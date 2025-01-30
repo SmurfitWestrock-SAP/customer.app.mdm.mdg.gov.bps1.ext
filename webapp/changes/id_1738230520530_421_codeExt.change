@@ -1,0 +1,22 @@
+{
+  "changeType": "codeExt",
+  "reference": "customer.app.mdm.mdg.gov.bps1.ext",
+  "namespace": "apps/customer.app.mdm.mdg.gov.bps1.ext/changes/",
+  "projectId": "customer.app.mdm.mdg.gov.bps1.ext",
+  "moduleName": "customer/app/mdm/mdg/gov/bps1/ext/changes/coding/mdgextension001",
+  "support": {
+    "generator": "rta.service.ControllerExtension"
+  },
+  "originalLanguage": "EN",
+  "layer": "CUSTOMER_BASE",
+  "fileType": "change",
+  "fileName": "id_1738230520530_421_codeExt",
+  "content": {
+    "codeRef": "coding/mdgextension001.js"
+  },
+  "texts": {},
+  "selector": {
+    "controllerName": "sap.suite.ui.generic.template.ObjectPage.view.Details"
+  },
+  "creation": "2025-01-30T09:48:40.531Z"
+}

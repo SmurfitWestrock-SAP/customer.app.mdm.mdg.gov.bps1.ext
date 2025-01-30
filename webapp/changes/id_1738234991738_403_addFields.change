@@ -1,0 +1,53 @@
+{
+  "changeType": "addFields",
+  "reference": "customer.app.mdm.mdg.gov.bps1.ext",
+  "namespace": "apps/customer.app.mdm.mdg.gov.bps1.ext/changes/",
+  "projectId": "customer.app.mdm.mdg.gov.bps1.ext",
+  "packageName": "$TMP",
+  "support": {
+    "generator": "@sap-ux/control-property-editor",
+    "compositeCommand": "id_1738234991736_402_composite",
+    "command": "addDelegateProperty",
+    "sapui5Version": "1.120.0"
+  },
+  "oDataInformation": {
+    "oDataServiceUri": "/sap/opu/odata/sap/C_BUSINESSPARTNERGOVTP_SRV/",
+    "propertyName": "MDChgProcessTypeDesc",
+    "entityType": "ChangeProcessType"
+  },
+  "originalLanguage": "EN",
+  "layer": "CUSTOMER_BASE",
+  "fileType": "change",
+  "fileName": "id_1738234991738_403_addFields",
+  "content": {
+    "field": {
+      "value": [
+        "MDChgProcessTypeDesc"
+      ],
+      "valueProperty": [
+        "value"
+      ],
+      "selector": {
+        "id": "mdm.mdg.gov.bps1::sap.suite.ui.generic.template.ObjectPage.view.Details::BusinessPartner--ProcessData::FormGroup_ChangeProcessType_MDChgProcessTypeDesc",
+        "idIsLocal": false
+      },
+      "jsTypes": [
+        "sap.ui.comp.smartfield.SmartField"
+      ],
+      "index": 1
+    }
+  },
+  "texts": {},
+  "selector": {
+    "id": "mdm.mdg.gov.bps1::sap.suite.ui.generic.template.ObjectPage.view.Details::BusinessPartner--ProcessData::FormGroup",
+    "idIsLocal": false
+  },
+  "dependentSelector": {
+    "form": {
+      "id": "mdm.mdg.gov.bps1::sap.suite.ui.generic.template.ObjectPage.view.Details::BusinessPartner--ProcessData::Form",
+      "idIsLocal": false
+    }
+  },
+  "jsOnly": false,
+  "creation": "2025-01-30T11:03:19.718Z"
+}

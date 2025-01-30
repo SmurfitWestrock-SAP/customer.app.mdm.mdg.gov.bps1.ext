@@ -1,0 +1,29 @@
+{
+  "fileName": "id_1738228695814",
+  "namespace": "apps/mdm.mdg.gov.bps1.av1/appVariants/customer.app.mdm.mdg.gov.bps1.ext/changes",
+  "layer": "CUSTOMER_BASE",
+  "fileType": "change",
+  "creation": "2025-01-30T09:18:15.814Z",
+  "packageName": "$TMP",
+  "reference": "customer.app.mdm.mdg.gov.bps1.ext",
+  "support": {
+    "generator": "@sap-ux/adp-tooling"
+  },
+  "changeType": "appdescr_ui5_addNewModel",
+  "content": {
+    "dataSource": {
+      "customer.mdgdata": {
+        "uri": "/sap/opu/odata/sap/ZMDG_DATA_SRV/",
+        "type": "OData",
+        "settings": {
+          "odataVersion": "2.0"
+        }
+      }
+    },
+    "model": {
+      "customer.mdgextend": {
+        "dataSource": "customer.mdgdata"
+      }
+    }
+  }
+}

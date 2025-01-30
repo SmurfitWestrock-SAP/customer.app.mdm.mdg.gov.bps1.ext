@@ -1,0 +1,27 @@
+{
+  "changeType": "appdescr_ui5_addLibraries",
+  "reference": "customer.app.mdm.mdg.gov.bps1.ext",
+  "namespace": "apps/customer.app.mdm.mdg.gov.bps1.ext/changes/",
+  "projectId": "customer.app.mdm.mdg.gov.bps1.ext",
+  "packageName": "",
+  "support": {
+    "generator": "@sap-ux/control-property-editor",
+    "compositeCommand": "id_1738234991736_402_composite",
+    "sapui5Version": "1.120.0"
+  },
+  "originalLanguage": "EN",
+  "layer": "CUSTOMER_BASE",
+  "fileType": "change",
+  "fileName": "id_1738234991752_404_appdescr_ui5_addLibraries",
+  "content": {
+    "libraries": {
+      "sap.ui.comp": {
+        "minVersion": "1.81",
+        "lazy": false
+      }
+    }
+  },
+  "texts": {},
+  "appDescriptorChange": true,
+  "creation": "2025-01-30T11:03:19.769Z"
+}
