@@ -4,7 +4,7 @@
   "namespace": "apps/customer.app.mdm.mdg.gov.bps1.ext/changes/",
   "projectId": "customer.app.mdm.mdg.gov.bps1.ext",
   "packageName": "$TMP",
-  "moduleName": "customer/app/mdm/mdg/gov/bps1/ext/changes/fragments/attachments.fragment.xml",
+  "moduleName": "customer/app/mdm/mdg/gov/bps1/ext/changes/fragments/SubAttachments.fragment.xml",
   "support": {
     "generator": "@sap-ux/control-property-editor",
     "command": "addXML",
@@ -13,18 +13,18 @@
   "originalLanguage": "EN",
   "layer": "CUSTOMER_BASE",
   "fileType": "change",
-  "fileName": "id_1738229636625_582_addXML",
+  "fileName": "id_1738243334117_701_addXML",
   "content": {
-    "targetAggregation": "blocks",
+    "targetAggregation": "subSections",
     "index": 2,
-    "fragmentPath": "fragments/attachments.fragment.xml"
+    "fragmentPath": "fragments/SubAttachments.fragment.xml"
   },
   "texts": {},
   "selector": {
-    "id": "mdm.mdg.gov.bps1::sap.suite.ui.generic.template.ObjectPage.view.Details::BusinessPartner--ProcessDataSection::SubSection",
+    "id": "mdm.mdg.gov.bps1::sap.suite.ui.generic.template.ObjectPage.view.Details::BusinessPartner--ProcessData::Section",
     "idIsLocal": false
   },
   "dependentSelector": {},
   "jsOnly": false,
-  "creation": "2025-01-30T09:34:00.828Z"
+  "creation": "2025-01-30T13:22:16.506Z"
 }

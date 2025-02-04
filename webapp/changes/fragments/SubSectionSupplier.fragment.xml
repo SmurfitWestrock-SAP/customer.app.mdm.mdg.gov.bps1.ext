@@ -21,7 +21,7 @@
                     <Text id="IdBkVT01" text="{i18n>bktyp.comp}" />
                 </Column>
                 <Column id="IdBkVC02">
-                    <Text id="IdBkVT02" text="{i18n>bktyp.pr}" />
+                    <Text id="IdBkVT02" text="{i18n>bktyp.ba}" />
                 </Column>
                 <Column id="IdBkVC03">
                     <Text id="IdBkVT03" text="{i18n>bktyp.curr}" />
@@ -32,7 +32,7 @@
                     <cells>
                         <Text id="IdBkVTypF" text="{ZC_PARTNER_MDG>BankType}" />
                         <Text id="IdBkVComp" text="{ZC_PARTNER_MDG>CompanyCodeName} ({ZC_PARTNER_MDG>CompanyCode})" />
-                        <Text id="IdBkVPrc" text="{ZC_PARTNER_MDG>ProfitCenter}" />
+                        <Text id="IdBkVBa" text="{ZC_PARTNER_MDG>BusinessArea}" />
                         <Text id="IdBkVWae" text="{ZC_PARTNER_MDG>Currency}" />                        
                     </cells>
                 </ColumnListItem>
@@ -87,7 +87,7 @@
                     <cells>
                         <Text id="IdRSVComp" text="{ZC_PARTNER_MDG>CompanyCode} ({ZC_PARTNER_MDG>CompanyCodeName})" />
                         <Text id="IdRSVDoc" text="{ZC_PARTNER_MDG>DocTypeDesc} ({ZC_PARTNER_MDG>CpDocType})" />
-                        <Text id="IdRSVPrfCent" text="{ZC_PARTNER_MDG>ProfitCenter}" />
+                        <Text id="IdRSVBa" text="{ZC_PARTNER_MDG>BusinessArea}" />
                         <Text id="IdRSVAcc" text="{ZC_PARTNER_MDG>GLAccountName} ({ZC_PARTNER_MDG>Account})"
                             visible="{=!!${ZC_PARTNER_MDG>Account} &amp;&amp; ${ZC_PARTNER_MDG>Account} !== '' ? true:false }" />
                         <Text id="IdRSVCost" text="{ZC_PARTNER_MDG>CostCenterName} ({ZC_PARTNER_MDG>CostCenter})"

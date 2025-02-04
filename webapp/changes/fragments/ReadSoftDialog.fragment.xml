@@ -19,7 +19,7 @@
                           <smartfield:SmartField value="{CpDocType}" />
                       </smartForm:GroupElement>
                       <smartForm:GroupElement>
-                          <smartfield:SmartField value="{ProfitCenter}" />
+                          <smartfield:SmartField value="{BusinessArea}" />
                       </smartForm:GroupElement>
                       <smartForm:GroupElement>
                           <smartfield:SmartField value="{Account}" />

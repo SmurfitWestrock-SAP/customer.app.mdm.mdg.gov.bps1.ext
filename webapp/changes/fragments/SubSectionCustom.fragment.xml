@@ -21,7 +21,7 @@
                     <Text id="IdBkCT01" text="{i18n>bktyp.comp}" />
                 </Column>
                 <Column id="IdBkCC02">
-                    <Text id="IdBkCT02" text="{i18n>bktyp.pr}" />
+                    <Text id="IdBkCT02" text="{i18n>bktyp.ba}" />
                 </Column>
                 <Column id="IdBkCC03">
                     <Text id="IdBkCT03" text="{i18n>bktyp.curr}" />
@@ -32,7 +32,7 @@
                     <cells>
                         <Text id="IdBkCTypF" text="{ZC_PARTNER_MDG>BankType}" />
                         <Text id="IdBkCComp" text="{ZC_PARTNER_MDG>CompanyCodeName} ({ZC_PARTNER_MDG>CompanyCode})" />
-                        <Text id="IdBkCPrc" text="{ZC_PARTNER_MDG>ProfitCenter}" />
+                        <Text id="IdBkCBa" text="{ZC_PARTNER_MDG>BusinessArea}" />
                         <Text id="IdBkCWae" text="{ZC_PARTNER_MDG>Currency}" />
                     </cells>
                 </ColumnListItem>

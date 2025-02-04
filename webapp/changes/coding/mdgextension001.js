@@ -10,8 +10,8 @@ sap.ui.define(
         "sap/ui/model/BindingMode"
     ],
     function (
-        ControllerExtension, OverrideExecution,
-        JSONModel, Fragment, MessagePopover, MessageItem, MessageBox, BindingMode
+        ControllerExtension, OverrideExecution, JSONModel, Fragment,
+        MessagePopover, MessageItem, MessageBox, BindingMode
     ) {
         'use strict';
         return ControllerExtension.extend("customer.app.mdm.mdg.gov.bps1.ext.mdgextension001", {
@@ -35,6 +35,11 @@ sap.ui.define(
                     couldBePrivate: {
                         public: false
                     },
+                    onOpenAttachments: {
+                        public: true /*default*/ ,
+                        final: false /*default*/ ,
+                        overrideExecution: OverrideExecution.Before /*default*/
+                    },
                     getUploadSetId: {
                         public: true /*default*/ ,
                         final: false /*default*/ ,
@@ -45,11 +50,6 @@ sap.ui.define(
                         final: false /*default*/ ,
                         overrideExecution: OverrideExecution.Instead /*default*/
                     },
-                    // onFilesReceivedExt: {
-                    //     public: true /*default*/ ,
-                    //     final: false /*default*/ ,
-                    //     overrideExecution: OverrideExecution.Instead /*default*/
-                    // },
                     onBeforeUploadStartsExt: {
                         public: true /*default*/ ,
                         final: false /*default*/ ,
@@ -100,6 +100,11 @@ sap.ui.define(
 
                 }
             },
+
+            onOpenAttachments: function () {
+                alert('Do not use');
+            },
+
             // // adding a private method, only accessible from this controller extension
             _privateMethod: function () {},
             // // adding a public method, might be called from or overridden by other controller extensions as well
@@ -111,7 +116,6 @@ sap.ui.define(
             onMyHook: function () {},
             // // method public per default, but made private via metadata
             couldBePrivate: function () {},
-
 
             // Sélection d'un type de document
             onSelectTypeExt: function (oEvent) {
@@ -142,7 +146,15 @@ sap.ui.define(
                             let oKeyDrf = that.getExtModel().createKey("/ZC_PARTNER_MDG_DFT", {
                                 MDChgProcessSrceObject: oData.convertUUID.Mdchgprocesssrceobject
                             });
+
+                            let oKeyAttList = that.getExtModel().createKey("/MdgMdtAttachSet", {
+                                SourceId: oData.convertUUID.Mdchgprocesssrceobject,
+                                ProcessId: "",
+                                BuGroup: oContext.getProperty("BusinessPartnerGrouping") || ""
+                            });
+
                             that._bindingView(oKeyDrf);
+                            that._bindingMdtAttch(oKeyAttList);
                         },
                         error: function (oError) {}
                     });
@@ -150,7 +162,15 @@ sap.ui.define(
                     let oKey = this.getExtModel().createKey("/ZC_PARTNER_MDG", {
                         MDChgProcessSrceObject: oContext.getProperty("MDChgProcessSrceObject") || ""
                     });
+
+                    let oKeyAttList = this.getExtModel().createKey("/MdgMdtAttachSet", {
+                        SourceId: oContext.getProperty("MDChgProcessSrceObject") || "",
+                        ProcessId: oContext.getProperty("MasterDataChangeProcess") || "",
+                        BuGroup: oContext.getProperty("BusinessPartnerGrouping") || ""
+                    });
+
                     this._bindingView(oKey);
+                    this._bindingMdtAttch(oKeyAttList);
                 }
             },
 
@@ -172,6 +192,26 @@ sap.ui.define(
 
                     }
                 })
+            },
+
+            _bindingMdtAttch: function (oKey) {
+                this.getExtModel().invalidateEntry(oKey);
+
+                this.getView().bindObject({
+                    path: oKey,
+                    model: 'MdtAttachList'
+                })
+            },
+
+            onBuGroupSelect: function (oEvent) {
+                let oContext = this.getView().getBindingContext();
+
+                let oKeyAttList = this.getExtModel().createKey("/MdgMdtAttachSet", {
+                    SourceId: this.getView().getBindingContext('ZC_PARTNER_MDG').getProperty('MDChgProcessSrceObject'),
+                    ProcessId: "",
+                    BuGroup: oContext.getProperty("BusinessPartnerGrouping") || ""
+                });
+                this._bindingMdtAttch(oKeyAttList);
             },
 
             // Modification des Url pour le chargement des fichiers
@@ -209,7 +249,7 @@ sap.ui.define(
 
                 oHeaderItem.addHeaderField(new sap.ui.core.Item({
                     key: "slug",
-                    text: oGuid + "@" + oData.MasterDataChangeProcess + "@" + oData.MDChgProcessSrceObject + "@" + oTypeKey + "@" + oHeaderItem.getFileName()
+                    text: oGuid + "@" + oData.MasterDataChangeProcess + "@" + oData.MDChgProcessSrceObject + "@" + oTypeKey + "@" + oHeaderItem.getFileName() + "@" + ''
                 }));
                 oHeaderItem.addHeaderField(new sap.ui.core.Item({
                     key: "x-csrf-token",
@@ -623,12 +663,21 @@ sap.ui.define(
                         const oDataModel = this.getExtModel();
                         this.getView().setModel(oDataModel, 'ZC_PARTNER_MDG');
                         oDataModel.setDefaultBindingMode(BindingMode.TwoWay);
+                        this.getView().setModel(oDataModel, 'MdtAttachList');
                     });
 
                     let oLink = this.getView().byId("QuickCreate.ProcessLink");
                     if (oLink !== undefined) {
                         oLink.setEnabled(false);
                     }
+
+                    // let oController = sap.ui.getCore().byId("mdm.mdg.gov.bps1::sap.suite.ui.generic.template.ObjectPage.view.Details::BusinessPartner").getController();
+                    // oController.attachEvent("onOpenAttachments", function () {
+                    //     alert("Alert Alert"); // Fixed compilation error
+                    // });
+
+                    // this.extensionAPI.getTransactionController().attachAfterCancel(this._onAfterCancel.bind(this));
+
 
                     // let oSubmit = this.getView().byId("mdm.mdg.gov.bps1::sap.suite.ui.generic.template.ObjectPage.view.Details::BusinessPartner--saveSubmit");
                     // oSubmit.attachPress(oEvent => {
@@ -646,14 +695,19 @@ sap.ui.define(
                  * This hook is the same one that SAPUI5 controls get after being rendered.
                  * @memberOf {{controllerExtPath}}
                  */
-                onAfterRendering: function () {},
+                onAfterRendering: function () {
+                    let oBuGroup = this.getView().byId("mdm.mdg.gov.bps1::sap.suite.ui.generic.template.ObjectPage.view.Details::BusinessPartner--GeneralInformation::BusinessPartnerGrouping::GroupElement");
+                    oBuGroup.getElements()[0].attachChangeModelValue(oEvent => {
+                        this.onBuGroupSelect(oEvent);
+                    });
+                },
                 /**
                  * Called when the Controller is destroyed. Use this one to free resources and finalize activities.
                  * @memberOf {{controllerExtPath}}
                  */
                 onExit: function () {},
                 // override public method of the base controller
-                basePublicMethod: function () {}
+                basePublicMethod: function () {},
             }
         });
     }

@@ -16,11 +16,11 @@
                           <smartfield:SmartField textLabel="{i18n>bktyp.bktyp}" value="{BankType}" />
                       </smartForm:GroupElement>                  
                       <smartForm:GroupElement>
-                          <smartfield:SmartField value="{CompanyCode}" mandatory="false"/>
+                          <smartfield:SmartField value="{CompanyCode}"/>
                       </smartForm:GroupElement>
                       <smartForm:GroupElement>
-                          <smartfield:SmartField value="{ProfitCenter}" />
-                      </smartForm:GroupElement>
+                          <smartfield:SmartField value="{BusinessArea}" />
+                      </smartForm:GroupElement>                      
                       <smartForm:GroupElement>
                           <smartfield:SmartField value="{Currency}" />
                       </smartForm:GroupElement>
