@@ -6,12 +6,12 @@ sap.ui.define(
         "sap/ui/core/Fragment",
         "sap/m/MessagePopover",
         "sap/m/MessageItem",
-        "sap/m/MessageBox",
-        "sap/ui/model/BindingMode"
+        "sap/ui/model/BindingMode",
+        "sap/m/GroupHeaderListItem"
     ],
     function (
         ControllerExtension, OverrideExecution, JSONModel, Fragment,
-        MessagePopover, MessageItem, MessageBox, BindingMode
+        MessagePopover, MessageItem, BindingMode, GroupHeaderListItem
     ) {
         'use strict';
         return ControllerExtension.extend("customer.app.mdm.mdg.gov.bps1.ext.mdgextension001", {
@@ -144,7 +144,7 @@ sap.ui.define(
                         },
                         success: function (oData) {
                             let oKeyDrf = that.getExtModel().createKey("/ZC_PARTNER_MDG_DFT", {
-                                MDChgProcessSrceObject: oData.convertUUID.Mdchgprocesssrceobject
+                                MDChgProcessSrceObject: oContext.getProperty("MDChgProcessSrceObject") || oData.convertUUID.Mdchgprocesssrceobject
                             });
 
                             let oKeyAttList = that.getExtModel().createKey("/MdgMdtAttachSet", {
@@ -249,7 +249,7 @@ sap.ui.define(
 
                 oHeaderItem.addHeaderField(new sap.ui.core.Item({
                     key: "slug",
-                    text: oGuid + "@" + oData.MasterDataChangeProcess + "@" + oData.MDChgProcessSrceObject + "@" + oTypeKey + "@" + oHeaderItem.getFileName() + "@" + ''
+                    text: oGuid + "@" + oData.MasterDataChangeProcess + "@" + oData.MDChgProcessSrceObject + "@" + oTypeKey + "@" + oHeaderItem.getFileName()
                 }));
                 oHeaderItem.addHeaderField(new sap.ui.core.Item({
                     key: "x-csrf-token",
@@ -632,6 +632,20 @@ sap.ui.define(
                 }
             },
 
+            getAction: function (oContext) {
+                return oContext.getProperty('Action');
+            },
+
+            getGroupHeader: function (oGroup) {
+                let Title = this.getView().getModel('i18n').getResourceBundle().getText('attch.crea');
+                if (oGroup.key === 'U') {
+                    Title = this.getView().getModel('i18n').getResourceBundle().getText('attch.upd');
+                }
+                return new GroupHeaderListItem({
+                    title: Title
+                })
+            },
+
             // _setFileProp: function () {            
             //     oLink.setEnabled(false);
             //     oLink.setVisible(false);
@@ -666,11 +680,6 @@ sap.ui.define(
                         this.getView().setModel(oDataModel, 'MdtAttachList');
                     });
 
-                    let oLink = this.getView().byId("QuickCreate.ProcessLink");
-                    if (oLink !== undefined) {
-                        oLink.setEnabled(false);
-                    }
-
                     // let oController = sap.ui.getCore().byId("mdm.mdg.gov.bps1::sap.suite.ui.generic.template.ObjectPage.view.Details::BusinessPartner").getController();
                     // oController.attachEvent("onOpenAttachments", function () {
                     //     alert("Alert Alert"); // Fixed compilation error
@@ -700,6 +709,38 @@ sap.ui.define(
                     oBuGroup.getElements()[0].attachChangeModelValue(oEvent => {
                         this.onBuGroupSelect(oEvent);
                     });
+
+                    let oSubProcess = this.getView().byId("mdm.mdg.gov.bps1::sap.suite.ui.generic.template.ObjectPage.view.Details::BusinessPartner--ProcessDataSection::SubSection");
+
+                    // For creation mode Managed fields from Process Information Group
+                    let aParsedContent = oSubProcess.getBlocks()[0]._aParsedContent;
+                    aParsedContent.forEach(oParsedContent => {
+                        if (oParsedContent.sId !== undefined) {
+                            if (oParsedContent.sId.includes('QuickCreate.ChangeProcess') === true) {
+
+                                let aGp0Fields = oParsedContent.getGroups()[0].getFormElements()[0].getFields()[0].getItems();
+                                aGp0Fields.forEach(oGp0Field => {
+                                    if (oGp0Field.sId.includes('RadioButtonGroup') === true) {
+                                        oGp0Field.setEnabled(false);
+                                    }
+                                });
+
+                                let aGp4Fields = oParsedContent.getGroups()[4].getFormElements()[0].getFields();
+                                aGp4Fields.forEach(oGp4Field => {
+                                    if (oGp4Field.sId.includes('ProcessLink') === true) {
+                                        oGp4Field.setEnabled(false);
+                                    }
+                                });
+                                // oParsedContent.getGroups()[4].setVisible(false);
+                            }
+                        }
+                    });
+
+                    let oLink = this.getView().byId("QuickCreate.ProcessLink");
+                    if (oLink !== undefined) {
+                        oLink.setEnabled(false);
+                    }
+
                 },
                 /**
                  * Called when the Controller is destroyed. Use this one to free resources and finalize activities.

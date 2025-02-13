@@ -1,7 +1,7 @@
  <core:FragmentDefinition id="IdFilesMng" xmlns:core='sap.ui.core' xmlns:m='sap.m' xmlns="sap.m.upload"
      xmlns:smartForm="sap.ui.comp.smartform" xmlns:smartfield="sap.ui.comp.smartfield">
      <m:HBox id="HBAtta001">
-         <m:VBox id="VBAtta001" width="70%" class="sapUiMediumMarginBeginEnd">
+         <m:VBox id="VBAtta001" width="60%" class="sapUiMediumMarginBeginEnd">
              <UploadSet id="UploadSet.ext" instantUpload="true" showIcons="true" uploadEnabled="{uiExt>upload}"
                  uploadUrl="/sap/opu/odata/sap/ZMDG_DATA_SRV/FileSet" mode="Delete"
                  beforeUploadStarts=".extension.customer.app.mdm.mdg.gov.bps1.ext.mdgextension001.onBeforeUploadStartsExt"
@@ -22,9 +22,9 @@
                      </m:OverflowToolbar>
                  </toolbar>
                  <items>
-                     <UploadSetItem id="UpSetItem.ext" fileName="{ZC_PARTNER_MDG>Filename}"
+                     <UploadSetItem id="UpSetItem.ext" fileName="{ZC_PARTNER_MDG>Filename}" url="{ZC_PARTNER_MDG>Url}"
                          mediaType="{ZC_PARTNER_MDG>Mimetype}" enabledEdit="false" visibleEdit="false"
-                         url="{ZC_PARTNER_MDG>Url}" visibleRemove="{uiExt>editable}">
+                         visibleRemove="{=${uiExt>editable} === true &amp;&amp; ${ZC_PARTNER_MDG>DeleteFlag} === true ? true:false}">
                          <statuses>
                              <m:ObjectStatus id="UpSetStatus.ext" title="{ZC_PARTNER_MDG>Type}"
                                  text="{ZC_PARTNER_MDG>TypeDesc}" />
@@ -33,17 +33,44 @@
                  </items>
              </UploadSet>
          </m:VBox>
-         <m:VBox id="VBAtta002" width="20%" class="sapUiMediumMarginBeginEnd">
-             <m:List headerText="{i18n>attch.listtit}" id="MdtAttachList"
-                 items="{path: 'MdtAttachList>MdgMdtAttachListSet'}"
-                 noDataText="{i18n>attch.bugrp}">
+         <m:VBox id="VBAtta002" width="30%" class="sapUiMediumMarginBeginEnd">
+             <m:Table id="MdtAttachTab" headerText="{i18n>attch.listtit}" noDataText="{i18n>attch.bugrp}" items="{path: 'MdtAttachList>MdgMdtAttachListSet', sorter: { path: 'Action', descending: false, 
+                 group: '.extension.customer.app.mdm.mdg.gov.bps1.ext.mdgextension001.getAction'}, 
+                 groupHeaderFactory: '.extension.customer.app.mdm.mdg.gov.bps1.ext.mdgextension001.getGroupHeader'}">
+                 <m:columns>
+                     <m:Column width="5%" />
+                     <m:Column width="45%">
+                         <m:Text text="{i18n>attch.type}" />
+                     </m:Column>
+                     <m:Column width="15%" hAlign="Center">
+                         <m:Text text="{i18n>attch.nosensitive}" />
+                     </m:Column>
+                     <m:Column width="15%" hAlign="Center">
+                         <m:Text text="{i18n>attch.sensitive}" />
+                     </m:Column>
+                 </m:columns>
+                 <m:items>
+                     <m:ColumnListItem vAlign="Middle">
+                         <m:cells>
+                             <core:Icon
+                                 src="{=${MdtAttachList>Action} === 'C' ? 'sap-icon://create-form':'sap-icon://edit'}" />
+                             <m:Label text="{MdtAttachList>Description}" />
+                             <core:Icon src="sap-icon://validate" visible="{MdtAttachList>NonSensitive}" color="green"/>
+                             <core:Icon src="sap-icon://validate" visible="{MdtAttachList>Sensitive}" color="green"/>
+                         </m:cells>
+                     </m:ColumnListItem>
+                 </m:items>
+             </m:Table>
+             <!-- <m:List headerText="{i18n>attch.listtit}" id="MdtAttachList" noDataText="{i18n>attch.bugrp}" items="{path: 'MdtAttachList>MdgMdtAttachListSet', sorter: { path: 'Action', descending: false, 
+                 group: '.extension.customer.app.mdm.mdg.gov.bps1.ext.mdgextension001.getAction'}, 
+                 groupHeaderFactory: '.extension.customer.app.mdm.mdg.gov.bps1.ext.mdgextension001.getGroupHeader'}">
                  <m:items>
                      <m:StandardListItem id="MdtAttItem" title="{MdtAttachList>Description}"
                          icon="{=${MdtAttachList>Action} === 'C' ? 'sap-icon://create-form':'sap-icon://edit'}"
                          info="{=${MdtAttachList>Sensitive} === true ? ${i18n>attch.sensitive}:' '}"
-                         infoState="Warning" />                        
+                         infoState="Warning" />
                  </m:items>
-             </m:List>
+             </m:List> -->
          </m:VBox>
      </m:HBox>
 

@@ -61,33 +61,37 @@
                     <Text id="IdRSVT02" text="{i18n>read.doctyp}" />
                 </Column>
                 <Column id="IdRSVC03">
-                    <Text id="IdRSVT03" text="{i18n>read.pr}" />
+                    <Text id="IdRSVT03" text="{i18n>read.ba}" />
                 </Column>
                 <Column id="IdRSVC04">
-                    <Text id="IdRSVT04" text="{i18n>read.accgl}" />
+                    <Text id="IdRSVT04" text="{i18n>read.module}" />
                 </Column>
                 <Column id="IdRSVC05">
-                    <Text id="IdRSVT05" text="{i18n>read.cost}" />
+                    <Text id="IdRSVT05" text="{i18n>read.accgl}" />
                 </Column>
                 <Column id="IdRSVC06">
-                    <Text id="IdRSVT06" text="{i18n>read.order}" />
+                    <Text id="IdRSVT06" text="{i18n>read.cost}" />
                 </Column>
                 <Column id="IdRSVC07">
-                    <Text id="IdRSVT07" text="{i18n>read.expvend}" />
+                    <Text id="IdRSVT07" text="{i18n>read.order}" />
                 </Column>
                 <Column id="IdRSVC08">
-                    <Text id="IdRSVT08" text="{i18n>read.tax}" />
+                    <Text id="IdRSVT08" text="{i18n>read.expvend}" />
                 </Column>
                 <Column id="IdRSVC09">
-                    <Text id="IdRSVT09" text="{i18n>read.accass}" />
+                    <Text id="IdRSVT09" text="{i18n>read.auto}" />
+                </Column>
+                <Column id="IdRSVC10">
+                    <Text id="IdRSVT10" text="{i18n>read.doctype}" />
                 </Column>
             </columns>
             <items>
                 <ColumnListItem id="IdReadSoftVItem" vAlign="Middle">
                     <cells>
                         <Text id="IdRSVComp" text="{ZC_PARTNER_MDG>CompanyCode} ({ZC_PARTNER_MDG>CompanyCodeName})" />
-                        <Text id="IdRSVDoc" text="{ZC_PARTNER_MDG>DocTypeDesc} ({ZC_PARTNER_MDG>CpDocType})" />
+                        <Text id="IdRSVCpDoc" text="{ZC_PARTNER_MDG>CpDocTypeDesc} ({ZC_PARTNER_MDG>CpDocType})" />
                         <Text id="IdRSVBa" text="{ZC_PARTNER_MDG>BusinessArea}" />
+                        <Text id="IdRSVMod" text="{ZC_PARTNER_MDG>DocModule}" />
                         <Text id="IdRSVAcc" text="{ZC_PARTNER_MDG>GLAccountName} ({ZC_PARTNER_MDG>Account})"
                             visible="{=!!${ZC_PARTNER_MDG>Account} &amp;&amp; ${ZC_PARTNER_MDG>Account} !== '' ? true:false }" />
                         <Text id="IdRSVCost" text="{ZC_PARTNER_MDG>CostCenterName} ({ZC_PARTNER_MDG>CostCenter})"
@@ -95,9 +99,9 @@
                         <Text id="IdRSVOrd" text="{ZC_PARTNER_MDG>OrderDescription} ({ZC_PARTNER_MDG>OrderId})"
                             visible="{=!!${ZC_PARTNER_MDG>OrderId} &amp;&amp; ${ZC_PARTNER_MDG>OrderId} !== '' ? true:false }" />
                         <CheckBox id="IdRSVExpVen" selected="{ZC_PARTNER_MDG>ExpressVendor}" enabled="false" />
-                        <Text id="IdRSVTxCod" text="{ZC_PARTNER_MDG>TxCode}" />
-                        <Text id="IdRSVAccAss" text="{ZC_PARTNER_MDG>AccAssignTempTxt} ({ZC_PARTNER_MDG>AccAssignment})"
-                            visible="{=!!${ZC_PARTNER_MDG>AccAssignment} &amp;&amp; ${ZC_PARTNER_MDG>AccAssignment} !== '' ? true:false }" />
+                        <CheckBox id="IdRSVAuto" selected="{ZC_PARTNER_MDG>AutoPosting}" enabled="false" />
+                        <Text id="IdRSVDoc" text="{ZC_PARTNER_MDG>DocTypeDesc} ({ZC_PARTNER_MDG>DocType})" 
+                         visible="{=!!${ZC_PARTNER_MDG>DocType} &amp;&amp; ${ZC_PARTNER_MDG>DocType} !== '' ? true:false }" />
                     </cells>
                 </ColumnListItem>
             </items>

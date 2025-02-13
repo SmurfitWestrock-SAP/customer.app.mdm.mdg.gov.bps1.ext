@@ -22,6 +22,9 @@
                           <smartfield:SmartField value="{BusinessArea}" />
                       </smartForm:GroupElement>
                       <smartForm:GroupElement>
+                          <smartfield:SmartField value="{DocModule}" />
+                      </smartForm:GroupElement>                      
+                      <smartForm:GroupElement>
                           <smartfield:SmartField value="{Account}" />
                       </smartForm:GroupElement>
                       <smartForm:GroupElement>
@@ -34,10 +37,10 @@
                           <smartfield:SmartField value="{ExpressVendor}"/>
                       </smartForm:GroupElement>
                       <smartForm:GroupElement>
-                          <smartfield:SmartField value="{TxCode}" />
+                          <smartfield:SmartField textLabel="{i18n>read.auto}" value="{AutoPosting}" />
                       </smartForm:GroupElement>
                       <smartForm:GroupElement>
-                          <smartfield:SmartField value="{AccAssignment}" />
+                          <smartfield:SmartField value="{DocType}" />
                       </smartForm:GroupElement>
                   </smartForm:Group>
               </smartForm:SmartForm>
