@@ -9,6 +9,8 @@
                     <ToolbarSpacer id="IdBkTCToolBS" />
                     <Button id="IdkTyCAdd" text="{i18n>CREATE_OBJECT}" visible="{uiExt>editable}"
                         press=".extension.customer.app.mdm.mdg.gov.bps1.ext.mdgextension001.onBkTyCAdd" />
+                    <Button id="IdkTyCUpd" text="{i18n>update}" visible="{uiExt>editable}"
+                        press=".extension.customer.app.mdm.mdg.gov.bps1.ext.mdgextension001.onBkTyCUpd" />
                     <Button id="IdkTyCDel" text="{i18n>DELETE}" visible="{uiExt>editable}"
                         press=".extension.customer.app.mdm.mdg.gov.bps1.ext.mdgextension001.onItemDel" />
                 </OverflowToolbar>

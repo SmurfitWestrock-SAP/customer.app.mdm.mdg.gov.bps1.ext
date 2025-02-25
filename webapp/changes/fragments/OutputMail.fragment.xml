@@ -8,6 +8,8 @@
                     <ToolbarSpacer id="IdOutMToolBS" />
                     <Button id="IdOutMAdd" text="{i18n>CREATE_OBJECT}" visible="{uiExt>editable}"
                         press=".extension.customer.app.mdm.mdg.gov.bps1.ext.mdgextension001.onOutMAdd" />
+                    <Button id="IdkOutMUpd" text="{i18n>update}" visible="{uiExt>editable}"
+                        press=".extension.customer.app.mdm.mdg.gov.bps1.ext.mdgextension001.onOutMUpd" />
                     <Button id="IdkOutMDel" text="{i18n>DELETE}" visible="{uiExt>editable}"
                         press=".extension.customer.app.mdm.mdg.gov.bps1.ext.mdgextension001.onItemDel" />
                 </OverflowToolbar>

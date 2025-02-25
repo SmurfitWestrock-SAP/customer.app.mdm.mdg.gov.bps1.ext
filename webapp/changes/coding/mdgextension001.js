@@ -290,34 +290,79 @@ sap.ui.define(
              * >>>> Bank Type Managment
              *************************************************************************/
             onBkTyCAdd: function (oEvent) {
-                this._loadBankTypeDialog(oEvent, "/ZC_BVTYPC_PRC");
+                let oBankTypeObj = this.getView().getBindingContext('ZC_PARTNER_MDG').getObject();
+                this._loadBankTypeDialog(oEvent, "/ZC_BVTYPC_PRC", oBankTypeObj, "");
             },
 
             onBkTyVAdd: function (oEvent) {
-                this._loadBankTypeDialog(oEvent, "/ZC_BVTYPV_PRC");
+                let oBankTypeObj = this.getView().getBindingContext('ZC_PARTNER_MDG').getObject();
+                this._loadBankTypeDialog(oEvent, "/ZC_BVTYPV_PRC", oBankTypeObj, "");
             },
 
-            _loadBankTypeDialog: function (oEvent, oEntity) {
+            onBkTyCUpd: function (oEvent) {
+                let oBankTypeContext = oEvent.getSource().getParent().getParent().getSelectedItem().getBindingContextPath();
+                // let oOutputContext = oItem.getBindingContextPath();
+                let oBankTypeObject = this.getView().getModel('ZC_PARTNER_MDG').getProperty(oBankTypeContext);
+
+                let sBankTypeKey = this.getExtModel().createKey('/ZC_BVTYPC_PRC', {
+                    MDChgProcessSrceObject: oBankTypeObject.MDChgProcessSrceObject,
+                    BankType: oBankTypeObject.BankType,
+                    CompanyCode: oBankTypeObject.CompanyCode,
+                    BusinessArea: oBankTypeObject.BusinessArea,
+                    Currency: oBankTypeObject.Currency
+                });
+
+                this._loadBankTypeDialog(oEvent, "/ZC_BVTYPC_PRC", "", sBankTypeKey);
+            },
+
+            onBkTyVUpd: function (oEvent) {
+                let oBankTypeContext = oEvent.getSource().getParent().getParent().getSelectedItem().getBindingContextPath();
+                // let oOutputContext = oItem.getBindingContextPath();
+                let oBankTypeObject = this.getView().getModel('ZC_PARTNER_MDG').getProperty(oBankTypeContext);
+
+                let sBankTypeKey = this.getExtModel().createKey('/ZC_BVTYPV_PRC', {
+                    MDChgProcessSrceObject: oBankTypeObject.MDChgProcessSrceObject,
+                    BankType: oBankTypeObject.BankType,
+                    CompanyCode: oBankTypeObject.CompanyCode,
+                    BusinessArea: oBankTypeObject.BusinessArea,
+                    Currency: oBankTypeObject.Currency
+                });
+
+                this._loadBankTypeDialog(oEvent, "/ZC_BVTYPV_PRC", "", sBankTypeKey);
+            },
+
+            _loadBankTypeDialog: function (oEvent, oEntity, oBankTypeObj, sBankTypeKey) {
                 this.oMessageManager.removeAllMessages();
                 this.getView().getModel("ZC_PARTNER_MDG").resetChanges(null, true, true);
-                let oCmdObj = this.getView().getBindingContext('ZC_PARTNER_MDG').getObject();
 
                 this._loadDialogPopup({
                     name: "customer.app.mdm.mdg.gov.bps1.ext.changes.fragments.BankTypeDialog",
                     dialog: this._pBankTypeDialog
                 }).then(oBankTypeDialog => {
                     this._pBankTypeDialog = oBankTypeDialog;
+                    this._pBankTypeDialog.IdTab = this.getView().byId(oEvent.getSource().getId());
+                    this._pBankTypeDialog.unbindObject();
                     this._pBankTypeDialog.setModel(this.getExtModel());
 
-                    const oBankTypContext = this.getExtModel().createEntry(oEntity, {
-                        properties: {
-                            MDChgProcessSrceObject: oCmdObj.MDChgProcessSrceObject,
-                            MasterDataChangeProcess: oCmdObj.MasterDataChangeProcess || "",
-                        }
-                    });
-                    this._pBankTypeDialog.setBindingContext(oBankTypContext);
-                    this._pBankTypeDialog.IdTab = this.getView().byId(oEvent.getSource().getId());
-                    this._pBankTypeDialog.open();
+                    if (oBankTypeObj) {
+                        const oBankTypContext = this.getExtModel().createEntry(oEntity, {
+                            properties: {
+                                MDChgProcessSrceObject: oBankTypeObj.MDChgProcessSrceObject
+                            }
+                        });
+                        this._pBankTypeDialog.setBindingContext(oBankTypContext);
+                        this._pBankTypeDialog.open();
+                    } else {
+                        this.getExtModel().invalidateEntry(sBankTypeKey);
+                        this._pBankTypeDialog.bindObject({
+                            path: sBankTypeKey,
+                            events: {
+                                dataReceived: (oData) => {
+                                    this._pBankTypeDialog.open();
+                                }
+                            }
+                        });
+                    }
                 });
             },
 
@@ -349,30 +394,57 @@ sap.ui.define(
              * >>>> ReadSoft Managment
              *************************************************************************/
             onRSVAdd: function (oEvent) {
-                this._loadReadSoftDialog(oEvent);
+                let oReadSoftObj = this.getView().getBindingContext('ZC_PARTNER_MDG').getObject();
+                this._loadReadSoftDialog(oEvent, oReadSoftObj, "");
             },
 
-            _loadReadSoftDialog: function (oEvent, oEntity) {
+            onRSVUpd: function (oEvent) {
+                let oReadSoftContext = oEvent.getSource().getParent().getParent().getSelectedItem().getBindingContextPath();
+                // let oOutputContext = oItem.getBindingContextPath();
+                let oReadSoftObject = this.getView().getModel('ZC_PARTNER_MDG').getProperty(oReadSoftContext);
+
+                let sReadSoftKey = this.getExtModel().createKey('/ZC_READSOFT_ACCT_PRC', {
+                    MDChgProcessSrceObject: oReadSoftObject.MDChgProcessSrceObject,
+                    CompanyCode: oReadSoftObject.CompanyCode,
+                    CpDocType: oReadSoftObject.CpDocType,
+                    BusinessArea: oReadSoftObject.BusinessArea,
+                    DocModule: oReadSoftObject.DocModule
+                });
+                this._loadReadSoftDialog(oEvent, "", sReadSoftKey);
+            },
+
+            _loadReadSoftDialog: function (oEvent, oReadSoftObj, sReadSoftKey) {
                 this.oMessageManager.removeAllMessages();
                 this.getView().getModel("ZC_PARTNER_MDG").resetChanges(null, true, true);
-                let oCmdObj = this.getView().getBindingContext('ZC_PARTNER_MDG').getObject();
 
                 this._loadDialogPopup({
                     name: "customer.app.mdm.mdg.gov.bps1.ext.changes.fragments.ReadSoftDialog",
                     dialog: this._pReadSoftDialog
                 }).then(oDialog => {
                     this._pReadSoftDialog = oDialog;
+                    this._pReadSoftDialog.IdTab = this.getView().byId(oEvent.getSource().getId());
+                    this._pReadSoftDialog.unbindObject();
                     this._pReadSoftDialog.setModel(this.getExtModel());
 
-                    const oReadSoftContext = this.getExtModel().createEntry("/ZC_READSOFT_ACCT_PRC", {
-                        properties: {
-                            MDChgProcessSrceObject: oCmdObj.MDChgProcessSrceObject,
-                            MasterDataChangeProcess: oCmdObj.MasterDataChangeProcess || "",
-                        }
-                    });
-                    this._pReadSoftDialog.setBindingContext(oReadSoftContext);
-                    this._pReadSoftDialog.IdTab = this.getView().byId(oEvent.getSource().getId());
-                    this._pReadSoftDialog.open();
+                    if (oReadSoftObj) {
+                        const oReadSoftContext = this.getExtModel().createEntry("/ZC_READSOFT_ACCT_PRC", {
+                            properties: {
+                                MDChgProcessSrceObject: oReadSoftObj.MDChgProcessSrceObject
+                            }
+                        });
+                        this._pReadSoftDialog.setBindingContext(oReadSoftContext);
+                        this._pReadSoftDialog.open();
+                    } else {
+                        this.getExtModel().invalidateEntry(sReadSoftKey);
+                        this._pReadSoftDialog.bindObject({
+                            path: sReadSoftKey,
+                            events: {
+                                dataReceived: (oData) => {
+                                    this._pReadSoftDialog.open();
+                                }
+                            }
+                        });
+                    }
                 });
             },
 
@@ -402,30 +474,57 @@ sap.ui.define(
              * >>>> Output Document Managment
              *************************************************************************/
             onOutMAdd: function (oEvent) {
-                this._loadOutputDialog(oEvent);
+                let oOutPutObj = this.getView().getBindingContext('ZC_PARTNER_MDG').getObject();
+                this._loadOutputDialog(oEvent, oOutPutObj, "");
             },
 
-            _loadOutputDialog: function (oEvent, oEntity) {
+            onOutMUpd: function (oEvent) {
+                let oOutputContext = oEvent.getSource().getParent().getParent().getSelectedItem().getBindingContextPath();
+                // let oOutputContext = oItem.getBindingContextPath();
+                let oOutputObject = this.getView().getModel('ZC_PARTNER_MDG').getProperty(oOutputContext);
+
+                let sOutMKey = this.getExtModel().createKey('/ZC_MDG_OUT_MAIL_PRC', {
+                    MDChgProcessSrceObject: oOutputObject.MDChgProcessSrceObject,
+                    OutputDoc: oOutputObject.OutputDoc,
+                    CompanyCode: oOutputObject.CompanyCode,
+                    ConsNumber: oOutputObject.ConsNumber
+                });
+                this._loadOutputDialog(oEvent, "", sOutMKey);
+            },
+
+            _loadOutputDialog: function (oEvent, oOutPutMObj, sOutMKey) {
                 this.oMessageManager.removeAllMessages();
                 this.getView().getModel("ZC_PARTNER_MDG").resetChanges(null, true, true);
-                let oCmdObj = this.getView().getBindingContext('ZC_PARTNER_MDG').getObject();
 
                 this._loadDialogPopup({
                     name: "customer.app.mdm.mdg.gov.bps1.ext.changes.fragments.OutPutMailDialog",
                     dialog: this._pOutputDialog
                 }).then(oDialog => {
                     this._pOutputDialog = oDialog;
+                    this._pOutputDialog.IdTab = this.getView().byId(oEvent.getSource().getId());
+                    this._pOutputDialog.unbindObject();
                     this._pOutputDialog.setModel(this.getExtModel());
 
-                    const oOutputContext = this.getExtModel().createEntry("/ZC_MDG_OUT_MAIL_PRC", {
-                        properties: {
-                            MDChgProcessSrceObject: oCmdObj.MDChgProcessSrceObject,
-                            MasterDataChangeProcess: oCmdObj.MasterDataChangeProcess || "",
-                        }
-                    });
-                    this._pOutputDialog.setBindingContext(oOutputContext);
-                    this._pOutputDialog.IdTab = this.getView().byId(oEvent.getSource().getId());
-                    this._pOutputDialog.open();
+                    if (oOutPutMObj) {
+                        const oOutputContext = this.getExtModel().createEntry("/ZC_MDG_OUT_MAIL_PRC", {
+                            properties: {
+                                MDChgProcessSrceObject: oOutPutMObj.MDChgProcessSrceObject,
+                                MasterDataChangeProcess: oOutPutMObj.MasterDataChangeProcess || "",
+                            }
+                        });
+                        this._pOutputDialog.setBindingContext(oOutputContext);
+                        this._pOutputDialog.open();
+                    } else {
+                        this.getExtModel().invalidateEntry(sOutMKey);
+                        this._pOutputDialog.bindObject({
+                            path: sOutMKey,
+                            events: {
+                                dataReceived: (oData) => {
+                                    this._pOutputDialog.open();
+                                }
+                            }
+                        });
+                    }
                 });
             },
 

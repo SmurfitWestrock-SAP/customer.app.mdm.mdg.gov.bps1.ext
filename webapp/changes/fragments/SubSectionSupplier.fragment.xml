@@ -9,6 +9,8 @@
                     <ToolbarSpacer id="IdBkTVToolBS" />
                     <Button id="IdkTyVAdd" text="{i18n>CREATE_OBJECT}" visible="{uiExt>editable}"
                         press=".extension.customer.app.mdm.mdg.gov.bps1.ext.mdgextension001.onBkTyVAdd" />
+                    <Button id="IdkTyVUpd" text="{i18n>update}" visible="{uiExt>editable}"
+                        press=".extension.customer.app.mdm.mdg.gov.bps1.ext.mdgextension001.onBkTyVUpd" />                        
                     <Button id="IdkTyVDel" text="{i18n>DELETE}" visible="{uiExt>editable}"
                         press=".extension.customer.app.mdm.mdg.gov.bps1.ext.mdgextension001.onItemDel" />
                 </OverflowToolbar>
@@ -49,6 +51,8 @@
                     <ToolbarSpacer id="IdRSVToolBS" />
                     <Button id="IdRSVAdd" text="{i18n>CREATE_OBJECT}" visible="{uiExt>editable}"
                         press=".extension.customer.app.mdm.mdg.gov.bps1.ext.mdgextension001.onRSVAdd" />
+                    <Button id="IdRSVUpd" text="{i18n>update}" visible="{uiExt>editable}"
+                        press=".extension.customer.app.mdm.mdg.gov.bps1.ext.mdgextension001.onRSVUpd" />                           
                     <Button id="IdRSVDel" text="{i18n>DELETE}" visible="{uiExt>editable}"
                         press=".extension.customer.app.mdm.mdg.gov.bps1.ext.mdgextension001.onItemDel" />
                 </OverflowToolbar>

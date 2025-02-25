@@ -13,7 +13,7 @@
               <smartForm:SmartForm id="IdReadSoftSF" editable="true">
                   <smartForm:Group>
                       <smartForm:GroupElement>
-                          <smartfield:SmartField value="{CompanyCode}" />
+                          <smartfield:SmartField value="{CompanyCode}"/>
                       </smartForm:GroupElement>
                       <smartForm:GroupElement>
                           <smartfield:SmartField value="{CpDocType}" />
