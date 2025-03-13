@@ -101,10 +101,6 @@ sap.ui.define(
                 }
             },
 
-            onOpenAttachments: function () {
-                alert('Do not use');
-            },
-
             // // adding a private method, only accessible from this controller extension
             _privateMethod: function () {},
             // // adding a public method, might be called from or overridden by other controller extensions as well
@@ -216,22 +212,35 @@ sap.ui.define(
 
             // Modification des Url pour le chargement des fichiers
             onFilesReceivedExt: function (oEvent) {
-                const aUploadItem = this.Uploadset.getItems();
+                // const aUploadItem = this.Uploadset.getItems();
+                // const oServiceUrl = this.getExtModel().sServiceUrl;
+
+                // aUploadItem.forEach(oItem => {
+                //     const oItemContext = oItem.getBindingContext('ZC_PARTNER_MDG');
+                //     const oData = oItemContext.getObject();
+
+                //     const oKey = this.getExtModel().createKey('/FileSet', {
+                //         SourceId: oData.MDChgProcessSrceObject,
+                //         Type: oData.Type,
+                //         Filename: oData.Filename
+                //     });
+                //     const sUrl = oServiceUrl + oKey + "/$value";
+                //     oItem.setProperty('url', sUrl);
+
+                //     this.getExtModel().resetChanges([oItemContext.sPath], true, true);
+                // });
+            },
+
+            formatUrl: function (MDChgProcessSrceObject, Type, Filename) {
                 const oServiceUrl = this.getExtModel().sServiceUrl;
 
-                aUploadItem.forEach(oItem => {
-                    const oItemContext = oItem.getBindingContext('ZC_PARTNER_MDG');
-                    const oData = oItemContext.getObject();
-
-                    const oKey = this.getExtModel().createKey('/FileSet', {
-                        SourceId: oData.MDChgProcessSrceObject,
-                        Type: oData.Type,
-                        Filename: oData.Filename
-                    });
-                    const sPath = oServiceUrl + oKey + "/$value";
-
-                    oItem.setProperty('url', sPath);
+                const oKey = this.getExtModel().createKey('/FileSet', {
+                    SourceId: MDChgProcessSrceObject,
+                    Type: Type,
+                    Filename: Filename
                 });
+                const sUrl = oServiceUrl + oKey + "/$value";
+                return sUrl;
             },
 
             // Before Upload Starts define Slug and Tocken
@@ -263,7 +272,6 @@ sap.ui.define(
                 let oStatus = oEvent.getParameter("status");
                 let oItem = oEvent.getParameter("item");
                 oItem.setVisibleEdit(false);
-                // this.Uploadset.setUploadEnabled(false);
                 this.getView().getModel('uiExt').setProperty('/upload', false);
 
                 if (oStatus && oStatus !== 201) {
@@ -301,39 +309,18 @@ sap.ui.define(
 
             onBkTyCUpd: function (oEvent) {
                 let oBankTypeContext = oEvent.getSource().getParent().getParent().getSelectedItem().getBindingContextPath();
-                // let oOutputContext = oItem.getBindingContextPath();
-                let oBankTypeObject = this.getView().getModel('ZC_PARTNER_MDG').getProperty(oBankTypeContext);
-
-                let sBankTypeKey = this.getExtModel().createKey('/ZC_BVTYPC_PRC', {
-                    MDChgProcessSrceObject: oBankTypeObject.MDChgProcessSrceObject,
-                    BankType: oBankTypeObject.BankType,
-                    CompanyCode: oBankTypeObject.CompanyCode,
-                    BusinessArea: oBankTypeObject.BusinessArea,
-                    Currency: oBankTypeObject.Currency
-                });
-
-                this._loadBankTypeDialog(oEvent, "/ZC_BVTYPC_PRC", "", sBankTypeKey);
+                this._loadBankTypeDialog(oEvent, "/ZC_BVTYPC_PRC", "", oBankTypeContext);
             },
 
             onBkTyVUpd: function (oEvent) {
                 let oBankTypeContext = oEvent.getSource().getParent().getParent().getSelectedItem().getBindingContextPath();
-                // let oOutputContext = oItem.getBindingContextPath();
-                let oBankTypeObject = this.getView().getModel('ZC_PARTNER_MDG').getProperty(oBankTypeContext);
-
-                let sBankTypeKey = this.getExtModel().createKey('/ZC_BVTYPV_PRC', {
-                    MDChgProcessSrceObject: oBankTypeObject.MDChgProcessSrceObject,
-                    BankType: oBankTypeObject.BankType,
-                    CompanyCode: oBankTypeObject.CompanyCode,
-                    BusinessArea: oBankTypeObject.BusinessArea,
-                    Currency: oBankTypeObject.Currency
-                });
-
-                this._loadBankTypeDialog(oEvent, "/ZC_BVTYPV_PRC", "", sBankTypeKey);
+                this._loadBankTypeDialog(oEvent, "/ZC_BVTYPV_PRC", "", oBankTypeContext);
             },
 
             _loadBankTypeDialog: function (oEvent, oEntity, oBankTypeObj, sBankTypeKey) {
                 this.oMessageManager.removeAllMessages();
                 this.getView().getModel("ZC_PARTNER_MDG").resetChanges(null, true, true);
+                this.getExtModel().resetChanges(null, true, true);
 
                 this._loadDialogPopup({
                     name: "customer.app.mdm.mdg.gov.bps1.ext.changes.fragments.BankTypeDialog",
@@ -400,22 +387,13 @@ sap.ui.define(
 
             onRSVUpd: function (oEvent) {
                 let oReadSoftContext = oEvent.getSource().getParent().getParent().getSelectedItem().getBindingContextPath();
-                // let oOutputContext = oItem.getBindingContextPath();
-                let oReadSoftObject = this.getView().getModel('ZC_PARTNER_MDG').getProperty(oReadSoftContext);
-
-                let sReadSoftKey = this.getExtModel().createKey('/ZC_READSOFT_ACCT_PRC', {
-                    MDChgProcessSrceObject: oReadSoftObject.MDChgProcessSrceObject,
-                    CompanyCode: oReadSoftObject.CompanyCode,
-                    CpDocType: oReadSoftObject.CpDocType,
-                    BusinessArea: oReadSoftObject.BusinessArea,
-                    DocModule: oReadSoftObject.DocModule
-                });
-                this._loadReadSoftDialog(oEvent, "", sReadSoftKey);
+                this._loadReadSoftDialog(oEvent, "", oReadSoftContext);
             },
 
             _loadReadSoftDialog: function (oEvent, oReadSoftObj, sReadSoftKey) {
                 this.oMessageManager.removeAllMessages();
                 this.getView().getModel("ZC_PARTNER_MDG").resetChanges(null, true, true);
+                this.getExtModel().resetChanges(null, true, true);
 
                 this._loadDialogPopup({
                     name: "customer.app.mdm.mdg.gov.bps1.ext.changes.fragments.ReadSoftDialog",
@@ -481,20 +459,21 @@ sap.ui.define(
             onOutMUpd: function (oEvent) {
                 let oOutputContext = oEvent.getSource().getParent().getParent().getSelectedItem().getBindingContextPath();
                 // let oOutputContext = oItem.getBindingContextPath();
-                let oOutputObject = this.getView().getModel('ZC_PARTNER_MDG').getProperty(oOutputContext);
+                // let oOutputObject = this.getView().getModel('ZC_PARTNER_MDG').getProperty(oOutputContext);
 
-                let sOutMKey = this.getExtModel().createKey('/ZC_MDG_OUT_MAIL_PRC', {
-                    MDChgProcessSrceObject: oOutputObject.MDChgProcessSrceObject,
-                    OutputDoc: oOutputObject.OutputDoc,
-                    CompanyCode: oOutputObject.CompanyCode,
-                    ConsNumber: oOutputObject.ConsNumber
-                });
-                this._loadOutputDialog(oEvent, "", sOutMKey);
+                // let sOutMKey = this.getExtModel().createKey('/ZC_MDG_OUT_MAIL_PRC', {
+                //     MDChgProcessSrceObject: oOutputObject.MDChgProcessSrceObject,
+                //     OutputDoc: oOutputObject.OutputDoc,
+                //     CompanyCode: oOutputObject.CompanyCode,
+                //     ConsNumber: oOutputObject.ConsNumber
+                // });
+                this._loadOutputDialog(oEvent, "", oOutputContext);
             },
 
             _loadOutputDialog: function (oEvent, oOutPutMObj, sOutMKey) {
                 this.oMessageManager.removeAllMessages();
                 this.getView().getModel("ZC_PARTNER_MDG").resetChanges(null, true, true);
+                this.getExtModel().resetChanges(null, true, true);
 
                 this._loadDialogPopup({
                     name: "customer.app.mdm.mdg.gov.bps1.ext.changes.fragments.OutPutMailDialog",
@@ -553,11 +532,6 @@ sap.ui.define(
             _setuiExt: function () {
                 let ouiData = this.getView().getModel('ui').getData();
                 this.getView().getModel('uiExt').setProperty('/editable', ouiData.editable);
-            },
-
-            onSaveAndSubmitExt: function (oEvent) {
-                let Object = this.getView().getBindingContext().getObject();
-                this.getView().getBindingContext().getProperty("BusinessPartnerUUID");
             },
 
             _initializeViewModel: function (sName, oData) {
@@ -635,16 +609,19 @@ sap.ui.define(
                 });
             },
 
-
+            // Method when the dialog is closed
             onDialogClose: function (oEvent) {
                 this.oMessageManager.removeAllMessages();
                 this.getView().getModel("ZC_PARTNER_MDG").resetChanges(null, true, true);
+                this.getExtModel().resetChanges(null, true, true);
                 oEvent.getSource().getParent().getParent().close();
             },
 
+            // Method when a line is deleted from a PRC table
             onItemDel: function (oEvent) {
                 this.oMessageManager.removeAllMessages();
                 this.getView().getModel("ZC_PARTNER_MDG").resetChanges(null, true, true);
+                this.getExtModel().resetChanges(null, true, true);
                 let oItem = oEvent.getSource().getParent().getParent().getSelectedItem();
                 let oPath = oItem.getBindingContextPath();
 
@@ -706,6 +683,8 @@ sap.ui.define(
                 return false;
             },
 
+            // Method for Binding Specific data linked to the Process 
+            // Event during Context Model Change
             onContextChange: function () {
                 var that = this;
                 var oContext = this.getView().getBindingContext();
@@ -714,6 +693,9 @@ sap.ui.define(
                     var _Refresh = function (sDraft) {
                         that.getView().unbindObject("ZC_PARTNER_MDG");
                         that._initDataExt(oContext, sDraft);
+
+                        // let oViewContext = that.getView().getBindingContext();
+                        // oViewContext.getModel().setProperty("BusinessPartnerGrouping", 'ZEXT', oViewContext);
                     };
                     try {
                         let p = /(?:MasterDataChangeProcess=)'([^&=]+)',/.exec(oContext.sPath)[1];
@@ -728,6 +710,11 @@ sap.ui.define(
                     } catch (Error) {
                         _Refresh();
                     }
+
+                    // oContext.getModel().attachEventOnce("batchRequestCompleted", function () {
+                    //     this._deleteDraft();
+                    // });
+
                 }
             },
 
@@ -743,6 +730,23 @@ sap.ui.define(
                 return new GroupHeaderListItem({
                     title: Title
                 })
+            },
+
+            _deleteDraft: function (oEvent) {
+                let that = this;
+                let oContext = this.getView().getBindingContext();
+                if (oContext !== undefined) {
+                    this.getExtModel().callFunction("/deleteDraft", {
+                        urlParameters: {
+                            Mdchgprocesssrceobject: oContext.getProperty("MDChgProcessSrceObject")
+                        },
+                        success: function () {
+                            that.getView().unbindObject("ZC_PARTNER_MDG");
+                            that.getView().getModel("customer.mdgextend").refresh();
+                        },
+                        error: function (oError) {}
+                    });
+                }
             },
 
             // _setFileProp: function () {            
@@ -769,23 +773,22 @@ sap.ui.define(
                         upload: false
                     }
                     this._initializeViewModel('uiExt', oUI);
-
+                    // Attach the method onContextChange on Context Model Change
                     oEvent.getSource().attachModelContextChange(this.onContextChange.bind(this));
 
+                    oEvent.getSource().getController().extensionAPI.getTransactionController().attachAfterCancel(this._deleteDraft.bind(this));
+
+                    // oEvent.getSource().getController().extensionAPI.invokeActions("/SaveDraftAndSubmitProcess", this.getView().getBindingContext()).then(function(r) {
+                    //     this._deleteDraft();
+                    // });
+
+                    // Define Specific oData View Model
                     this.getExtModel().metadataLoaded().then(() => {
                         const oDataModel = this.getExtModel();
                         this.getView().setModel(oDataModel, 'ZC_PARTNER_MDG');
                         oDataModel.setDefaultBindingMode(BindingMode.TwoWay);
                         this.getView().setModel(oDataModel, 'MdtAttachList');
                     });
-
-                    // let oController = sap.ui.getCore().byId("mdm.mdg.gov.bps1::sap.suite.ui.generic.template.ObjectPage.view.Details::BusinessPartner").getController();
-                    // oController.attachEvent("onOpenAttachments", function () {
-                    //     alert("Alert Alert"); // Fixed compilation error
-                    // });
-
-                    // this.extensionAPI.getTransactionController().attachAfterCancel(this._onAfterCancel.bind(this));
-
 
                     // let oSubmit = this.getView().byId("mdm.mdg.gov.bps1::sap.suite.ui.generic.template.ObjectPage.view.Details::BusinessPartner--saveSubmit");
                     // oSubmit.attachPress(oEvent => {
@@ -797,13 +800,16 @@ sap.ui.define(
                  * (NOT before the first rendering! onInit() is used for that one!).
                  * @memberOf {{controllerExtPath}}
                  */
-                onBeforeRendering: function () {},
+                onBeforeRendering: function () {
+
+                },
                 /**
                  * Called when the View has been rendered (so its HTML is part of the document). Post-rendering manipulations of the HTML could be done here.
                  * This hook is the same one that SAPUI5 controls get after being rendered.
                  * @memberOf {{controllerExtPath}}
                  */
                 onAfterRendering: function () {
+                    // Attach method onBuGroupSelect on the event Model Change Value of the Bu Group List
                     let oBuGroup = this.getView().byId("mdm.mdg.gov.bps1::sap.suite.ui.generic.template.ObjectPage.view.Details::BusinessPartner--GeneralInformation::BusinessPartnerGrouping::GroupElement");
                     oBuGroup.getElements()[0].attachChangeModelValue(oEvent => {
                         this.onBuGroupSelect(oEvent);
@@ -835,19 +841,32 @@ sap.ui.define(
                         }
                     });
 
+                    // The process Linked button is set to Enabled
                     let oLink = this.getView().byId("QuickCreate.ProcessLink");
                     if (oLink !== undefined) {
                         oLink.setEnabled(false);
                     }
 
+
+                    // Gestion du bouton Edit
+                    let that = this;
+                    // let oEditButton = this.byId(this.getView().getId() + "--edit");
+                    // sap.ui.getCore().byId(that.getView().getId() + "--edit").bindProperty("visible", true);
+                    // oEditButton.setVisible('true');
                 },
                 /**
                  * Called when the Controller is destroyed. Use this one to free resources and finalize activities.
                  * @memberOf {{controllerExtPath}}
                  */
-                onExit: function () {},
+                onExit: function () {
+                    // alert("onExit");
+                },
                 // override public method of the base controller
                 basePublicMethod: function () {},
+
+                baseonLeaveAppExtension: function () {
+                    alert("onLeaveAppExtension");
+                },
             }
         });
     }
