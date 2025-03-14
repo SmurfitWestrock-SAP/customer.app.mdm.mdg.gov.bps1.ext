@@ -149,7 +149,17 @@ sap.ui.define(
                                 BuGroup: oContext.getProperty("BusinessPartnerGrouping") || ""
                             });
 
-                            that._bindingView(oKeyDrf);
+                            that.getExtModel().callFunction("/deleteDraft", {
+                                urlParameters: {
+                                    Mdchgprocesssrceobject: oContext.getProperty("MDChgProcessSrceObject"),
+                                    Tempoactiv: false
+                                },
+                                success: function () {
+                                    that._bindingView(oKeyDrf);
+                                },
+                                error: function (oError) {}
+                            });
+
                             that._bindingMdtAttch(oKeyAttList);
                         },
                         error: function (oError) {}
@@ -738,7 +748,8 @@ sap.ui.define(
                 if (oContext !== undefined) {
                     this.getExtModel().callFunction("/deleteDraft", {
                         urlParameters: {
-                            Mdchgprocesssrceobject: oContext.getProperty("MDChgProcessSrceObject")
+                            Mdchgprocesssrceobject: oContext.getProperty("MDChgProcessSrceObject"),
+                            Tempoactiv: true
                         },
                         success: function () {
                             that.getView().unbindObject("ZC_PARTNER_MDG");
@@ -864,9 +875,9 @@ sap.ui.define(
                 // override public method of the base controller
                 basePublicMethod: function () {},
 
-                baseonLeaveAppExtension: function () {
-                    alert("onLeaveAppExtension");
-                },
+                // baseonLeaveAppExtension: function () {
+                //     alert("onLeaveAppExtension");
+                // },
             }
         });
     }
