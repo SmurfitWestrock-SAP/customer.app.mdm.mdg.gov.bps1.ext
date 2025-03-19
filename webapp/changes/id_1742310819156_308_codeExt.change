@@ -1,0 +1,22 @@
+{
+  "changeType": "codeExt",
+  "reference": "customer.app.mdm.mdg.gov.bps1.ext",
+  "namespace": "apps/customer.app.mdm.mdg.gov.bps1.ext/changes/",
+  "projectId": "customer.app.mdm.mdg.gov.bps1.ext",
+  "moduleName": "customer/app/mdm/mdg/gov/bps1/ext/changes/coding/CreateButton",
+  "support": {
+    "generator": "rta.service.ControllerExtension"
+  },
+  "originalLanguage": "EN",
+  "layer": "CUSTOMER_BASE",
+  "fileType": "change",
+  "fileName": "id_1742310819156_308_codeExt",
+  "content": {
+    "codeRef": "coding/CreateButton.js"
+  },
+  "texts": {},
+  "selector": {
+    "controllerName": "sap.suite.ui.generic.template.ListReport.view.ListReport"
+  },
+  "creation": "2025-03-18T15:13:39.157Z"
+}

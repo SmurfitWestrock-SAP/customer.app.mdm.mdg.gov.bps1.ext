@@ -34,7 +34,7 @@ server:
         ignoreCertError: false # If set to true, certificate errors will be ignored. E.g. self-signed certificates will be accepted
         backend:
           - destination: MDD-605_BVEYRAC
-            url: https://REQUIRED_FOR_VSCODE.example
+          # url: https://REQUIRED_FOR_VSCODE.example
             path: /sap
           # - destination: MDD-605_BVEYRAC
           #   url: https://REQUIRED_FOR_VSCODE.example
