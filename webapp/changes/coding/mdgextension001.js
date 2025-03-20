@@ -268,7 +268,7 @@ sap.ui.define(
 
                 oHeaderItem.addHeaderField(new sap.ui.core.Item({
                     key: "slug",
-                    text: oGuid + "@" + oData.MasterDataChangeProcess + "@" + oData.MDChgProcessSrceObject + "@" + oTypeKey + "@" + oHeaderItem.getFileName()
+                    text: oGuid + "@" + oData.MasterDataChangeProcess + "@" + oData.MDChgProcessSrceObject + "@" + oTypeKey + "@" + oHeaderItem.getFileName() + "@REQUESTOR"
                 }));
                 oHeaderItem.addHeaderField(new sap.ui.core.Item({
                     key: "x-csrf-token",
@@ -623,7 +623,8 @@ sap.ui.define(
             onDialogClose: function (oEvent) {
                 this.oMessageManager.removeAllMessages();
                 this.getView().getModel("ZC_PARTNER_MDG").resetChanges(null, true, true);
-                this.getExtModel().resetChanges(null, true, true);
+                this.getExtModel().resetChanges(null, true, true);            
+                oEvent.getSource().getParent().getParent().unbindObject()
                 oEvent.getSource().getParent().getParent().close();
             },
 

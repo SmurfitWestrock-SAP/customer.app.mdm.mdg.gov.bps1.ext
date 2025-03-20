@@ -35,7 +35,7 @@
                         <Text id="IdBkCTypF" text="{ZC_PARTNER_MDG>BankType}" />
                         <Text id="IdBkCComp" text="{ZC_PARTNER_MDG>CompanyCodeName} ({ZC_PARTNER_MDG>CompanyCode})" />
                         <Text id="IdBkCBa" text="{ZC_PARTNER_MDG>BusinessArea}" />
-                        <Text id="IdBkCWae" text="{ZC_PARTNER_MDG>Currency}" />
+                        <Text id="IdBkCWae" text="{ZC_PARTNER_MDG>IsoCurrency}" />
                     </cells>
                 </ColumnListItem>
             </items>
