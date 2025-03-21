@@ -13,6 +13,7 @@ sap.ui.define(
                     // oCreateButton.setEnabled(false);                    
                     // oCreateButton?.bindProperty("enabled", { path: "/ZZCreationAuth(1)/Authorized" });
                     // this.getView().getModel().read("/ZZCreationAuth(1)");
+                    
             	}
             }
         });
