@@ -1,0 +1,40 @@
+<core:FragmentDefinition id="IdBTVendFrag" xmlns:core='sap.ui.core' xmlns='sap.m' xmlns:uxap='sap.uxap'>
+    <!-- <Table id="IdBkTypVendTab" items="{path: 'ZC_PARTNER_MDG>to_VendorBankType'}" mode="SingleSelectLeft" width="70%">
+        <headerToolbar>
+            <OverflowToolbar id="IdBkTVToolB">
+                <Title id="IdTitTabV" text="{i18n>bktyp.bktyp}" level="H2" />
+                <ToolbarSpacer id="IdBkTVToolBS" />
+                <Button id="IdkTyVAdd" text="{i18n>CREATE_OBJECT}" visible="{uiExt>editable}"
+                    press=".extension.customer.app.mdm.mdg.gov.bps1.ext.mdgextension001.onBkTyVAdd" />
+                <Button id="IdkTyVUpd" text="{i18n>update}" visible="{uiExt>editable}"
+                    press=".extension.customer.app.mdm.mdg.gov.bps1.ext.mdgextension001.onBkTyVUpd" />
+                <Button id="IdkTyVDel" text="{i18n>DELETE}" visible="{uiExt>editable}"
+                    press=".extension.customer.app.mdm.mdg.gov.bps1.ext.mdgextension001.onItemDel" />
+            </OverflowToolbar>
+        </headerToolbar>
+        <columns>
+            <Column id="IdBkVC04">
+                <Text id="IdBkVT04" text="{i18n>bktyp.bktyp}" />
+            </Column>
+            <Column id="IdBkVC01">
+                <Text id="IdBkVT01" text="{i18n>bktyp.comp}" />
+            </Column>
+            <Column id="IdBkVC02">
+                <Text id="IdBkVT02" text="{i18n>bktyp.ba}" />
+            </Column>
+            <Column id="IdBkVC03">
+                <Text id="IdBkVT03" text="{i18n>bktyp.curr}" />
+            </Column>
+        </columns>
+        <items>
+            <ColumnListItem id="IdBkVendItem" vAlign="Middle">
+                <cells>
+                    <Text id="IdVBankType" text="{ZC_PARTNER_MDG>BankType}" />
+                    <Text id="IdBkVComp" text="{ZC_PARTNER_MDG>CompanyCodeName} ({ZC_PARTNER_MDG>CompanyCode})" />
+                    <Text id="IdBkVBa" text="{ZC_PARTNER_MDG>BusinessArea}" />
+                    <Text id="IdBkVWae" text="{ZC_PARTNER_MDG>IsoCurrency}" />
+                </cells>
+            </ColumnListItem>
+        </items>
+    </Table> -->
+</core:FragmentDefinition>

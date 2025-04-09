@@ -1,6 +1,7 @@
 <!-- Use stable and unique IDs!-->
 <core:FragmentDefinition id="IdAddVendFrag" xmlns:core='sap.ui.core' xmlns='sap.m' xmlns:uxap='sap.uxap'>
     <uxap:ObjectPageSubSection id="BkTypSubSectVend" title="{i18n>bktyp.vend}" mode="Expanded" titleUppercase="false">
+        <!-- <core:Fragment fragmentName="extension.customer.app.mdm.mdg.gov.bps1.ext.fragments.BankTypeSupplier" type="XML"/> -->
         <Table id="IdBkTypVendTab" items="{path: 'ZC_PARTNER_MDG>to_VendorBankType'}" mode="SingleSelectLeft"
             width="70%">
             <headerToolbar>
@@ -32,7 +33,7 @@
             <items>
                 <ColumnListItem id="IdBkVendItem" vAlign="Middle">
                     <cells>
-                        <Text id="IdBkVTypF" text="{ZC_PARTNER_MDG>BankType}" />
+                        <Text id="IdVBankType" text="{ZC_PARTNER_MDG>BankType}" />
                         <Text id="IdBkVComp" text="{ZC_PARTNER_MDG>CompanyCodeName} ({ZC_PARTNER_MDG>CompanyCode})" />
                         <Text id="IdBkVBa" text="{ZC_PARTNER_MDG>BusinessArea}" />
                         <Text id="IdBkVWae" text="{ZC_PARTNER_MDG>IsoCurrency}" />                        

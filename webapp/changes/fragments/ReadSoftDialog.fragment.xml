@@ -13,17 +13,17 @@
               <smartForm:SmartForm id="IdReadSoftSF" editable="true">
                   <smartForm:Group>
                       <smartForm:GroupElement>
-                          <smartfield:SmartField value="{CompanyCode}"/>
+                          <smartfield:SmartField value="{CompanyCode}" enabled="{=${UpdNotEnabled} ? false:true}" />
                       </smartForm:GroupElement>
                       <smartForm:GroupElement>
-                          <smartfield:SmartField value="{CpDocType}" />
+                          <smartfield:SmartField value="{CpDocType}" enabled="{=${UpdNotEnabled} ? false:true}"  />
                       </smartForm:GroupElement>
                       <smartForm:GroupElement>
-                          <smartfield:SmartField value="{BusinessArea}" />
+                          <smartfield:SmartField value="{BusinessArea}" enabled="{=${UpdNotEnabled} ? false:true}"  />
                       </smartForm:GroupElement>
                       <smartForm:GroupElement>
-                          <smartfield:SmartField value="{DocModule}" />
-                      </smartForm:GroupElement>                      
+                          <smartfield:SmartField value="{DocModule}" enabled="{=${UpdNotEnabled} ? false:true}"  />
+                      </smartForm:GroupElement>
                       <smartForm:GroupElement>
                           <smartfield:SmartField value="{Account}" />
                       </smartForm:GroupElement>
@@ -34,7 +34,7 @@
                           <smartfield:SmartField value="{OrderId}" />
                       </smartForm:GroupElement>
                       <smartForm:GroupElement>
-                          <smartfield:SmartField value="{ExpressVendor}"/>
+                          <smartfield:SmartField value="{ExpressVendor}" />
                       </smartForm:GroupElement>
                       <smartForm:GroupElement>
                           <smartfield:SmartField textLabel="{i18n>read.auto}" value="{AutoPosting}" />

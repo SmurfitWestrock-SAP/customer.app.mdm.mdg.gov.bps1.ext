@@ -623,7 +623,7 @@ sap.ui.define(
             onDialogClose: function (oEvent) {
                 this.oMessageManager.removeAllMessages();
                 this.getView().getModel("ZC_PARTNER_MDG").resetChanges(null, true, true);
-                this.getExtModel().resetChanges(null, true, true);            
+                this.getExtModel().resetChanges(null, true, true);
                 oEvent.getSource().getParent().getParent().unbindObject()
                 oEvent.getSource().getParent().getParent().close();
             },
@@ -640,7 +640,9 @@ sap.ui.define(
                     success: oData => {
                         this.getView().byId(oEvent.getSource().getId()).getModel("customer.mdgextend").refresh();
                     },
-                    error: oError => {}
+                    error: oError => {
+                        alert(oError);
+                    }
                 });
             },
 
@@ -823,9 +825,12 @@ sap.ui.define(
                 onAfterRendering: function () {
                     // Attach method onBuGroupSelect on the event Model Change Value of the Bu Group List
                     let oBuGroup = this.getView().byId("mdm.mdg.gov.bps1::sap.suite.ui.generic.template.ObjectPage.view.Details::BusinessPartner--GeneralInformation::BusinessPartnerGrouping::GroupElement");
-                    oBuGroup.getElements()[0].attachChangeModelValue(oEvent => {
-                        this.onBuGroupSelect(oEvent);
-                    });
+
+                    if (oBuGroup.getElements() !== undefined) {
+                        oBuGroup.getElements()[0].attachChangeModelValue(oEvent => {
+                            this.onBuGroupSelect(oEvent);
+                        });
+                    }
 
                     let oSubProcess = this.getView().byId("mdm.mdg.gov.bps1::sap.suite.ui.generic.template.ObjectPage.view.Details::BusinessPartner--ProcessDataSection::SubSection");
 

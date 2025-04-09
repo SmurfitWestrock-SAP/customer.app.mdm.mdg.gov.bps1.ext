@@ -13,16 +13,16 @@
               <smartForm:SmartForm id="IdBankTypeSF" editable="true">
                   <smartForm:Group>
                       <smartForm:GroupElement>
-                          <smartfield:SmartField textLabel="{i18n>bktyp.bktyp}" value="{BankType}" />
+                          <smartfield:SmartField textLabel="{i18n>bktyp.bktyp}" value="{BankType}" mandatory="true"/>
                       </smartForm:GroupElement>                  
                       <smartForm:GroupElement>
-                          <smartfield:SmartField value="{CompanyCode}"/>
+                          <smartfield:SmartField value="{CompanyCode}" enabled="{=${UpdNotEnabled} ? false:true}"/>
                       </smartForm:GroupElement>
                       <smartForm:GroupElement>
-                          <smartfield:SmartField value="{BusinessArea}" />
+                          <smartfield:SmartField value="{BusinessArea}" enabled="{=${UpdNotEnabled} ? false:true}" />
                       </smartForm:GroupElement>                      
                       <smartForm:GroupElement>
-                          <smartfield:SmartField value="{Currency}" />
+                          <smartfield:SmartField value="{Currency}" enabled="{=${UpdNotEnabled} ? false:true}" />
                       </smartForm:GroupElement>
                   </smartForm:Group>
               </smartForm:SmartForm>
