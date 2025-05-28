@@ -388,6 +388,87 @@ sap.ui.define(
              *************************************************************************/
 
             /*************************************************************************
+             * >>>> Permitted Payee Managment
+             *************************************************************************/
+            onPPVAdd: function (oEvent) {
+                let oPermitPayeeObj = this.getView().getBindingContext('ZC_PARTNER_MDG').getObject();
+                this._loadPermitPayeeDialog(oEvent, "/ZC_VENDORPERMITPAYEE_PRC", oPermitPayeeObj, "");
+            },
+
+            onPPVUpd: function (oEvent) {
+                let oPermitPayeeObj = this.getView().getBindingContext('ZC_PARTNER_MDG').getObject();
+                this._loadPermitPayeeDialog(oEvent, "/ZC_VENDORPERMITPAYEE_PRC", oPermitPayeeObj, "");
+            },
+
+            // onBkTyCUpd: function (oEvent) {
+            //     let oBankTypeContext = oEvent.getSource().getParent().getParent().getSelectedItem().getBindingContextPath();
+            //     this._loadBankTypeDialog(oEvent, "/ZC_BVTYPC_PRC", "", oBankTypeContext);
+            // },
+
+            // onBkTyVUpd: function (oEvent) {
+            //     let oBankTypeContext = oEvent.getSource().getParent().getParent().getSelectedItem().getBindingContextPath();
+            //     this._loadBankTypeDialog(oEvent, "/ZC_BVTYPV_PRC", "", oBankTypeContext);
+            // },
+
+            _loadPermitPayeeDialog: function (oEvent, oEntity, oPermitPayeeObj, sPermitPayeeKey) {
+                this.oMessageManager.removeAllMessages();
+                this.getView().getModel("ZC_PARTNER_MDG").resetChanges(null, true, true);
+                this.getExtModel().resetChanges(null, true, true);
+
+                this._loadDialogPopup({
+                    name: "customer.app.mdm.mdg.gov.bps1.ext.changes.fragments.PermittedPayeeDialog",
+                    dialog: this._pPermittedPayeeDialog
+                }).then(oPermitPayeeDialog => {
+                    this._pPermittedPayeeDialog = oPermitPayeeDialog;
+                    this._pPermittedPayeeDialog.IdTab = this.getView().byId(oEvent.getSource().getId());
+                    this._pPermittedPayeeDialog.unbindObject();
+                    this._pPermittedPayeeDialog.setModel(this.getExtModel());
+
+                    if (oPermitPayeeObj) {
+                        const oPermitPayeeObj = this.getExtModel().createEntry(oEntity, {
+                            properties: {
+                                MDChgProcessSrceObject: oPermitPayeeObj.MDChgProcessSrceObject
+                            }
+                        });
+                        this._pPermittedPayeeDialog.setBindingContext(oPermitPayeeObj);
+                        this._pPermittedPayeeDialog.open();
+                    } else {
+                        this.getExtModel().invalidateEntry(sPermitPayeeKey);
+                        this._pPermittedPayeeDialog.bindObject({
+                            path: sPermitPayeeKey,
+                            events: {
+                                dataReceived: (oData) => {
+                                    this._pPermittedPayeeDialog.open();
+                                }
+                            }
+                        });
+                    }
+                });
+            },
+
+            onPPSave: function (oEvent) {
+                this.oMessageManager.removeAllMessages();
+                this._pPermittedPayeeDialog.setBusy(true);
+
+                this.submitChanges({
+                        model: this.getExtModel(),
+                        busyControl: this.getView()
+                    })
+                    .then((oResult) => { //Sucess                                                      
+                        this._pPermittedPayeeDialog.unbindObject();
+                        this._pPermittedPayeeDialog.IdTab.getModel("customer.mdgextend").refresh();
+                        this._pPermittedPayeeDialog.setBusy(false);
+                        this._pPermittedPayeeDialog.close();
+                    })
+                    .catch((oError) => {
+                        this._pPermittedPayeeDialog.setBusy(false);
+                    });
+            },
+            /*************************************************************************
+             * <<<< Permitted Payee Managment
+             *************************************************************************/
+
+            /*************************************************************************
              * >>>> ReadSoft Managment
              *************************************************************************/
             onRSVAdd: function (oEvent) {

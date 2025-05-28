@@ -11,7 +11,7 @@
                     <Button id="IdkTyVAdd" text="{i18n>CREATE_OBJECT}" visible="{uiExt>editable}"
                         press=".extension.customer.app.mdm.mdg.gov.bps1.ext.mdgextension001.onBkTyVAdd" />
                     <Button id="IdkTyVUpd" text="{i18n>update}" visible="{uiExt>editable}"
-                        press=".extension.customer.app.mdm.mdg.gov.bps1.ext.mdgextension001.onBkTyVUpd" />                        
+                        press=".extension.customer.app.mdm.mdg.gov.bps1.ext.mdgextension001.onBkTyVUpd" />
                     <Button id="IdkTyVDel" text="{i18n>DELETE}" visible="{uiExt>editable}"
                         press=".extension.customer.app.mdm.mdg.gov.bps1.ext.mdgextension001.onItemDel" />
                 </OverflowToolbar>
@@ -36,7 +36,42 @@
                         <Text id="IdVBankType" text="{ZC_PARTNER_MDG>BankType}" />
                         <Text id="IdBkVComp" text="{ZC_PARTNER_MDG>CompanyCodeName} ({ZC_PARTNER_MDG>CompanyCode})" />
                         <Text id="IdBkVBa" text="{ZC_PARTNER_MDG>BusinessArea}" />
-                        <Text id="IdBkVWae" text="{ZC_PARTNER_MDG>IsoCurrency}" />                        
+                        <Text id="IdBkVWae" text="{ZC_PARTNER_MDG>IsoCurrency}" />
+                    </cells>
+                </ColumnListItem>
+            </items>
+        </Table>
+    </uxap:ObjectPageSubSection>
+
+    <uxap:ObjectPageSubSection id="BkPermiPayeeVend" title="{i18n>perpay.vend}" mode="Expanded" titleUppercase="false">
+        <Table id="IdPermiPayeeVendTab" items="{path: 'ZC_PARTNER_MDG>to_VendorPermittedPayee'}" mode="SingleSelectLeft"
+            width="70%">
+            <headerToolbar>
+                <OverflowToolbar id="IdPPVTVToolB">
+                    <Title id="IdTitTabPPV" text="{i18n>perpay.perpay}" level="H2" />
+                    <ToolbarSpacer id="IdPPVToolBS" />
+                    <Button id="IdPPVAdd" text="{i18n>CREATE_OBJECT}" visible="{uiExt>editable}"
+                        press=".extension.customer.app.mdm.mdg.gov.bps1.ext.mdgextension001.onPPVAdd" />
+                    <Button id="IdPPVUpd" text="{i18n>update}" visible="{uiExt>editable}"
+                        press=".extension.customer.app.mdm.mdg.gov.bps1.ext.mdgextension001.onPPVUpd" />
+                    <Button id="IdPPVDel" text="{i18n>DELETE}" visible="{uiExt>editable}"
+                        press=".extension.customer.app.mdm.mdg.gov.bps1.ext.mdgextension001.onItemDel" />
+                </OverflowToolbar>
+            </headerToolbar>
+            <columns>
+                <Column id="IdPPVC01">
+                    <Text id="IdPPVT01" text="{i18n>perpay.comp}" />
+                </Column>
+                <Column id="IdPPVC02">
+                    <Text id="IdPPVT02" text="{i18n>perpay.perpay}" />
+                </Column>
+            </columns>
+            <items>
+                <ColumnListItem id="IdPermiPayeeVendItem" vAlign="Middle">
+                    <cells>
+                        <Text id="IdPPVComp" text="{ZC_PARTNER_MDG>CompanyCodeName} ({ZC_PARTNER_MDG>CompanyCode})" />
+                        <Text id="IdPPVPayee"
+                            text="{ZC_PARTNER_MDG>PermittedPayee} ({ZC_PARTNER_MDG>PermittedPayeeName})" />
                     </cells>
                 </ColumnListItem>
             </items>
@@ -53,7 +88,7 @@
                     <Button id="IdRSVAdd" text="{i18n>CREATE_OBJECT}" visible="{uiExt>editable}"
                         press=".extension.customer.app.mdm.mdg.gov.bps1.ext.mdgextension001.onRSVAdd" />
                     <Button id="IdRSVUpd" text="{i18n>update}" visible="{uiExt>editable}"
-                        press=".extension.customer.app.mdm.mdg.gov.bps1.ext.mdgextension001.onRSVUpd" />                           
+                        press=".extension.customer.app.mdm.mdg.gov.bps1.ext.mdgextension001.onRSVUpd" />
                     <Button id="IdRSVDel" text="{i18n>DELETE}" visible="{uiExt>editable}"
                         press=".extension.customer.app.mdm.mdg.gov.bps1.ext.mdgextension001.onItemDel" />
                 </OverflowToolbar>
@@ -105,11 +140,12 @@
                             visible="{=!!${ZC_PARTNER_MDG>OrderId} &amp;&amp; ${ZC_PARTNER_MDG>OrderId} !== '' ? true:false }" />
                         <CheckBox id="IdRSVExpVen" selected="{ZC_PARTNER_MDG>ExpressVendor}" enabled="false" />
                         <CheckBox id="IdRSVAuto" selected="{ZC_PARTNER_MDG>AutoPosting}" enabled="false" />
-                        <Text id="IdRSVDoc" text="{ZC_PARTNER_MDG>DocTypeDesc} ({ZC_PARTNER_MDG>DocType})" 
-                         visible="{=!!${ZC_PARTNER_MDG>DocType} &amp;&amp; ${ZC_PARTNER_MDG>DocType} !== '' ? true:false }" />
+                        <Text id="IdRSVDoc" text="{ZC_PARTNER_MDG>DocTypeDesc} ({ZC_PARTNER_MDG>DocType})"
+                            visible="{=!!${ZC_PARTNER_MDG>DocType} &amp;&amp; ${ZC_PARTNER_MDG>DocType} !== '' ? true:false }" />
                     </cells>
                 </ColumnListItem>
             </items>
         </Table>
     </uxap:ObjectPageSubSection>
+
 </core:FragmentDefinition>
