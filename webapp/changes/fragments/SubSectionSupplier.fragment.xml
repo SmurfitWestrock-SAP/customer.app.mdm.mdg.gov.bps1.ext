@@ -60,7 +60,7 @@
             </headerToolbar>
             <columns>
                 <Column id="IdPPVC01">
-                    <Text id="IdPPVT01" text="{i18n>perpay.comp}" />
+                    <Text id="IdPPVT01" text="{i18n>perpay.com}" />
                 </Column>
                 <Column id="IdPPVC02">
                     <Text id="IdPPVT02" text="{i18n>perpay.perpay}" />

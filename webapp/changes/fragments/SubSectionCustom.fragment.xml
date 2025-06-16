@@ -41,4 +41,40 @@
             </items>
         </Table>
     </uxap:ObjectPageSubSection>
+
+    <uxap:ObjectPageSubSection id="BkPermiPayeeCust" title="{i18n>perpay.cust}" mode="Expanded" titleUppercase="false">
+        <Table id="IdPermiPayeeCustTab" items="{path: 'ZC_PARTNER_MDG>to_CustomerPermittedPayee'}"
+            mode="SingleSelectLeft" width="70%">
+            <headerToolbar>
+                <OverflowToolbar id="IdPPCTVToolB">
+                    <Title id="IdTitTabPPC" text="{i18n>perpay.perpay}" level="H2" />
+                    <ToolbarSpacer id="IdPPCToolBS" />
+                    <Button id="IdPPCAdd" text="{i18n>CREATE_OBJECT}" visible="{uiExt>editable}"
+                        press=".extension.customer.app.mdm.mdg.gov.bps1.ext.mdgextension001.onPPCAdd" />
+                    <Button id="IdPPCUpd" text="{i18n>update}" visible="{uiExt>editable}"
+                        press=".extension.customer.app.mdm.mdg.gov.bps1.ext.mdgextension001.onPPCUpd" />
+                    <Button id="IdPPCDel" text="{i18n>DELETE}" visible="{uiExt>editable}"
+                        press=".extension.customer.app.mdm.mdg.gov.bps1.ext.mdgextension001.onItemDel" />
+                </OverflowToolbar>
+            </headerToolbar>
+            <columns>
+                <Column id="IdPPCC01">
+                    <Text id="IdPPCT01" text="{i18n>perpay.com}" />
+                </Column>
+                <Column id="IdPPCC02">
+                    <Text id="IdPPCT02" text="{i18n>perpay.perpay}" />
+                </Column>
+            </columns>
+            <items>
+                <ColumnListItem id="IdPermiPayeeCustItem" vAlign="Middle">
+                    <cells>
+                        <Text id="IdPPCComp" text="{ZC_PARTNER_MDG>CompanyCodeName} ({ZC_PARTNER_MDG>CompanyCode})" />
+                        <Text id="IdPPCPayee"
+                            text="{ZC_PARTNER_MDG>PermittedPayee} ({ZC_PARTNER_MDG>PermittedPayeeName})" />
+                    </cells>
+                </ColumnListItem>
+            </items>
+        </Table>
+    </uxap:ObjectPageSubSection>
+
 </core:FragmentDefinition>

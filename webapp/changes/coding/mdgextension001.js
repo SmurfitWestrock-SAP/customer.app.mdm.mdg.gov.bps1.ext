@@ -390,25 +390,25 @@ sap.ui.define(
             /*************************************************************************
              * >>>> Permitted Payee Managment
              *************************************************************************/
+            onPPCAdd: function (oEvent) {
+                let oPermitPayeeObj = this.getView().getBindingContext('ZC_PARTNER_MDG').getObject();
+                this._loadPermitPayeeDialog(oEvent, "/ZC_CUSTOMERPERMITPAYEE_PRC", oPermitPayeeObj, "");
+            },
+
+            onPPCUpd: function (oEvent) {
+                let oPermitPayeContext = oEvent.getSource().getParent().getParent().getSelectedItem().getBindingContextPath();
+                this._loadPermitPayeeDialog(oEvent, "/ZC_CUSTOMERPERMITPAYEE_PRC", "", oPermitPayeContext);
+            },
+
             onPPVAdd: function (oEvent) {
                 let oPermitPayeeObj = this.getView().getBindingContext('ZC_PARTNER_MDG').getObject();
                 this._loadPermitPayeeDialog(oEvent, "/ZC_VENDORPERMITPAYEE_PRC", oPermitPayeeObj, "");
             },
 
             onPPVUpd: function (oEvent) {
-                let oPermitPayeeObj = this.getView().getBindingContext('ZC_PARTNER_MDG').getObject();
-                this._loadPermitPayeeDialog(oEvent, "/ZC_VENDORPERMITPAYEE_PRC", oPermitPayeeObj, "");
+                let oPermitPayeContext = oEvent.getSource().getParent().getParent().getSelectedItem().getBindingContextPath();
+                this._loadPermitPayeeDialog(oEvent, "/ZC_VENDORPERMITPAYEE_PRC", "", oPermitPayeContext);
             },
-
-            // onBkTyCUpd: function (oEvent) {
-            //     let oBankTypeContext = oEvent.getSource().getParent().getParent().getSelectedItem().getBindingContextPath();
-            //     this._loadBankTypeDialog(oEvent, "/ZC_BVTYPC_PRC", "", oBankTypeContext);
-            // },
-
-            // onBkTyVUpd: function (oEvent) {
-            //     let oBankTypeContext = oEvent.getSource().getParent().getParent().getSelectedItem().getBindingContextPath();
-            //     this._loadBankTypeDialog(oEvent, "/ZC_BVTYPV_PRC", "", oBankTypeContext);
-            // },
 
             _loadPermitPayeeDialog: function (oEvent, oEntity, oPermitPayeeObj, sPermitPayeeKey) {
                 this.oMessageManager.removeAllMessages();
@@ -425,12 +425,12 @@ sap.ui.define(
                     this._pPermittedPayeeDialog.setModel(this.getExtModel());
 
                     if (oPermitPayeeObj) {
-                        const oPermitPayeeObj = this.getExtModel().createEntry(oEntity, {
+                        const oPermitPayContext = this.getExtModel().createEntry(oEntity, {
                             properties: {
                                 MDChgProcessSrceObject: oPermitPayeeObj.MDChgProcessSrceObject
                             }
                         });
-                        this._pPermittedPayeeDialog.setBindingContext(oPermitPayeeObj);
+                        this._pPermittedPayeeDialog.setBindingContext(oPermitPayContext);
                         this._pPermittedPayeeDialog.open();
                     } else {
                         this.getExtModel().invalidateEntry(sPermitPayeeKey);
