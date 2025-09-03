@@ -21,9 +21,9 @@
                       <smartForm:GroupElement>
                           <smartfield:SmartField value="{BusinessArea}" enabled="{=${UpdNotEnabled} ? false:true}"  />
                       </smartForm:GroupElement>
-                      <smartForm:GroupElement>
+                      <!-- <smartForm:GroupElement>
                           <smartfield:SmartField value="{DocModule}" enabled="{=${UpdNotEnabled} ? false:true}"  />
-                      </smartForm:GroupElement>
+                      </smartForm:GroupElement> -->
                       <smartForm:GroupElement>
                           <smartfield:SmartField value="{Account}" />
                       </smartForm:GroupElement>
@@ -36,12 +36,18 @@
                       <smartForm:GroupElement>
                           <smartfield:SmartField value="{ExpressVendor}" />
                       </smartForm:GroupElement>
-                      <smartForm:GroupElement>
+                      <!-- <smartForm:GroupElement>
                           <smartfield:SmartField textLabel="{i18n>read.auto}" value="{AutoPosting}" />
-                      </smartForm:GroupElement>
+                      </smartForm:GroupElement> -->
                       <smartForm:GroupElement>
                           <smartfield:SmartField value="{DocType}" />
                       </smartForm:GroupElement>
+                      <smartForm:GroupElement>
+                          <smartfield:SmartField value="{TaxCode}" />
+                      </smartForm:GroupElement>
+                      <smartForm:GroupElement>
+                          <smartfield:SmartField value="{AccTempName}" />
+                      </smartForm:GroupElement>                                            
                   </smartForm:Group>
               </smartForm:SmartForm>
           </content>

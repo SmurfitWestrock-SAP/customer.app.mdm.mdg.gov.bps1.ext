@@ -1,0 +1,29 @@
+{
+  "changeType": "propertyBindingChange",
+  "reference": "customer.app.mdm.mdg.gov.bps1.ext",
+  "namespace": "apps/customer.app.mdm.mdg.gov.bps1.ext/changes/",
+  "projectId": "customer.app.mdm.mdg.gov.bps1.ext",
+  "packageName": "$TMP",
+  "support": {
+    "generator": "@sap-ux/control-property-editor",
+    "command": "bindProperty",
+    "sapui5Version": "1.120.0"
+  },
+  "originalLanguage": "EN",
+  "layer": "CUSTOMER_BASE",
+  "fileType": "change",
+  "fileName": "id_1753693612738_335_propertyBindingChange",
+  "content": {
+    "property": "text",
+    "newBinding": "{@i18n>DuplicateCheck}"
+  },
+  "texts": {},
+  "selector": {
+    "id": "mdm.mdg.gov.bps1::sap.suite.ui.generic.template.ObjectPage.view.Details::BusinessPartner--customer.app.mdm.mdg.gov.bps1.ext.btn-0ae6f918",
+    "type": "sap.m.Button",
+    "idIsLocal": false
+  },
+  "dependentSelector": {},
+  "jsOnly": false,
+  "creation": "2025-07-28T09:06:55.803Z"
+}

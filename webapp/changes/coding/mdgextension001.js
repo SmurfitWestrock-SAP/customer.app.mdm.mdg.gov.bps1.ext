@@ -7,11 +7,13 @@ sap.ui.define(
         "sap/m/MessagePopover",
         "sap/m/MessageItem",
         "sap/ui/model/BindingMode",
-        "sap/m/GroupHeaderListItem"
+        "sap/m/GroupHeaderListItem",
+        "mdm/mdg/gov/bps1/ext/controller/DuplicateCheck.controller",
+        "customer/app/mdm/mdg/gov/bps1/ext/changes/coding/DuplicateCheckExt.controller"
     ],
     function (
         ControllerExtension, OverrideExecution, JSONModel, Fragment,
-        MessagePopover, MessageItem, BindingMode, GroupHeaderListItem
+        MessagePopover, MessageItem, BindingMode, GroupHeaderListItem, DuplicateCheck, DuplicateCheckExt
     ) {
         'use strict';
         return ControllerExtension.extend("customer.app.mdm.mdg.gov.bps1.ext.mdgextension001", {
@@ -97,8 +99,43 @@ sap.ui.define(
                         public: true /*default*/ ,
                         final: false /*default*/
                     },
-
                 }
+            },
+
+            // Lancement de la Popup de contrôle de duplicité (mdm.mdg.gov.bps1.ext.controller.DuplicateCheck)
+            onDuplicateCheck: function (oEvent) {
+                // Détection si la demande est Submit ou en Approbation
+                // Si on est dans le flux d'approbation on fait appel au controller DuplicateCheckExt
+                // Sinon on appelle le controller standard DuplicateCheck
+                if (this.getView().getBindingContext().getObject("MDChgProcessIsStarted") === true) {
+                    this.DuplicateCheck = new DuplicateCheckExt({
+                        extensionAPI: this.extensionAPIExt,
+                        parentController: this
+                    });
+                    this.DuplicateCheck.startDuplicateCheck();
+                } else {
+                    var that = this;
+                    var oBindingContext = this.getView().getBindingContext();
+                    var u = {};
+                    var oContinue = this.extensionAPIExt.invokeActions("/DuplicateCheckContinue", oBindingContext, u);
+                    oContinue.then(function (r) {
+                        that.DuplicateCheck = new DuplicateCheck({
+                            extensionAPI: that.extensionAPIExt,
+                            parentController: that
+                        });
+                        that.DuplicateCheck.startDuplicateCheck();
+                    });
+                }
+            },
+
+            // Surcharge du bouton Continue
+            onDuplicateContinueExt: function (oEvent) {
+                DuplicateCheck.prototype.onDuplicateContinue.apply(this.DuplicateCheck, arguments);
+            },
+
+            // Surcharge du bouton Withdraw
+            onDuplicateWithdrawExt: function (oEvent) {
+                DuplicateCheck.prototype.onDuplicateWithdraw.apply(this.DuplicateCheck, arguments);
             },
 
             // // adding a private method, only accessible from this controller extension
@@ -133,6 +170,7 @@ sap.ui.define(
             // Changement des données partenaires et des fichiers
             _initDataExt: function (oContext, sDraft) {
                 var that = this;
+
                 if (sDraft) {
                     this.getExtModel().callFunction("/convertUUID", {
                         urlParameters: {
@@ -295,7 +333,6 @@ sap.ui.define(
 
             // Suppression d'un fichier #Attachment en attente d'ajout ou déjà ajouté.
             onAfterRemoveFileExt: function (oEvent) {
-                // const sPath = oEvent.getParameter('item').getBindingContext('ZC_PARTNER_MDG').getPath() + "/$value";
                 const sPath = oEvent.getParameter('item').getBindingContext('ZC_PARTNER_MDG').getPath();
 
                 this.getExtModel().remove(sPath, {
@@ -466,6 +503,124 @@ sap.ui.define(
             },
             /*************************************************************************
              * <<<< Permitted Payee Managment
+             *************************************************************************/
+
+            /*************************************************************************
+             * >>>> Unloading Point Managment
+             *************************************************************************/
+            onUPCAdd: function (oEvent) {
+                let oUnlPtObj = this.getView().getBindingContext('ZC_PARTNER_MDG').getObject();
+                this._loadUnlPtDialog(oEvent, oUnlPtObj, "");
+            },
+
+            onUPCUpd: function (oEvent) {
+                let oUnlPtContext = oEvent.getSource().getParent().getParent().getSelectedItem().getBindingContextPath();
+                this._loadUnlPtDialog(oEvent, "", oUnlPtContext);
+            },
+
+            _loadUnlPtDialog: function (oEvent, oUnlPtObj, sUnlPtKey) {
+                this.oMessageManager.removeAllMessages();
+                this.getView().getModel("ZC_PARTNER_MDG").resetChanges(null, true, true);
+                this.getExtModel().resetChanges(null, true, true);
+
+                this._loadDialogPopup({
+                    name: "customer.app.mdm.mdg.gov.bps1.ext.changes.fragments.UnloadingPoint",
+                    dialog: this._pUnlPtDialog
+                }).then(oDialog => {
+                    this._pUnlPtDialog = oDialog;
+                    this._pUnlPtDialog.IdTab = this.getView().byId(oEvent.getSource().getId());
+                    this._pUnlPtDialog.unbindObject();
+                    this._pUnlPtDialog.setModel(this.getExtModel());
+
+                    if (oUnlPtObj) {
+                        const oUnlPtContext = this.getExtModel().createEntry("/ZC_CUSTOMERUNLOADINGPOINT_PRC", {
+                            properties: {
+                                MDChgProcessSrceObject: oUnlPtObj.MDChgProcessSrceObject,
+                                MasterDataChangeProcess: oUnlPtObj.MasterDataChangeProcess || "",
+                            }
+                        });
+                        this._pUnlPtDialog.setBindingContext(oUnlPtContext);
+                        this._pUnlPtDialog.open();
+                    } else {
+                        this.getExtModel().invalidateEntry(sUnlPtKey);
+                        this._pUnlPtDialog.bindObject({
+                            path: sUnlPtKey,
+                            events: {
+                                dataReceived: (oData) => {
+                                    this._pUnlPtDialog.open();
+                                }
+                            }
+                        });
+                    }
+                });
+            },
+
+
+            onGRHoursCodeChg: function (oEvent) {
+                let sBPGoodsReceivingHoursCode = oEvent.getParameter('newValue');
+
+                let oUnloadPintContext = this._pUnlPtDialog.getBindingContext();
+
+                let sKey = this.getExtModel().createKey('/BPGoodReceivingHoursSet', {
+                    Wanid: sBPGoodsReceivingHoursCode
+                });
+                this.getExtModel().read(sKey, {
+                    success: function (oData) {
+                        oUnloadPintContext.getModel().setProperty("MondayMorningOpeningTime", oData.Moab1, oUnloadPintContext);
+                        oUnloadPintContext.getModel().setProperty("MondayMorningClosingTime", oData.Mobi1, oUnloadPintContext);
+                        oUnloadPintContext.getModel().setProperty("MondayAfternoonOpeningTime", oData.Moab2, oUnloadPintContext);
+                        oUnloadPintContext.getModel().setProperty("MondayAfternoonClosingTime", oData.Mobi2, oUnloadPintContext);
+                        oUnloadPintContext.getModel().setProperty("TuesdayMorningOpeningTime", oData.Diab1, oUnloadPintContext);
+                        oUnloadPintContext.getModel().setProperty("TuesdayMorningClosingTime", oData.Dibi1, oUnloadPintContext);
+                        oUnloadPintContext.getModel().setProperty("TuesdayAfternoonOpeningTime", oData.Diab2, oUnloadPintContext);
+                        oUnloadPintContext.getModel().setProperty("TuesdayAfternoonClosingTime", oData.Dibi2, oUnloadPintContext);
+                        oUnloadPintContext.getModel().setProperty("WednesdayMorningOpeningTime", oData.Miab1, oUnloadPintContext);
+                        oUnloadPintContext.getModel().setProperty("WednesdayMorningClosingTime", oData.Mibi1, oUnloadPintContext);
+                        oUnloadPintContext.getModel().setProperty("WednesdayAfternoonOpeningTime", oData.Miab2, oUnloadPintContext);
+                        oUnloadPintContext.getModel().setProperty("WednesdayAfternoonClosingTime", oData.Mibi2, oUnloadPintContext);
+                        oUnloadPintContext.getModel().setProperty("ThursdayMorningOpeningTime", oData.Doab1, oUnloadPintContext);
+                        oUnloadPintContext.getModel().setProperty("ThursdayMorningClosingTime", oData.Dobi1, oUnloadPintContext);
+                        oUnloadPintContext.getModel().setProperty("ThursdayAfternoonOpeningTime", oData.Doab2, oUnloadPintContext);
+                        oUnloadPintContext.getModel().setProperty("ThursdayAfternoonClosingTime", oData.Dobi2, oUnloadPintContext);
+                        oUnloadPintContext.getModel().setProperty("FridayMorningOpeningTime", oData.Frab1, oUnloadPintContext);
+                        oUnloadPintContext.getModel().setProperty("FridayMorningClosingTime", oData.Frbi1, oUnloadPintContext);
+                        oUnloadPintContext.getModel().setProperty("FridayAfternoonOpeningTime", oData.Frab2, oUnloadPintContext);
+                        oUnloadPintContext.getModel().setProperty("FridayAfternoonClosingTime", oData.Frbi2, oUnloadPintContext);
+                        oUnloadPintContext.getModel().setProperty("SaturdayMorningOpeningTime", oData.Saab1, oUnloadPintContext);
+                        oUnloadPintContext.getModel().setProperty("SaturdayMorningClosingTime", oData.Sabi1, oUnloadPintContext);
+                        oUnloadPintContext.getModel().setProperty("SaturdayAfternoonOpeningTime", oData.Saab2, oUnloadPintContext);
+                        oUnloadPintContext.getModel().setProperty("SaturdayAfternoonClosingTime", oData.Sabi2, oUnloadPintContext);
+                        oUnloadPintContext.getModel().setProperty("SundayMorningOpeningTime", oData.Soab1, oUnloadPintContext);
+                        oUnloadPintContext.getModel().setProperty("SundayMorningClosingTime", oData.Sobi1, oUnloadPintContext);
+                        oUnloadPintContext.getModel().setProperty("SundayAfternoonOpeningTime", oData.Soab2, oUnloadPintContext);
+                        oUnloadPintContext.getModel().setProperty("SundayAfternoonClosingTime", oData.Sobi2, oUnloadPintContext);
+                    },
+                    error: function (oErr) {
+                        this.getView().setBusy(false);
+                    }
+                });
+            },
+
+            onUPTSave: function (oEvent) {
+                this.oMessageManager.removeAllMessages();
+                this._pUnlPtDialog.setBusy(true);
+
+                this.submitChanges({
+                        model: this.getExtModel(),
+                        busyControl: this.getView()
+                    })
+                    .then((oResult) => {
+                        this._pUnlPtDialog.unbindObject();
+                        this._pUnlPtDialog.IdTab.getModel("customer.mdgextend").refresh();
+                        this._pUnlPtDialog.setBusy(false);
+                        this._pUnlPtDialog.close();
+                    })
+                    .catch((oError) => {
+                        this._pUnlPtDialog.setBusy(false);
+                    });
+            },
+            /*************************************************************************
+             * <<<< Unloading Point Managment
              *************************************************************************/
 
             /*************************************************************************
@@ -784,12 +939,10 @@ sap.ui.define(
                 var oContext = this.getView().getBindingContext();
                 if (oContext && oContext.sPath !== this.sPath && !oContext.bCreated && oContext.getObject() || oContext && oContext.bForceRefresh) {
                     this.sPath = oContext.sPath;
+                    // oContext.getModel().setProperty("DuplicateCheck_ac", false, oContext);
                     var _Refresh = function (sDraft) {
                         that.getView().unbindObject("ZC_PARTNER_MDG");
                         that._initDataExt(oContext, sDraft);
-
-                        // let oViewContext = that.getView().getBindingContext();
-                        // oViewContext.getModel().setProperty("BusinessPartnerGrouping", 'ZEXT', oViewContext);
                     };
                     try {
                         let p = /(?:MasterDataChangeProcess=)'([^&=]+)',/.exec(oContext.sPath)[1];
@@ -807,8 +960,7 @@ sap.ui.define(
 
                     // oContext.getModel().attachEventOnce("batchRequestCompleted", function () {
                     //     this._deleteDraft();
-                    // });
-
+                    // });                                        
                 }
             },
 
@@ -844,11 +996,6 @@ sap.ui.define(
                 }
             },
 
-            // _setFileProp: function () {            
-            //     oLink.setEnabled(false);
-            //     oLink.setVisible(false);
-            // },
-
             // // this section allows to extend lifecycle hooks or override public methods of the base controller
             override: {
                 /**
@@ -873,10 +1020,11 @@ sap.ui.define(
 
                     oEvent.getSource().getController().extensionAPI.getTransactionController().attachAfterCancel(this._deleteDraft.bind(this));
 
+                    this.extensionAPIExt = oEvent.getSource().getController().extensionAPI;
+
                     // oEvent.getSource().getController().extensionAPI.invokeActions("/SaveDraftAndSubmitProcess", this.getView().getBindingContext()).then(function(r) {
                     //     this._deleteDraft();
                     // });
-
                     // Define Specific oData View Model
                     this.getExtModel().metadataLoaded().then(() => {
                         const oDataModel = this.getExtModel();
@@ -896,7 +1044,8 @@ sap.ui.define(
                  * @memberOf {{controllerExtPath}}
                  */
                 onBeforeRendering: function () {
-
+                    // oCreateButton?.bindProperty("enabled", { path: "/ZZCreationAuth(1)/Authorized" });
+                    // this.getView().getModel().read("/ZZCreationAuth(1)");
                 },
                 /**
                  * Called when the View has been rendered (so its HTML is part of the document). Post-rendering manipulations of the HTML could be done here.
@@ -944,14 +1093,8 @@ sap.ui.define(
                     if (oLink !== undefined) {
                         oLink.setEnabled(false);
                     }
-
-
-                    // Gestion du bouton Edit
-                    let that = this;
-                    // let oEditButton = this.byId(this.getView().getId() + "--edit");
-                    // sap.ui.getCore().byId(that.getView().getId() + "--edit").bindProperty("visible", true);
-                    // oEditButton.setVisible('true');
                 },
+
                 /**
                  * Called when the Controller is destroyed. Use this one to free resources and finalize activities.
                  * @memberOf {{controllerExtPath}}
@@ -960,12 +1103,7 @@ sap.ui.define(
                     // alert("onExit");
                 },
                 // override public method of the base controller
-                basePublicMethod: function () {},
-
-                // baseonLeaveAppExtension: function () {
-                //     alert("onLeaveAppExtension");
-                // },
+                basePublicMethod: function () {}
             }
         });
-    }
-);
+    });

@@ -1,0 +1,30 @@
+{
+  "changeType": "addXML",
+  "reference": "customer.app.mdm.mdg.gov.bps1.ext",
+  "namespace": "apps/customer.app.mdm.mdg.gov.bps1.ext/changes/",
+  "projectId": "customer.app.mdm.mdg.gov.bps1.ext",
+  "packageName": "$TMP",
+  "moduleName": "customer/app/mdm/mdg/gov/bps1/ext/changes/fragments/DuplicateCheckDialogBegin.fragment.xml",
+  "support": {
+    "generator": "@sap-ux/control-property-editor",
+    "command": "addXML",
+    "sapui5Version": "1.120.0"
+  },
+  "originalLanguage": "EN",
+  "layer": "CUSTOMER_BASE",
+  "fileType": "change",
+  "fileName": "id_1753445228344_398_addXML",
+  "content": {
+    "targetAggregation": "beginButton",
+    "index": 0,
+    "fragmentPath": "fragments/DuplicateCheckDialogBegin.fragment.xml"
+  },
+  "texts": {},
+  "selector": {
+    "id": "DuplicateCheckDialog",
+    "idIsLocal": false
+  },
+  "dependentSelector": {},
+  "jsOnly": false,
+  "creation": "2025-07-25T12:07:13.829Z"
+}

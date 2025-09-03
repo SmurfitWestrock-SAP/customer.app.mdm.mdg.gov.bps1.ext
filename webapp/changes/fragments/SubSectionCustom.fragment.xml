@@ -1,5 +1,6 @@
 <!-- Use stable and unique IDs!-->
-<core:FragmentDefinition id="IdBTCustFrag" xmlns:core='sap.ui.core' xmlns='sap.m' xmlns:uxap='sap.uxap'>
+<core:FragmentDefinition id="IdBTCustFrag" xmlns:core='sap.ui.core' xmlns='sap.m' xmlns:uxap='sap.uxap'
+    core:require="{Time: 'sap/ui/model/odata/type/Time'}">
     <uxap:ObjectPageSubSection id="BkTypSubSectCust" title="{i18n>bktyp.cust}" mode="Expanded" titleUppercase="false">
         <Table id="IdBkTypCustTab" items="{path: 'ZC_PARTNER_MDG>to_CustomerBankType'}" mode="SingleSelectLeft"
             width="70%">
@@ -71,6 +72,91 @@
                         <Text id="IdPPCComp" text="{ZC_PARTNER_MDG>CompanyCodeName} ({ZC_PARTNER_MDG>CompanyCode})" />
                         <Text id="IdPPCPayee"
                             text="{ZC_PARTNER_MDG>PermittedPayee} ({ZC_PARTNER_MDG>PermittedPayeeName})" />
+                    </cells>
+                </ColumnListItem>
+            </items>
+        </Table>
+    </uxap:ObjectPageSubSection>
+
+
+    <uxap:ObjectPageSubSection id="BkUnloadPtCust" title="{i18n>unloadpt.cust}" mode="Expanded" titleUppercase="false">
+        <Table id="IdUnloadPtCusTab" items="{path: 'ZC_PARTNER_MDG>to_CustomerUnloadPoint'}" mode="SingleSelectLeft"
+            width="100%">
+            <headerToolbar>
+                <OverflowToolbar id="IdUPCToolB">
+                    <Title id="IdTitTabUPC" text="{i18n>unloadpt.cust}" level="H2" />
+                    <ToolbarSpacer id="IdUPCToolBS" />
+                    <Button id="IdUPCAdd" text="{i18n>CREATE_OBJECT}" visible="{uiExt>editable}"
+                        press=".extension.customer.app.mdm.mdg.gov.bps1.ext.mdgextension001.onUPCAdd" />
+                    <Button id="IdUPCUpd" text="{i18n>update}" visible="{uiExt>editable}"
+                        press=".extension.customer.app.mdm.mdg.gov.bps1.ext.mdgextension001.onUPCUpd" />
+                    <Button id="IdUPCDel" text="{i18n>DELETE}" visible="{uiExt>editable}"
+                        press=".extension.customer.app.mdm.mdg.gov.bps1.ext.mdgextension001.onItemDel" />
+                </OverflowToolbar>
+            </headerToolbar>
+            <columns>
+                <Column id="IdUPCC01">
+                    <Text id="IdUPCT01" text="{i18n>unloadpt.unlpt}" />
+                </Column>
+                <Column id="IdUPCC02">
+                    <Text id="IdUPCT02" text="{i18n>unloadpt.def}" />
+                </Column>
+                <Column id="IdUPCC03">
+                    <Text id="IdUPCT03" text="{i18n>unloadpt.cal}" />
+                </Column>
+                <Column id="IdUPCC11">
+                    <Text id="IdUPCT11" text="{i18n>unloadpt.hrs}" />
+                </Column>                
+                <Column id="IdUPCC04">
+                    <Text id="IdUPCT04" text="{i18n>unloadpt.mon}" />
+                </Column>
+                <Column id="IdUPCC05">
+                    <Text id="IdUPCT05" text="{i18n>unloadpt.tues}" />
+                </Column>
+                <Column id="IdUPCC06">
+                    <Text id="IdUPCT06" text="{i18n>unloadpt.wedn}" />
+                </Column>
+                <Column id="IdUPCC07">
+                    <Text id="IdUPCT07" text="{i18n>unloadpt.thur}" />
+                </Column>
+                <Column id="IdUPCC08">
+                    <Text id="IdUPCT08" text="{i18n>unloadpt.fri}" />
+                </Column>
+                <Column id="IdUPCC98">
+                    <Text id="IdUPCT09" text="{i18n>unloadpt.sat}" />
+                </Column>
+                <Column id="IdUPCC10">
+                    <Text id="IdUPCT10" text="{i18n>unloadpt.sun}" />
+                </Column>
+            </columns>
+            <items>
+                <ColumnListItem id="IdUnloadPtItem" vAlign="Middle">
+                    <cells>
+                        <Text id="IdUPCUnlPt" text="{ZC_PARTNER_MDG>UnloadingPointName}" />
+                        <CheckBox id="IdUPDef" selected="{ZC_PARTNER_MDG>IsDfltBPUnloadingPoint}" enabled="false" />
+                        <Text id="IdUPCCal" text="{ZC_PARTNER_MDG>CustomerFactoryCalenderCode}" />
+                        <Text id="idUPCHour" text="{ZC_PARTNER_MDG>BPGoodsReceivingHoursCode}" />
+                        <Text id="IdUPCMon"
+                            text="{path: 'ZC_PARTNER_MDG>MondayMorningOpeningTime', type: 'Time', formatOptions: { style: 'short' }}-{path: 'ZC_PARTNER_MDG>MondayMorningClosingTime', type: 'Time', formatOptions: { style: 'short' }}
+                            {path: 'ZC_PARTNER_MDG>MondayAfternoonOpeningTime', type: 'Time', formatOptions: { style: 'short' }}-{path: 'ZC_PARTNER_MDG>MondayAfternoonClosingTime', type: 'Time', formatOptions: { style: 'short' }}" />
+                        <Text id="IdUPCTues"
+                            text="{path: 'ZC_PARTNER_MDG>TuesdayMorningOpeningTime', type: 'Time', formatOptions: { style: 'short' }}-{path: 'ZC_PARTNER_MDG>TuesdayMorningClosingTime', type: 'Time', formatOptions: { style: 'short' }}
+                            {path: 'ZC_PARTNER_MDG>TuesdayAfternoonOpeningTime', type: 'Time', formatOptions: { style: 'short' }}-{path: 'ZC_PARTNER_MDG>TuesdayAfternoonClosingTime', type: 'Time', formatOptions: { style: 'short' }}" />
+                        <Text id="IdUPCWedn"
+                            text="{path: 'ZC_PARTNER_MDG>WednesdayMorningOpeningTime', type: 'Time', formatOptions: { style: 'short' }}-{path: 'ZC_PARTNER_MDG>WednesdayMorningClosingTime', type: 'Time', formatOptions: { style: 'short' }}
+                            {path: 'ZC_PARTNER_MDG>WednesdayAfternoonOpeningTime', type: 'Time', formatOptions: { style: 'short' }}-{path: 'ZC_PARTNER_MDG>WednesdayAfternoonClosingTime', type: 'Time', formatOptions: { style: 'short' }}" />
+                        <Text id="IdUPCCThur"
+                            text="{path: 'ZC_PARTNER_MDG>ThursdayMorningOpeningTime', type: 'Time', formatOptions: { style: 'short' }}-{path: 'ZC_PARTNER_MDG>ThursdayMorningClosingTime', type: 'Time', formatOptions: { style: 'short' }}
+                            {path: 'ZC_PARTNER_MDG>ThursdayAfternoonOpeningTime', type: 'Time', formatOptions: { style: 'short' }}-{path: 'ZC_PARTNER_MDG>ThursdayAfternoonClosingTime', type: 'Time', formatOptions: { style: 'short' }}" />
+                        <Text id="IdUPCCFri"
+                            text="{path: 'ZC_PARTNER_MDG>FridayMorningOpeningTime', type: 'Time', formatOptions: { style: 'short' }}-{path: 'ZC_PARTNER_MDG>FridayMorningClosingTime', type: 'Time', formatOptions: { style: 'short' }}
+                            {path: 'ZC_PARTNER_MDG>FridayAfternoonOpeningTime', type: 'Time', formatOptions: { style: 'short' }}-{path: 'ZC_PARTNER_MDG>FridayAfternoonClosingTime', type: 'Time', formatOptions: { style: 'short' }}" />
+                        <Text id="IdUPCCSat"
+                            text="{path: 'ZC_PARTNER_MDG>SaturdayMorningOpeningTime', type: 'Time', formatOptions: { style: 'short' }}-{path: 'ZC_PARTNER_MDG>SaturdayMorningClosingTime', type: 'Time', formatOptions: { style: 'short' }}
+                            {path: 'ZC_PARTNER_MDG>SaturdayAfternoonOpeningTime', type: 'Time', formatOptions: { style: 'short' }}-{path: 'ZC_PARTNER_MDG>SaturdayAfternoonClosingTime', type: 'Time', formatOptions: { style: 'short' }}" />
+                        <Text id="IdUPCSun"
+                            text="{path: 'ZC_PARTNER_MDG>SundayMorningOpeningTime', type: 'Time', formatOptions: { style: 'short' }}-{path: 'ZC_PARTNER_MDG>SundayMorningClosingTime', type: 'Time', formatOptions: { style: 'short' }}
+                            {path: 'ZC_PARTNER_MDG>SundayAfternoonOpeningTime', type: 'Time', formatOptions: { style: 'short' }}-{path: 'ZC_PARTNER_MDG>SundayAfternoonClosingTime', type: 'Time', formatOptions: { style: 'short' }}" />
                     </cells>
                 </ColumnListItem>
             </items>

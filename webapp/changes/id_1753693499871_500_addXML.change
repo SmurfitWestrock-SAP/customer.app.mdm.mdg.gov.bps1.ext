@@ -1,0 +1,31 @@
+{
+  "changeType": "addXML",
+  "reference": "customer.app.mdm.mdg.gov.bps1.ext",
+  "namespace": "apps/customer.app.mdm.mdg.gov.bps1.ext/changes/",
+  "projectId": "customer.app.mdm.mdg.gov.bps1.ext",
+  "packageName": "$TMP",
+  "moduleName": "customer/app/mdm/mdg/gov/bps1/ext/changes/fragments/DuplicateCheckAction.fragment.xml",
+  "support": {
+    "generator": "@sap-ux/control-property-editor",
+    "command": "addXML",
+    "sapui5Version": "1.120.0"
+  },
+  "originalLanguage": "EN",
+  "layer": "CUSTOMER_BASE",
+  "fileType": "change",
+  "fileName": "id_1753693499871_500_addXML",
+  "content": {
+    "targetAggregation": "actions",
+    "index": 0,
+    "fragmentPath": "fragments/DuplicateCheckAction.fragment.xml",
+    "templateName": "CUSTOM_ACTION"
+  },
+  "texts": {},
+  "selector": {
+    "id": "mdm.mdg.gov.bps1::sap.suite.ui.generic.template.ObjectPage.view.Details::BusinessPartner--template::ObjectPage::ObjectPageHeader",
+    "idIsLocal": false
+  },
+  "dependentSelector": {},
+  "jsOnly": false,
+  "creation": "2025-07-28T09:05:02.321Z"
+}

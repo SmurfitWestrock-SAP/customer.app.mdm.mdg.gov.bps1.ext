@@ -1,0 +1,8 @@
+<!-- Use stable and unique IDs!-->
+<core:FragmentDefinition xmlns:core='sap.ui.core' xmlns='sap.m'>
+    <Button id="DuplicateCheckDialogExt.WithdrawButton"
+        text="{i18n|sap.suite.ui.generic.template.ObjectPage|DuplicateCheck>DuplicateWithdraw}"
+        press=".extension.customer.app.mdm.mdg.gov.bps1.ext.mdgextension001.onDuplicateWithdrawExt"
+        visible="{=${MDChgProcessIsStarted} ===  false}">
+    </Button>
+</core:FragmentDefinition>
