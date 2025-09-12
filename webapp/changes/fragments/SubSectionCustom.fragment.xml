@@ -1,6 +1,6 @@
 <!-- Use stable and unique IDs!-->
 <core:FragmentDefinition id="IdBTCustFrag" xmlns:core='sap.ui.core' xmlns='sap.m' xmlns:uxap='sap.uxap'
-    core:require="{Time: 'sap/ui/model/odata/type/Time'}">
+    core:require="{Time: 'sap/ui/model/odata/type/Time'}" xmlns:tab='sap.ui.table'>
     <uxap:ObjectPageSubSection id="BkTypSubSectCust" title="{i18n>bktyp.cust}" mode="Expanded" titleUppercase="false">
         <Table id="IdBkTypCustTab" items="{path: 'ZC_PARTNER_MDG>to_CustomerBankType'}" mode="SingleSelectLeft"
             width="70%">
@@ -106,7 +106,7 @@
                 </Column>
                 <Column id="IdUPCC11">
                     <Text id="IdUPCT11" text="{i18n>unloadpt.hrs}" />
-                </Column>                
+                </Column>
                 <Column id="IdUPCC04">
                     <Text id="IdUPCT04" text="{i18n>unloadpt.mon}" />
                 </Column>

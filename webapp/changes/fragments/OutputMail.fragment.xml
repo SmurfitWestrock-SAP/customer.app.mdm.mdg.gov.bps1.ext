@@ -1,43 +1,93 @@
 <!-- Use stable and unique IDs!-->
-<core:FragmentDefinition id="IdOutMailDialogFrag" xmlns:core='sap.ui.core' xmlns='sap.m' xmlns:uxap='sap.uxap'>
+<core:FragmentDefinition id="IdOutMailDialogFrag" xmlns:core='sap.ui.core' xmlns='sap.m' xmlns:uxap='sap.uxap'
+    xmlns:tab='sap.ui.table' xmlns:smarttable="sap.ui.comp.smarttable">
     <uxap:ObjectPageSubSection id="OutMailSub" title="{i18n>outm.title}" mode="Expanded" titleUppercase="false">
-        <Table id="IdOutMailTab" items="{path: 'ZC_PARTNER_MDG>to_OutputMail'}" mode="SingleSelectLeft" width="70%">
-            <headerToolbar>
-                <OverflowToolbar id="IdOutMToolB">
-                    <Title id="IdTitTabOutM" text="{i18n>outm.doc}" level="H2" />
-                    <ToolbarSpacer id="IdOutMToolBS" />
-                    <Button id="IdOutMAdd" text="{i18n>CREATE_OBJECT}" visible="{uiExt>editable}"
-                        press=".extension.customer.app.mdm.mdg.gov.bps1.ext.mdgextension001.onOutMAdd" />
-                    <Button id="IdkOutMUpd" text="{i18n>update}" visible="{uiExt>editable}"
-                        press=".extension.customer.app.mdm.mdg.gov.bps1.ext.mdgextension001.onOutMUpd" />
-                    <Button id="IdkOutMDel" text="{i18n>DELETE}" visible="{uiExt>editable}"
-                        press=".extension.customer.app.mdm.mdg.gov.bps1.ext.mdgextension001.onItemDel" />
-                </OverflowToolbar>
-            </headerToolbar>
-            <columns>
-                <Column id="IdOMC02">
-                    <Text id="IdOMT02" text="{i18n>outm.doc}" />
-                </Column>
-                <Column id="IdOMC01">
-                    <Text id="IdOMT01" text="{i18n>outm.comp}" />
-                </Column>
-                <Column id="IdOMC03">
-                    <Text id="IdOMT03" text="{i18n>outm.mail}" />
-                </Column>
-                <Column id="IdOMC04">
-                    <Text id="IdOMT04" text="{i18n>outm.note}" />
-                </Column>
-            </columns>
-            <items>
-                <ColumnListItem id="IdOMendItem" vAlign="Middle">
-                    <cells>
-                        <Text id="IdOMDoc" text="{ZC_PARTNER_MDG>OutputDocDescr} ({ZC_PARTNER_MDG>OutputDoc})" />
-                        <Text id="IdOMComp" text="{ZC_PARTNER_MDG>CompanyCode} ({ZC_PARTNER_MDG>CompanyCodeName})" />
-                        <Text id="IdOMMail" text="{ZC_PARTNER_MDG>Mail}" />
-                        <Text id="IdOMNote" text="{ZC_PARTNER_MDG>Notes}" />
-                    </cells>
-                </ColumnListItem>
-            </items>
-        </Table>
+        <ScrollContainer id="mdm.mdg.gov.bps1.ext.ScrollContainer2" horizontal="false" vertical="true" height="270px">
+            <Table id="IdOutMailTab" items="{path: 'ZC_PARTNER_MDG>to_OutputMail'}" mode="SingleSelectLeft"
+                sticky="ColumnHeaders,HeaderToolbar" width="70%">
+                <headerToolbar>
+                    <OverflowToolbar id="IdOutMToolB">
+                        <Title id="IdTitTabOutM" text="{i18n>outm.doc}" level="H2" />
+                        <ToolbarSpacer id="IdOutMToolBS" />
+                        <Button id="IdOutMAdd" text="{i18n>CREATE_OBJECT}" visible="{uiExt>editable}"
+                            press=".extension.customer.app.mdm.mdg.gov.bps1.ext.mdgextension001.onOutMAdd" />
+                        <Button id="IdkOutMUpd" text="{i18n>update}" visible="{uiExt>editable}"
+                            press=".extension.customer.app.mdm.mdg.gov.bps1.ext.mdgextension001.onOutMUpd" />
+                        <Button id="IdkOutMDel" text="{i18n>DELETE}" visible="{uiExt>editable}"
+                            press=".extension.customer.app.mdm.mdg.gov.bps1.ext.mdgextension001.onItemDel" />
+                    </OverflowToolbar>
+                </headerToolbar>
+                <columns>
+                    <Column id="IdOMC02">
+                        <Text id="IdOMT02" text="{i18n>outm.doc}" />
+                    </Column>
+                    <Column id="IdOMC01">
+                        <Text id="IdOMT01" text="{i18n>outm.comp}" />
+                    </Column>
+                    <Column id="IdOMC03">
+                        <Text id="IdOMT03" text="{i18n>outm.mail}" />
+                    </Column>
+                    <Column id="IdOMC04">
+                        <Text id="IdOMT04" text="{i18n>outm.note}" />
+                    </Column>
+                </columns>
+                <items>
+                    <ColumnListItem id="IdOMendItem" vAlign="Middle">
+                        <cells>
+                            <Text id="IdOMDoc" text="{ZC_PARTNER_MDG>OutputDocDescr} ({ZC_PARTNER_MDG>OutputDoc})" />
+                            <Text id="IdOMComp"
+                                text="{ZC_PARTNER_MDG>CompanyCode} ({ZC_PARTNER_MDG>CompanyCodeName})" />
+                            <Text id="IdOMMail" text="{ZC_PARTNER_MDG>Mail}" />
+                            <Text id="IdOMNote" text="{ZC_PARTNER_MDG>Notes}" />
+                        </cells>
+                    </ColumnListItem>
+                </items>
+            </Table>
+        </ScrollContainer>
+
+        <!-- <tab:Table id="IdOutMailTab" selectionMode="MultiToggle" rows="{path: 'ZC_PARTNER_MDG>to_OutputMail'}"
+                enableColumnFreeze="false" enableCellFilter="false" ariaLabelledBy="title" enableSelectAll="false"
+                width="70%" visibleRowCount="5" selectionBehavior="RowOnly">
+                <tab:extension>
+                    <OverflowToolbar id="IdOutMToolB">
+                        <Title id="IdTitTabOutM" text="{i18n>outm.doc}" level="H2" />
+                        <ToolbarSpacer id="IdOutMToolBS" />
+                        <Button id="IdOutMAdd" text="{i18n>CREATE_OBJECT}" visible="{uiExt>editable}"
+                            press=".extension.customer.app.mdm.mdg.gov.bps1.ext.mdgextension001.onOutMAdd" />
+                        <Button id="IdkOutMUpd" text="{i18n>update}" visible="{uiExt>editable}"
+                            press=".extension.customer.app.mdm.mdg.gov.bps1.ext.mdgextension001.onOutMUpd" />
+                        <Button id="IdkOutMDel" text="{i18n>DELETE}" visible="{uiExt>editable}"
+                            press=".extension.customer.app.mdm.mdg.gov.bps1.ext.mdgextension001.onItemDel" />
+                    </OverflowToolbar>
+                </tab:extension>
+                <tab:columns>
+                    <tab:Column id="IdOMC02">
+                        <Label id="IdOMT02" text="{i18n>outm.doc}" />
+                        <tab:template>
+                            <Text id="IdOMDoc" text="{ZC_PARTNER_MDG>OutputDocDescr} ({ZC_PARTNER_MDG>OutputDoc})" />
+                        </tab:template>
+                    </tab:Column>
+                    <tab:Column id="IdOMC01">
+                        <Label id="IdOMT01" text="{i18n>outm.doc}" />
+                        <tab:template>
+                            <Text id="IdOMComp"
+                                text="{ZC_PARTNER_MDG>CompanyCode} ({ZC_PARTNER_MDG>CompanyCodeName})" />
+                        </tab:template>
+                    </tab:Column>
+                    <tab:Column id="IdOMC03">
+                        <Label id="IdOMT03" text="{i18n>outm.doc}" />
+                        <tab:template>
+                            <Text id="IdOMMail" text="{ZC_PARTNER_MDG>Mail}" />
+                        </tab:template>
+                    </tab:Column>
+                    <tab:Column id="IdOMC04">
+                        <Label id="IdOMT04" text="{i18n>outm.doc}" />
+                        <tab:template>
+                            <Text id="IdOMNote" text="{ZC_PARTNER_MDG>Notes}" />
+                        </tab:template>
+                    </tab:Column>
+                </tab:columns>
+            </tab:Table> -->
+
     </uxap:ObjectPageSubSection>
 </core:FragmentDefinition>

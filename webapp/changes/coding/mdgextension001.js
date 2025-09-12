@@ -937,9 +937,13 @@ sap.ui.define(
             onContextChange: function () {
                 var that = this;
                 var oContext = this.getView().getBindingContext();
+
                 if (oContext && oContext.sPath !== this.sPath && !oContext.bCreated && oContext.getObject() || oContext && oContext.bForceRefresh) {
                     this.sPath = oContext.sPath;
-                    // oContext.getModel().setProperty("DuplicateCheck_ac", false, oContext);
+                    // let sDuplicate_ac = oContext.getModel().getProperty("DuplicateCheck_ac");
+                    // if (sDuplicate_ac !== undefined) {
+                    //     oContext.getModel().setProperty("DuplicateCheck_ac", false, oContext);
+                    // }
                     var _Refresh = function (sDraft) {
                         that.getView().unbindObject("ZC_PARTNER_MDG");
                         that._initDataExt(oContext, sDraft);
@@ -957,11 +961,14 @@ sap.ui.define(
                     } catch (Error) {
                         _Refresh();
                     }
-
-                    // oContext.getModel().attachEventOnce("batchRequestCompleted", function () {
-                    //     this._deleteDraft();
-                    // });                                        
                 }
+
+                // if (oContext && oContext.getObject() || oContext && oContext.bForceRefresh) {
+                //     let sDuplicate_ac = oContext.getModel().getProperty("DuplicateCheck_ac");
+                //     if (sDuplicate_ac && sDuplicate_ac !== undefined) {
+                //         oContext.getModel().setProperty("DuplicateCheck_ac", false, oContext);
+                //     }
+                // }
             },
 
             getAction: function (oContext) {
@@ -1012,7 +1019,8 @@ sap.ui.define(
                     // Initialisation du modèle JSON 'UI'
                     let oUI = {
                         editable: false,
-                        upload: false
+                        upload: false,
+                        dupvis: false
                     }
                     this._initializeViewModel('uiExt', oUI);
                     // Attach the method onContextChange on Context Model Change
@@ -1056,37 +1064,60 @@ sap.ui.define(
                     // Attach method onBuGroupSelect on the event Model Change Value of the Bu Group List
                     let oBuGroup = this.getView().byId("mdm.mdg.gov.bps1::sap.suite.ui.generic.template.ObjectPage.view.Details::BusinessPartner--GeneralInformation::BusinessPartnerGrouping::GroupElement");
 
-                    if (oBuGroup.getElements() !== undefined) {
+                    if (oBuGroup !== undefined && oBuGroup.getElements() !== undefined) {
                         oBuGroup.getElements()[0].attachChangeModelValue(oEvent => {
                             this.onBuGroupSelect(oEvent);
                         });
                     }
 
+                    // Hide the duplicate check standard button
+                    let oButDuplicate = this.getView().byId('mdm.mdg.gov.bps1::sap.suite.ui.generic.template.ObjectPage.view.Details::BusinessPartner--action::ActionDuplicateCheck');
+                    if (oButDuplicate && oButDuplicate !== undefined) {
+                        if (oButDuplicate) {
+                            oButDuplicate.setVisible(false);
+
+                            function set_false(sPath) {
+                                return false;
+                            }
+                            if (oButDuplicate && oButDuplicate.getVisible) {
+                                oButDuplicate.bindProperty("visible", {
+                                    parts: [{
+                                        path: "DuplicateCheckApprov_ac"
+                                    }],
+                                    formatter: set_false
+                                });
+                            }
+                        }
+                    }
+
+
                     let oSubProcess = this.getView().byId("mdm.mdg.gov.bps1::sap.suite.ui.generic.template.ObjectPage.view.Details::BusinessPartner--ProcessDataSection::SubSection");
 
                     // For creation mode Managed fields from Process Information Group
-                    let aParsedContent = oSubProcess.getBlocks()[0]._aParsedContent;
-                    aParsedContent.forEach(oParsedContent => {
-                        if (oParsedContent.sId !== undefined) {
-                            if (oParsedContent.sId.includes('QuickCreate.ChangeProcess') === true) {
+                    if (oSubProcess !== undefined) {
+                        let aParsedContent = oSubProcess.getBlocks()[0]._aParsedContent;
+                        aParsedContent.forEach(oParsedContent => {
+                            if (oParsedContent.sId !== undefined) {
+                                if (oParsedContent.sId.includes('QuickCreate.ChangeProcess') === true) {
 
-                                let aGp0Fields = oParsedContent.getGroups()[0].getFormElements()[0].getFields()[0].getItems();
-                                aGp0Fields.forEach(oGp0Field => {
-                                    if (oGp0Field.sId.includes('RadioButtonGroup') === true) {
-                                        oGp0Field.setEnabled(false);
-                                    }
-                                });
+                                    let aGp0Fields = oParsedContent.getGroups()[0].getFormElements()[0].getFields()[0].getItems();
+                                    aGp0Fields.forEach(oGp0Field => {
+                                        if (oGp0Field.sId.includes('RadioButtonGroup') === true) {
+                                            oGp0Field.setEnabled(false);
+                                        }
+                                    });
 
-                                let aGp4Fields = oParsedContent.getGroups()[4].getFormElements()[0].getFields();
-                                aGp4Fields.forEach(oGp4Field => {
-                                    if (oGp4Field.sId.includes('ProcessLink') === true) {
-                                        oGp4Field.setEnabled(false);
-                                    }
-                                });
-                                // oParsedContent.getGroups()[4].setVisible(false);
+                                    let aGp4Fields = oParsedContent.getGroups()[4].getFormElements()[0].getFields();
+                                    aGp4Fields.forEach(oGp4Field => {
+                                        if (oGp4Field.sId.includes('ProcessLink') === true) {
+                                            oGp4Field.setEnabled(false);
+                                        }
+                                    });
+                                    // oParsedContent.getGroups()[4].setVisible(false);
+                                }
                             }
-                        }
-                    });
+                        });
+                    }
 
                     // The process Linked button is set to Enabled
                     let oLink = this.getView().byId("QuickCreate.ProcessLink");

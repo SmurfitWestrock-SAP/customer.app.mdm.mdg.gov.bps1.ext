@@ -1,0 +1,22 @@
+specVersion: "3.1"
+metadata:
+  name: app.mdm.mdg.gov.bps1.ext
+type: application
+builder:
+  resources:
+    excludes:
+      - /test/**
+      - /localService/**
+  customTasks:
+    - name: deploy-to-abap
+      afterTask: generateCachebusterInfo
+      configuration:
+        target:
+          destination: MDD-505-DESTINATION-DEV_ONLY
+          url: http://mdddevonly.group.wan:8422/
+          client: '505'
+        app:
+          package: ZMDG_EXT
+          transport: MDDK900526
+        exclude:
+          - /test/

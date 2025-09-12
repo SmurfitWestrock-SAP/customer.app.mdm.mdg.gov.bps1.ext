@@ -5,7 +5,7 @@
       <Dialog id="IdUPTDialog" showHeader="false">
           <customHeader>
               <Toolbar>
-                  <Label text="{i18n>read.title}" design="Bold" />
+                  <Label text="{i18n>unloadpt.title}" design="Bold" />
                   <ToolbarSpacer />
                   <Button id="IdUPTCancel" icon="sap-icon://sys-cancel" type="Reject" press="onDialogClose" />
               </Toolbar>
