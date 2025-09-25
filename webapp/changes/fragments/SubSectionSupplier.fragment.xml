@@ -1,7 +1,7 @@
 <!-- Use stable and unique IDs!-->
-<core:FragmentDefinition id="IdAddVendFrag" xmlns:core='sap.ui.core' xmlns='sap.m' xmlns:uxap='sap.uxap'>
+<core:FragmentDefinition id="IdAddVendFrag" xmlns:core='sap.ui.core' xmlns='sap.m' xmlns:uxap='sap.uxap'
+    xmlns:tab='sap.ui.table'>
     <uxap:ObjectPageSubSection id="BkTypSubSectVend" title="{i18n>bktyp.vend}" mode="Expanded" titleUppercase="false">
-        <!-- <core:Fragment fragmentName="extension.customer.app.mdm.mdg.gov.bps1.ext.fragments.BankTypeSupplier" type="XML"/> -->
         <Table id="IdBkTypVendTab" items="{path: 'ZC_PARTNER_MDG>to_VendorBankType'}" mode="SingleSelectLeft"
             width="70%">
             <headerToolbar>
@@ -41,6 +41,49 @@
                 </ColumnListItem>
             </items>
         </Table>
+
+        <!-- <tab:Table id="IdBkTypVendTab" selectionMode="MultiToggle" rows="{path: 'ZC_PARTNER_MDG>to_VendorBankType'}"
+            enableColumnFreeze="false" enableCellFilter="false" ariaLabelledBy="title" enableSelectAll="false"
+            width="70%" visibleRowCount="5" selectionBehavior="RowOnly">
+            <tab:extension>
+                <OverflowToolbar id="IdBkTVToolB">
+                    <Title id="IdTitTabV" text="{i18n>bktyp.bktyp}" level="H2" />
+                    <ToolbarSpacer id="IdBkTVToolBS" />
+                    <Button id="IdkTyVAdd" text="{i18n>CREATE_OBJECT}" visible="{uiExt>editable}"
+                        press=".extension.customer.app.mdm.mdg.gov.bps1.ext.mdgextension001.onBkTyVAdd" />
+                    <Button id="IdkTyVUpd" text="{i18n>update}" visible="{uiExt>editable}"
+                        press=".extension.customer.app.mdm.mdg.gov.bps1.ext.mdgextension001.onBkTyVUpd" />
+                    <Button id="IdkTyVDel" text="{i18n>DELETE}" visible="{uiExt>editable}"
+                        press=".extension.customer.app.mdm.mdg.gov.bps1.ext.mdgextension001.onItemDel" />
+                </OverflowToolbar>
+            </tab:extension>
+            <tab:columns>
+                <tab:Column id="IdBkVC04">
+                    <Text id="IdBkVT04" text="{i18n>bktyp.bktyp}" />
+                    <tab:template>
+                        <Text id="IdVBankType" text="{ZC_PARTNER_MDG>BankType}" />
+                    </tab:template>
+                </tab:Column>
+                <tab:Column id="IdBkVC01">
+                    <Text id="IdBkVT01" text="{i18n>bktyp.comp}" />
+                    <tab:template>
+                        <Text id="IdBkVComp" text="{ZC_PARTNER_MDG>CompanyCodeName} ({ZC_PARTNER_MDG>CompanyCode})" />
+                    </tab:template>
+                </tab:Column>
+                <tab:Column id="IdBkVC02">
+                    <Text id="IdBkVT02" text="{i18n>bktyp.ba}" />
+                    <tab:template>
+                        <Text id="IdBkVBa" text="{ZC_PARTNER_MDG>BusinessArea}" />
+                    </tab:template>
+                </tab:Column>
+                <tab:Column id="IdBkVC03">
+                    <Text id="IdBkVT03" text="{i18n>bktyp.curr}" />
+                    <tab:template>
+                        <Text id="IdBkVWae" text="{ZC_PARTNER_MDG>IsoCurrency}" />
+                    </tab:template>
+                </tab:Column>
+            </tab:columns>
+        </tab:Table> -->
     </uxap:ObjectPageSubSection>
 
     <uxap:ObjectPageSubSection id="BkPermiPayeeVend" title="{i18n>perpay.vend}" mode="Expanded" titleUppercase="false">
@@ -76,6 +119,38 @@
                 </ColumnListItem>
             </items>
         </Table>
+
+        <!-- <tab:Table id="IdPermiPayeeVendTab" selectionMode="MultiToggle" rows="{path: 'ZC_PARTNER_MDG>to_VendorPermittedPayee'}"
+            enableColumnFreeze="false" enableCellFilter="false" ariaLabelledBy="title" enableSelectAll="false"
+            width="70%" visibleRowCount="5" selectionBehavior="RowOnly">
+            <tab:extension>
+           <OverflowToolbar id="IdPPVTVToolB">
+                    <Title id="IdTitTabPPV" text="{i18n>perpay.perpay}" level="H2" />
+                    <ToolbarSpacer id="IdPPVToolBS" />
+                    <Button id="IdPPVAdd" text="{i18n>CREATE_OBJECT}" visible="{uiExt>editable}"
+                        press=".extension.customer.app.mdm.mdg.gov.bps1.ext.mdgextension001.onPPVAdd" />
+                    <Button id="IdPPVUpd" text="{i18n>update}" visible="{uiExt>editable}"
+                        press=".extension.customer.app.mdm.mdg.gov.bps1.ext.mdgextension001.onPPVUpd" />
+                    <Button id="IdPPVDel" text="{i18n>DELETE}" visible="{uiExt>editable}"
+                        press=".extension.customer.app.mdm.mdg.gov.bps1.ext.mdgextension001.onItemDel" />
+                </OverflowToolbar>
+            </tab:extension>
+            <tab:columns>
+                <tab:Column id="IdPPVC01">
+                    <Text id="IdPPVT01" text="{i18n>perpay.com}" />
+                    <tab:template>
+                        <Text id="IdPPVComp" text="{ZC_PARTNER_MDG>CompanyCodeName} ({ZC_PARTNER_MDG>CompanyCode})" />
+                    </tab:template>
+                </tab:Column>
+                <tab:Column id="IdPPVC02">
+                    <Text id="IdPPVT02" text="{i18n>perpay.perpay}" />
+                    <tab:template>
+                        <Text id="IdPPVPayee"
+                            text="{ZC_PARTNER_MDG>PermittedPayee} ({ZC_PARTNER_MDG>PermittedPayeeName})" />
+                    </tab:template>
+                </tab:Column>
+            </tab:columns>
+        </tab:Table> -->
     </uxap:ObjectPageSubSection>
 
     <uxap:ObjectPageSubSection id="ReadSoftSectVend" title="{i18n>read.title}" mode="Expanded" titleUppercase="false">
@@ -129,7 +204,7 @@
                 </Column>
                 <Column id="IdRSVC12">
                     <Text id="IdRSVT12" text="{i18n>read.acctmp}" />
-                </Column>                                
+                </Column>
             </columns>
             <items>
                 <ColumnListItem id="IdReadSoftVItem" vAlign="Middle">
@@ -150,11 +225,96 @@
                             visible="{=!!${ZC_PARTNER_MDG>DocType} &amp;&amp; ${ZC_PARTNER_MDG>DocType} !== '' ? true:false }" />
                         <Text id="IdRSVTax" text="{ZC_PARTNER_MDG>TaxCodeName} ({ZC_PARTNER_MDG>TaxCode})"
                             visible="{=!!${ZC_PARTNER_MDG>TaxCode} &amp;&amp; ${ZC_PARTNER_MDG>TaxCode} !== '' ? true:false }" />
-                        <Text id="IdRSVAccTmp" text="{ZC_PARTNER_MDG>AccTempName}" />                                                        
+                        <Text id="IdRSVAccTmp" text="{ZC_PARTNER_MDG>AccTempName}" />
                     </cells>
                 </ColumnListItem>
             </items>
         </Table>
+
+        <!-- <tab:Table id="IdReadSoftVendTab" selectionMode="MultiToggle" rows="{path: 'ZC_PARTNER_MDG>to_VendorReadSoft'}"
+            enableColumnFreeze="false" enableCellFilter="false" ariaLabelledBy="title" enableSelectAll="false"
+            width="100%" visibleRowCount="5" selectionBehavior="RowOnly">
+            <tab:extension>
+                <OverflowToolbar id="IdRSVToolB">
+                    <Title id="IdTitTabRSV" text="{i18n>read.acc}" level="H2" />
+                    <ToolbarSpacer id="IdRSVToolBS" />
+                    <Button id="IdRSVAdd" text="{i18n>CREATE_OBJECT}" visible="{uiExt>editable}"
+                        press=".extension.customer.app.mdm.mdg.gov.bps1.ext.mdgextension001.onRSVAdd" />
+                    <Button id="IdRSVUpd" text="{i18n>update}" visible="{uiExt>editable}"
+                        press=".extension.customer.app.mdm.mdg.gov.bps1.ext.mdgextension001.onRSVUpd" />
+                    <Button id="IdRSVDel" text="{i18n>DELETE}" visible="{uiExt>editable}"
+                        press=".extension.customer.app.mdm.mdg.gov.bps1.ext.mdgextension001.onItemDel" />
+                </OverflowToolbar>
+            </tab:extension>
+            <tab:columns>
+
+                <tab:Column id="IdRSVC01">
+                    <Text id="IdRSVT01" text="{i18n>read.comp}" />
+                    <tab:template>
+                        <Text id="IdRSVComp" text="{ZC_PARTNER_MDG>CompanyCode} ({ZC_PARTNER_MDG>CompanyCodeName})" />
+                    </tab:template>
+                </tab:Column>
+                <tab:Column id="IdRSVC02">
+                    <Text id="IdRSVT02" text="{i18n>read.doctyp}" />
+                    <tab:template>
+                        <Text id="IdRSVCpDoc" text="{ZC_PARTNER_MDG>CpDocTypeDesc} ({ZC_PARTNER_MDG>CpDocType})" />
+                    </tab:template>
+                </tab:Column>
+                <tab:Column id="IdRSVC03">
+                    <Text id="IdRSVT03" text="{i18n>read.ba}" />
+                    <tab:template>
+                        <Text id="IdRSVBa" text="{ZC_PARTNER_MDG>BusinessArea}" />
+                    </tab:template>
+                </tab:Column>
+                <tab:Column id="IdRSVC05">
+                    <Text id="IdRSVT05" text="{i18n>read.accgl}" />
+                    <tab:template>
+                        <Text id="IdRSVAcc" text="{ZC_PARTNER_MDG>GLAccountName} ({ZC_PARTNER_MDG>Account})"
+                            visible="{=!!${ZC_PARTNER_MDG>Account} &amp;&amp; ${ZC_PARTNER_MDG>Account} !== '' ? true:false }" />
+                    </tab:template>
+                </tab:Column>
+                <tab:Column id="IdRSVC06">
+                    <Text id="IdRSVT06" text="{i18n>read.cost}" />
+                    <tab:template>
+                        <Text id="IdRSVCost" text="{ZC_PARTNER_MDG>CostCenterName} ({ZC_PARTNER_MDG>CostCenter})"
+                            visible="{=!!${ZC_PARTNER_MDG>CostCenter} &amp;&amp; ${ZC_PARTNER_MDG>CostCenter} !== '' ? true:false }" />
+                    </tab:template>
+                </tab:Column>
+                <tab:Column id="IdRSVC07">
+                    <Text id="IdRSVT07" text="{i18n>read.order}" />
+                    <tab:template>
+                        <Text id="IdRSVOrd" text="{ZC_PARTNER_MDG>OrderDescription} ({ZC_PARTNER_MDG>OrderId})"
+                            visible="{=!!${ZC_PARTNER_MDG>OrderId} &amp;&amp; ${ZC_PARTNER_MDG>OrderId} !== '' ? true:false }" />
+                    </tab:template>
+                </tab:Column>
+                <tab:Column id="IdRSVC08">
+                    <Text id="IdRSVT08" text="{i18n>read.expvend}" />
+                    <tab:template>
+                        <CheckBox id="IdRSVExpVen" selected="{ZC_PARTNER_MDG>ExpressVendor}" enabled="false" />
+                    </tab:template>
+                </tab:Column>
+                <tab:Column id="IdRSVC10">
+                    <Text id="IdRSVT10" text="{i18n>read.doctype}" />
+                    <tab:template>
+                        <Text id="IdRSVDoc" text="{ZC_PARTNER_MDG>DocTypeDesc} ({ZC_PARTNER_MDG>DocType})"
+                            visible="{=!!${ZC_PARTNER_MDG>DocType} &amp;&amp; ${ZC_PARTNER_MDG>DocType} !== '' ? true:false }" />
+                    </tab:template>
+                </tab:Column>
+                <tab:Column id="IdRSVC11">
+                    <Text id="IdRSVT11" text="{i18n>read.taxcode}" />
+                    <tab:template>
+                        <Text id="IdRSVTax" text="{ZC_PARTNER_MDG>TaxCodeName} ({ZC_PARTNER_MDG>TaxCode})"
+                            visible="{=!!${ZC_PARTNER_MDG>TaxCode} &amp;&amp; ${ZC_PARTNER_MDG>TaxCode} !== '' ? true:false }" />
+                    </tab:template>
+                </tab:Column>
+                <tab:Column id="IdRSVC12">
+                    <Text id="IdRSVT12" text="{i18n>read.acctmp}" />
+                    <tab:template>
+                        <Text id="IdRSVAccTmp" text="{ZC_PARTNER_MDG>AccTempName}" />
+                    </tab:template>
+                </tab:Column>
+            </tab:columns>
+        </tab:Table> -->
     </uxap:ObjectPageSubSection>
 
 </core:FragmentDefinition>

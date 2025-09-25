@@ -1,6 +1,6 @@
 <!-- Use stable and unique IDs!-->
 <core:FragmentDefinition id="IdOutMailDialogFrag" xmlns:core='sap.ui.core' xmlns='sap.m' xmlns:uxap='sap.uxap'
-    xmlns:tab='sap.ui.table' xmlns:smarttable="sap.ui.comp.smarttable">
+    xmlns:tab='sap.ui.table'>
     <uxap:ObjectPageSubSection id="OutMailSub" title="{i18n>outm.title}" mode="Expanded" titleUppercase="false">
         <ScrollContainer id="mdm.mdg.gov.bps1.ext.ScrollContainer2" horizontal="false" vertical="true" height="270px">
             <Table id="IdOutMailTab" items="{path: 'ZC_PARTNER_MDG>to_OutputMail'}" mode="SingleSelectLeft"
