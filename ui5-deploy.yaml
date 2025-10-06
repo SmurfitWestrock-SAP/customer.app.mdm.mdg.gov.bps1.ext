@@ -17,6 +17,6 @@ builder:
           client: '505'
         app:
           package: ZMDG_EXT
-          transport: MDDK900526
+          transport: MDDK900774
         exclude:
           - /test/
