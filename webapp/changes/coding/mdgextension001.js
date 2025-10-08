@@ -22,81 +22,81 @@ sap.ui.define(
                 // 	// in general methods that start with "_" are private
                 methods: {
                     publicMethod: {
-                        public: true /*default*/,
-                        final: false /*default*/,
+                        public: true /*default*/ ,
+                        final: false /*default*/ ,
                         overrideExecution: OverrideExecution.Instead /*default*/
                     },
                     finalPublicMethod: {
                         final: true
                     },
                     onMyHook: {
-                        public: true /*default*/,
-                        final: false /*default*/,
+                        public: true /*default*/ ,
+                        final: false /*default*/ ,
                         overrideExecution: OverrideExecution.After
                     },
                     couldBePrivate: {
                         public: false
                     },
                     onOpenAttachments: {
-                        public: true /*default*/,
-                        final: false /*default*/,
+                        public: true /*default*/ ,
+                        final: false /*default*/ ,
                         overrideExecution: OverrideExecution.Before /*default*/
                     },
                     getUploadSetId: {
-                        public: true /*default*/,
-                        final: false /*default*/,
+                        public: true /*default*/ ,
+                        final: false /*default*/ ,
                         overrideExecution: OverrideExecution.Instead /*default*/
                     },
                     onSelectTypeExt: {
-                        public: true /*default*/,
-                        final: false /*default*/,
+                        public: true /*default*/ ,
+                        final: false /*default*/ ,
                         overrideExecution: OverrideExecution.Instead /*default*/
                     },
                     onBeforeUploadStartsExt: {
-                        public: true /*default*/,
-                        final: false /*default*/,
+                        public: true /*default*/ ,
+                        final: false /*default*/ ,
                         overrideExecution: OverrideExecution.Instead /*default*/
                     },
                     onUploadCompletedExt: {
-                        public: true /*default*/,
-                        final: false /*default*/,
+                        public: true /*default*/ ,
+                        final: false /*default*/ ,
                         overrideExecution: OverrideExecution.Instead /*default*/
                     },
                     onAfterRemoveFileExt: {
-                        public: true /*default*/,
-                        final: false /*default*/,
+                        public: true /*default*/ ,
+                        final: false /*default*/ ,
                         overrideExecution: OverrideExecution.Instead /*default*/
                     },
                     onBkTyCAdd: {
-                        public: true /*default*/,
+                        public: true /*default*/ ,
                         final: false /*default*/
                     },
                     onBTSave: {
-                        public: true /*default*/,
+                        public: true /*default*/ ,
                         final: false /*default*/
                     },
                     onRSVAdd: {
-                        public: true /*default*/,
+                        public: true /*default*/ ,
                         final: false /*default*/
                     },
                     onRSSave: {
-                        public: true /*default*/,
+                        public: true /*default*/ ,
                         final: false /*default*/
                     },
                     onOutMAdd: {
-                        public: true /*default*/,
+                        public: true /*default*/ ,
                         final: false /*default*/
                     },
                     onOMSave: {
-                        public: true /*default*/,
+                        public: true /*default*/ ,
                         final: false /*default*/
                     },
                     onItemDel: {
-                        public: true /*default*/,
+                        public: true /*default*/ ,
                         final: false /*default*/
                     },
                     onDialogClose: {
-                        public: true /*default*/,
+                        public: true /*default*/ ,
                         final: false /*default*/
                     },
                 }
@@ -139,16 +139,16 @@ sap.ui.define(
             },
 
             // // adding a private method, only accessible from this controller extension
-            _privateMethod: function () { },
+            _privateMethod: function () {},
             // // adding a public method, might be called from or overridden by other controller extensions as well
-            publicMethod: function () { },
+            publicMethod: function () {},
             // // adding final public method, might be called from, but not overridden by other controller extensions as well
-            finalPublicMethod: function () { },
+            finalPublicMethod: function () {},
             // // adding a hook method, might be called by or overridden from other controller extensions
             // // override these method does not replace the implementation, but executes after the original method
-            onMyHook: function () { },
+            onMyHook: function () {},
             // // method public per default, but made private via metadata
-            couldBePrivate: function () { },
+            couldBePrivate: function () {},
 
             // Sélection d'un type de document
             onSelectTypeExt: function (oEvent) {
@@ -195,12 +195,12 @@ sap.ui.define(
                                 success: function () {
                                     that._bindingView(oKeyDrf);
                                 },
-                                error: function (oError) { }
+                                error: function (oError) {}
                             });
 
                             that._bindingMdtAttch(oKeyAttList);
                         },
-                        error: function (oError) { }
+                        error: function (oError) {}
                     });
                 } else {
                     let oKey = this.getExtModel().createKey("/ZC_PARTNER_MDG", {
@@ -336,8 +336,8 @@ sap.ui.define(
                 const sPath = oEvent.getParameter('item').getBindingContext('ZC_PARTNER_MDG').getPath();
 
                 this.getExtModel().remove(sPath, {
-                    success: function (oData) { },
-                    error: function (oError) { }
+                    success: function (oData) {},
+                    error: function (oError) {}
                 });
             },
 
@@ -405,10 +405,10 @@ sap.ui.define(
                 this._pBankTypeDialog.setBusy(true);
 
                 this.submitChanges({
-                    model: this.getExtModel(),
-                    // idGroup: "ac_grp",
-                    busyControl: this.getView()
-                })
+                        model: this.getExtModel(),
+                        // idGroup: "ac_grp",
+                        busyControl: this.getView()
+                    })
                     .then((oResult) => { //Sucess                                                      
                         this._pBankTypeDialog.unbindObject();
                         this._pBankTypeDialog.IdTab.getModel("customer.mdgextend").refresh();
@@ -488,9 +488,9 @@ sap.ui.define(
                 this._pPermittedPayeeDialog.setBusy(true);
 
                 this.submitChanges({
-                    model: this.getExtModel(),
-                    busyControl: this.getView()
-                })
+                        model: this.getExtModel(),
+                        busyControl: this.getView()
+                    })
                     .then((oResult) => { //Sucess                                                      
                         this._pPermittedPayeeDialog.unbindObject();
                         this._pPermittedPayeeDialog.IdTab.getModel("customer.mdgextend").refresh();
@@ -606,9 +606,9 @@ sap.ui.define(
                 this._pUnlPtDialog.setBusy(true);
 
                 this.submitChanges({
-                    model: this.getExtModel(),
-                    busyControl: this.getView()
-                })
+                        model: this.getExtModel(),
+                        busyControl: this.getView()
+                    })
                     .then((oResult) => {
                         this._pUnlPtDialog.unbindObject();
                         this._pUnlPtDialog.IdTab.getModel("customer.mdgextend").refresh();
@@ -677,9 +677,9 @@ sap.ui.define(
                 this._pReadSoftDialog.setBusy(true);
 
                 this.submitChanges({
-                    model: this.getExtModel(),
-                    busyControl: this.getView()
-                })
+                        model: this.getExtModel(),
+                        busyControl: this.getView()
+                    })
                     .then((oResult) => {
                         this._pReadSoftDialog.unbindObject();
                         this._pReadSoftDialog.IdTab.getModel("customer.mdgextend").refresh();
@@ -758,9 +758,9 @@ sap.ui.define(
                 this._pOutputDialog.setBusy(true);
 
                 this.submitChanges({
-                    model: this.getExtModel(),
-                    busyControl: this.getView()
-                })
+                        model: this.getExtModel(),
+                        busyControl: this.getView()
+                    })
                     .then((oResult) => {
                         this._pOutputDialog.unbindObject();
                         this._pOutputDialog.IdTab.getModel("customer.mdgextend").refresh();
@@ -984,16 +984,19 @@ sap.ui.define(
                             that.getView().unbindObject("ZC_PARTNER_MDG");
                             that.getView().getModel("customer.mdgextend").refresh();
                         },
-                        error: function (oError) { }
+                        error: function (oError) {}
                     });
                 }
             },
 
             onLongText: function (oEvent) {
                 let oContext = this.getView().getBindingContext();
+                let oContextExt = this.getView().getBindingContext('ZC_PARTNER_MDG');
+                let SourceId = oContext.getProperty("MDChgProcessSrceObject");
 
-                let SourceId = oContext.getProperty("MDChgProcessSrceObject"),
-                    ProcessId = oContext.getProperty("MasterDataChangeProcess");
+                if (oContextExt !== undefined && oContextExt) {
+                    SourceId = oContextExt.getProperty("MDChgProcessSrceObject");            
+                }
 
                 sap.ushell.Container.getServiceAsync("CrossApplicationNavigation").then(function (oService) {
                     oService.hrefForExternalAsync({
@@ -1003,7 +1006,7 @@ sap.ui.define(
                         },
                         params: {
                             "MDChgProcessSrceObject": SourceId,
-                            "MasterDataChangeProcess": ProcessId
+                            "MasterDataChangeProcess": oContext.getProperty("MasterDataChangeProcess")
                         }
                     }).then(function (sHref) {
                         oService.toExternal({
@@ -1146,7 +1149,7 @@ sap.ui.define(
                     // alert("onExit");
                 },
                 // override public method of the base controller
-                basePublicMethod: function () { }
+                basePublicMethod: function () {}
             }
         });
     });
