@@ -2,7 +2,8 @@
 <core:FragmentDefinition id="IdBTCustFrag" xmlns:core='sap.ui.core' xmlns='sap.m' xmlns:uxap='sap.uxap'
     core:require="{Time: 'sap/ui/model/odata/type/Time'}" xmlns:tab='sap.ui.table'>
     <uxap:ObjectPageSubSection id="BkTypSubSectCust" title="{i18n>bktyp.cust}" mode="Expanded" titleUppercase="false">
-        <Table id="IdBkTypCustTab" items="{path: 'ZC_PARTNER_MDG>to_CustomerBankType'}" mode="SingleSelectLeft"
+
+        <!-- <Table id="IdBkTypCustTab" items="{path: 'ZC_PARTNER_MDG>to_CustomerBankType'}" mode="SingleSelectLeft"
             width="70%">
             <headerToolbar>
                 <OverflowToolbar id="IdBkTCToolB">
@@ -40,11 +41,11 @@
                     </cells>
                 </ColumnListItem>
             </items>
-        </Table>
+        </Table> -->
 
-        <!-- <tab:Table id="IdBkTypCustTab" selectionMode="MultiToggle" rows="{path: 'ZC_PARTNER_MDG>to_CustomerBankType'}"
+        <tab:Table id="IdBkTypCustTab" selectionMode="MultiToggle" rows="{path: 'ZC_PARTNER_MDG>to_CustomerBankType'}"
             enableColumnFreeze="false" enableCellFilter="false" ariaLabelledBy="title" enableSelectAll="false"
-            width="70%" visibleRowCount="5" selectionBehavior="RowOnly">
+            width="70%" visibleRowCount="4" selectionBehavior="RowOnly">
             <tab:extension>
                 <OverflowToolbar id="IdBkTCToolB">
                     <Title id="IdTitTabC" text="{i18n>bktyp.bktyp}" level="H2" />
@@ -67,7 +68,8 @@
                 <tab:Column id="IdBkCC01">
                     <Text id="IdBkCT01" text="{i18n>bktyp.comp}" />
                     <tab:template>
-                        <Text id="IdBkCComp" text="{ZC_PARTNER_MDG>CompanyCodeName} ({ZC_PARTNER_MDG>CompanyCode})" />
+                        <Text id="IdBkCComp" text="{ZC_PARTNER_MDG>CompanyCodeName} ({ZC_PARTNER_MDG>CompanyCode})"
+                            visible="{=${ZC_PARTNER_MDG>CompanyCode} ? true:false}" />
                     </tab:template>
                 </tab:Column>
                 <tab:Column id="IdBkCC02">
@@ -83,12 +85,11 @@
                     </tab:template>
                 </tab:Column>
             </tab:columns>
-        </tab:Table> -->
-
+        </tab:Table>
     </uxap:ObjectPageSubSection>
 
     <uxap:ObjectPageSubSection id="BkPermiPayeeCust" title="{i18n>perpay.cust}" mode="Expanded" titleUppercase="false">
-        <Table id="IdPermiPayeeCustTab" items="{path: 'ZC_PARTNER_MDG>to_CustomerPermittedPayee'}"
+        <!-- <Table id="IdPermiPayeeCustTab" items="{path: 'ZC_PARTNER_MDG>to_CustomerPermittedPayee'}"
             mode="SingleSelectLeft" width="70%">
             <headerToolbar>
                 <OverflowToolbar id="IdPPCTVToolB">
@@ -113,17 +114,18 @@
             <items>
                 <ColumnListItem id="IdPermiPayeeCustItem" vAlign="Middle">
                     <cells>
-                        <Text id="IdPPCComp" text="{ZC_PARTNER_MDG>CompanyCodeName} ({ZC_PARTNER_MDG>CompanyCode})" />
+                        <Text id="IdPPCComp" text="{ZC_PARTNER_MDG>CompanyCodeName} ({ZC_PARTNER_MDG>CompanyCode})"
+                        visible="{=${ZC_PARTNER_MDG>CompanyCode} ? true:false}" />
                         <Text id="IdPPCPayee"
                             text="{ZC_PARTNER_MDG>PermittedPayee} ({ZC_PARTNER_MDG>PermittedPayeeName})" />
                     </cells>
                 </ColumnListItem>
             </items>
-        </Table>
+        </Table> -->
 
-        <!-- <tab:Table id="IdPermiPayeeCustTab" selectionMode="MultiToggle"
+        <tab:Table id="IdPermiPayeeCustTab" selectionMode="MultiToggle"
             rows="{path: 'ZC_PARTNER_MDG>to_CustomerPermittedPayee'}" enableColumnFreeze="false"
-            enableCellFilter="false" ariaLabelledBy="title" enableSelectAll="false" width="70%" visibleRowCount="5"
+            enableCellFilter="false" ariaLabelledBy="title" enableSelectAll="false" width="70%" visibleRowCount="4"
             selectionBehavior="RowOnly">
             <tab:extension>
                 <OverflowToolbar id="IdPPCTVToolB">
@@ -141,7 +143,8 @@
                 <tab:Column id="IdPPCC01">
                     <Text id="IdPPCT01" text="{i18n>perpay.com}" />
                     <tab:template>
-                        <Text id="IdPPCComp" text="{ZC_PARTNER_MDG>CompanyCodeName} ({ZC_PARTNER_MDG>CompanyCode})" />
+                        <Text id="IdPPCComp" text="{ZC_PARTNER_MDG>CompanyCodeName} ({ZC_PARTNER_MDG>CompanyCode})"
+                            visible="{=${ZC_PARTNER_MDG>CompanyCode} ? true:false}" />
                     </tab:template>
                 </tab:Column>
                 <tab:Column id="IdPPCC02">
@@ -152,12 +155,12 @@
                     </tab:template>
                 </tab:Column>
             </tab:columns>
-        </tab:Table> -->
+        </tab:Table>
     </uxap:ObjectPageSubSection>
 
 
     <uxap:ObjectPageSubSection id="BkUnloadPtCust" title="{i18n>unloadpt.cust}" mode="Expanded" titleUppercase="false">
-        <Table id="IdUnloadPtCusTab" items="{path: 'ZC_PARTNER_MDG>to_CustomerUnloadPoint'}" mode="SingleSelectLeft"
+        <!-- <Table id="IdUnloadPtCusTab" items="{path: 'ZC_PARTNER_MDG>to_CustomerUnloadPoint'}" mode="SingleSelectLeft"
             width="100%">
             <headerToolbar>
                 <OverflowToolbar id="IdUPCToolB">
@@ -214,35 +217,35 @@
                         <Text id="IdUPCCal" text="{ZC_PARTNER_MDG>CustomerFactoryCalenderCode}" />
                         <Text id="idUPCHour" text="{ZC_PARTNER_MDG>BPGoodsReceivingHoursCode}" />
                         <Text id="IdUPCMon"
-                            text="{path: 'ZC_PARTNER_MDG>MondayMorningOpeningTime', type: 'Time', formatOptions: { style: 'short' }}-{path: 'ZC_PARTNER_MDG>MondayMorningClosingTime', type: 'Time', formatOptions: { style: 'short' }}
-                            {path: 'ZC_PARTNER_MDG>MondayAfternoonOpeningTime', type: 'Time', formatOptions: { style: 'short' }}-{path: 'ZC_PARTNER_MDG>MondayAfternoonClosingTime', type: 'Time', formatOptions: { style: 'short' }}" />
+                            text="{path: 'ZC_PARTNER_MDG>MondayMorningOpeningTime', sap/ui/model/odata/type/Time, formatOptions: { style: 'short' }}-{path: 'ZC_PARTNER_MDG>MondayMorningClosingTime', sap/ui/model/odata/type/Time, formatOptions: { style: 'short' }}
+                            {path: 'ZC_PARTNER_MDG>MondayAfternoonOpeningTime', sap/ui/model/odata/type/Time, formatOptions: { style: 'short' }}-{path: 'ZC_PARTNER_MDG>MondayAfternoonClosingTime', sap/ui/model/odata/type/Time, formatOptions: { style: 'short' }}" />
                         <Text id="IdUPCTues"
-                            text="{path: 'ZC_PARTNER_MDG>TuesdayMorningOpeningTime', type: 'Time', formatOptions: { style: 'short' }}-{path: 'ZC_PARTNER_MDG>TuesdayMorningClosingTime', type: 'Time', formatOptions: { style: 'short' }}
-                            {path: 'ZC_PARTNER_MDG>TuesdayAfternoonOpeningTime', type: 'Time', formatOptions: { style: 'short' }}-{path: 'ZC_PARTNER_MDG>TuesdayAfternoonClosingTime', type: 'Time', formatOptions: { style: 'short' }}" />
+                            text="{path: 'ZC_PARTNER_MDG>TuesdayMorningOpeningTime', sap/ui/model/odata/type/Time, formatOptions: { style: 'short' }}-{path: 'ZC_PARTNER_MDG>TuesdayMorningClosingTime', sap/ui/model/odata/type/Time, formatOptions: { style: 'short' }}
+                            {path: 'ZC_PARTNER_MDG>TuesdayAfternoonOpeningTime', sap/ui/model/odata/type/Time, formatOptions: { style: 'short' }}-{path: 'ZC_PARTNER_MDG>TuesdayAfternoonClosingTime', sap/ui/model/odata/type/Time, formatOptions: { style: 'short' }}" />
                         <Text id="IdUPCWedn"
-                            text="{path: 'ZC_PARTNER_MDG>WednesdayMorningOpeningTime', type: 'Time', formatOptions: { style: 'short' }}-{path: 'ZC_PARTNER_MDG>WednesdayMorningClosingTime', type: 'Time', formatOptions: { style: 'short' }}
-                            {path: 'ZC_PARTNER_MDG>WednesdayAfternoonOpeningTime', type: 'Time', formatOptions: { style: 'short' }}-{path: 'ZC_PARTNER_MDG>WednesdayAfternoonClosingTime', type: 'Time', formatOptions: { style: 'short' }}" />
+                            text="{path: 'ZC_PARTNER_MDG>WednesdayMorningOpeningTime', sap/ui/model/odata/type/Time, formatOptions: { style: 'short' }}-{path: 'ZC_PARTNER_MDG>WednesdayMorningClosingTime', sap/ui/model/odata/type/Time, formatOptions: { style: 'short' }}
+                            {path: 'ZC_PARTNER_MDG>WednesdayAfternoonOpeningTime', sap/ui/model/odata/type/Time, formatOptions: { style: 'short' }}-{path: 'ZC_PARTNER_MDG>WednesdayAfternoonClosingTime', sap/ui/model/odata/type/Time, formatOptions: { style: 'short' }}" />
                         <Text id="IdUPCCThur"
-                            text="{path: 'ZC_PARTNER_MDG>ThursdayMorningOpeningTime', type: 'Time', formatOptions: { style: 'short' }}-{path: 'ZC_PARTNER_MDG>ThursdayMorningClosingTime', type: 'Time', formatOptions: { style: 'short' }}
-                            {path: 'ZC_PARTNER_MDG>ThursdayAfternoonOpeningTime', type: 'Time', formatOptions: { style: 'short' }}-{path: 'ZC_PARTNER_MDG>ThursdayAfternoonClosingTime', type: 'Time', formatOptions: { style: 'short' }}" />
+                            text="{path: 'ZC_PARTNER_MDG>ThursdayMorningOpeningTime', sap/ui/model/odata/type/Time, formatOptions: { style: 'short' }}-{path: 'ZC_PARTNER_MDG>ThursdayMorningClosingTime', sap/ui/model/odata/type/Time, formatOptions: { style: 'short' }}
+                            {path: 'ZC_PARTNER_MDG>ThursdayAfternoonOpeningTime', sap/ui/model/odata/type/Time, formatOptions: { style: 'short' }}-{path: 'ZC_PARTNER_MDG>ThursdayAfternoonClosingTime', sap/ui/model/odata/type/Time, formatOptions: { style: 'short' }}" />
                         <Text id="IdUPCCFri"
-                            text="{path: 'ZC_PARTNER_MDG>FridayMorningOpeningTime', type: 'Time', formatOptions: { style: 'short' }}-{path: 'ZC_PARTNER_MDG>FridayMorningClosingTime', type: 'Time', formatOptions: { style: 'short' }}
-                            {path: 'ZC_PARTNER_MDG>FridayAfternoonOpeningTime', type: 'Time', formatOptions: { style: 'short' }}-{path: 'ZC_PARTNER_MDG>FridayAfternoonClosingTime', type: 'Time', formatOptions: { style: 'short' }}" />
+                            text="{path: 'ZC_PARTNER_MDG>FridayMorningOpeningTime', sap/ui/model/odata/type/Time, formatOptions: { style: 'short' }}-{path: 'ZC_PARTNER_MDG>FridayMorningClosingTime', sap/ui/model/odata/type/Time, formatOptions: { style: 'short' }}
+                            {path: 'ZC_PARTNER_MDG>FridayAfternoonOpeningTime', sap/ui/model/odata/type/Time, formatOptions: { style: 'short' }}-{path: 'ZC_PARTNER_MDG>FridayAfternoonClosingTime', sap/ui/model/odata/type/Time, formatOptions: { style: 'short' }}" />
                         <Text id="IdUPCCSat"
-                            text="{path: 'ZC_PARTNER_MDG>SaturdayMorningOpeningTime', type: 'Time', formatOptions: { style: 'short' }}-{path: 'ZC_PARTNER_MDG>SaturdayMorningClosingTime', type: 'Time', formatOptions: { style: 'short' }}
-                            {path: 'ZC_PARTNER_MDG>SaturdayAfternoonOpeningTime', type: 'Time', formatOptions: { style: 'short' }}-{path: 'ZC_PARTNER_MDG>SaturdayAfternoonClosingTime', type: 'Time', formatOptions: { style: 'short' }}" />
+                            text="{path: 'ZC_PARTNER_MDG>SaturdayMorningOpeningTime', sap/ui/model/odata/type/Time, formatOptions: { style: 'short' }}-{path: 'ZC_PARTNER_MDG>SaturdayMorningClosingTime', sap/ui/model/odata/type/Time, formatOptions: { style: 'short' }}
+                            {path: 'ZC_PARTNER_MDG>SaturdayAfternoonOpeningTime', sap/ui/model/odata/type/Time, formatOptions: { style: 'short' }}-{path: 'ZC_PARTNER_MDG>SaturdayAfternoonClosingTime', sap/ui/model/odata/type/Time, formatOptions: { style: 'short' }}" />
                         <Text id="IdUPCSun"
-                            text="{path: 'ZC_PARTNER_MDG>SundayMorningOpeningTime', type: 'Time', formatOptions: { style: 'short' }}-{path: 'ZC_PARTNER_MDG>SundayMorningClosingTime', type: 'Time', formatOptions: { style: 'short' }}
-                            {path: 'ZC_PARTNER_MDG>SundayAfternoonOpeningTime', type: 'Time', formatOptions: { style: 'short' }}-{path: 'ZC_PARTNER_MDG>SundayAfternoonClosingTime', type: 'Time', formatOptions: { style: 'short' }}" />
+                            text="{path: 'ZC_PARTNER_MDG>SundayMorningOpeningTime', sap/ui/model/odata/type/Time, formatOptions: { style: 'short' }}-{path: 'ZC_PARTNER_MDG>SundayMorningClosingTime', sap/ui/model/odata/type/Time, formatOptions: { style: 'short' }}
+                            {path: 'ZC_PARTNER_MDG>SundayAfternoonOpeningTime', sap/ui/model/odata/type/Time, formatOptions: { style: 'short' }}-{path: 'ZC_PARTNER_MDG>SundayAfternoonClosingTime', sap/ui/model/odata/type/Time, formatOptions: { style: 'short' }}" />
                     </cells>
                 </ColumnListItem>
             </items>
-        </Table>
+        </Table>  -->
 
 
-        <!-- <tab:Table id="IdUnloadPtCusTab" selectionMode="MultiToggle"
+        <tab:Table id="IdUnloadPtCusTab" selectionMode="MultiToggle"
             rows="{path: 'ZC_PARTNER_MDG>to_CustomerUnloadPoint'}" enableColumnFreeze="false" enableCellFilter="false"
-            ariaLabelledBy="title" enableSelectAll="false" width="100%" visibleRowCount="5" selectionBehavior="RowOnly">
+            ariaLabelledBy="title" enableSelectAll="false" width="100%" visibleRowCount="4" selectionBehavior="RowOnly">
             <tab:extension>
                 <OverflowToolbar id="IdUPCToolB">
                     <Title id="IdTitTabUPC" text="{i18n>unloadpt.cust}" level="H2" />
@@ -284,60 +287,60 @@
                     <Text id="IdUPCT04" text="{i18n>unloadpt.mon}" />
                     <tab:template>
                         <Text id="IdUPCMon"
-                            text="{path: 'ZC_PARTNER_MDG>MondayMorningOpeningTime', type: 'Time', formatOptions: { style: 'short' }}-{path: 'ZC_PARTNER_MDG>MondayMorningClosingTime', type: 'Time', formatOptions: { style: 'short' }}
-                            {path: 'ZC_PARTNER_MDG>MondayAfternoonOpeningTime', type: 'Time', formatOptions: { style: 'short' }}-{path: 'ZC_PARTNER_MDG>MondayAfternoonClosingTime', type: 'Time', formatOptions: { style: 'short' }}" />
+                            text="{path: 'ZC_PARTNER_MDG>MondayMorningOpeningTime', type: 'sap/ui/model/odata/type/Time', formatOptions: { style: 'short' }}-{path: 'ZC_PARTNER_MDG>MondayMorningClosingTime', type: 'sap/ui/model/odata/type/Time', formatOptions: { style: 'short' }}
+                            {path: 'ZC_PARTNER_MDG>MondayAfternoonOpeningTime', type: 'sap/ui/model/odata/type/Time', formatOptions: { style: 'short' }}-{path: 'ZC_PARTNER_MDG>MondayAfternoonClosingTime', type: 'sap/ui/model/odata/type/Time', formatOptions: { style: 'short' }}" />
                     </tab:template>
                 </tab:Column>
                 <tab:Column id="IdUPCC05">
                     <Text id="IdUPCT05" text="{i18n>unloadpt.tues}" />
                     <tab:template>
                         <Text id="IdUPCTues"
-                            text="{path: 'ZC_PARTNER_MDG>TuesdayMorningOpeningTime', type: 'Time', formatOptions: { style: 'short' }}-{path: 'ZC_PARTNER_MDG>TuesdayMorningClosingTime', type: 'Time', formatOptions: { style: 'short' }}
-                            {path: 'ZC_PARTNER_MDG>TuesdayAfternoonOpeningTime', type: 'Time', formatOptions: { style: 'short' }}-{path: 'ZC_PARTNER_MDG>TuesdayAfternoonClosingTime', type: 'Time', formatOptions: { style: 'short' }}" />
+                            text="{path: 'ZC_PARTNER_MDG>TuesdayMorningOpeningTime', type: 'sap/ui/model/odata/type/Time', formatOptions: { style: 'short' }}-{path: 'ZC_PARTNER_MDG>TuesdayMorningClosingTime', type: 'sap/ui/model/odata/type/Time', formatOptions: { style: 'short' }}
+                            {path: 'ZC_PARTNER_MDG>TuesdayAfternoonOpeningTime', type: 'sap/ui/model/odata/type/Time', formatOptions: { style: 'short' }}-{path: 'ZC_PARTNER_MDG>TuesdayAfternoonClosingTime', type: 'sap/ui/model/odata/type/Time', formatOptions: { style: 'short' }}" />
                     </tab:template>
                 </tab:Column>
                 <tab:Column id="IdUPCC06">
                     <Text id="IdUPCT06" text="{i18n>unloadpt.wedn}" />
                     <tab:template>
                         <Text id="IdUPCWedn"
-                            text="{path: 'ZC_PARTNER_MDG>WednesdayMorningOpeningTime', type: 'Time', formatOptions: { style: 'short' }}-{path: 'ZC_PARTNER_MDG>WednesdayMorningClosingTime', type: 'Time', formatOptions: { style: 'short' }}
-                            {path: 'ZC_PARTNER_MDG>WednesdayAfternoonOpeningTime', type: 'Time', formatOptions: { style: 'short' }}-{path: 'ZC_PARTNER_MDG>WednesdayAfternoonClosingTime', type: 'Time', formatOptions: { style: 'short' }}" />
+                            text="{path: 'ZC_PARTNER_MDG>WednesdayMorningOpeningTime', type: 'sap/ui/model/odata/type/Time', formatOptions: { style: 'short' }}-{path: 'ZC_PARTNER_MDG>WednesdayMorningClosingTime', type: 'sap/ui/model/odata/type/Time', formatOptions: { style: 'short' }}
+                            {path: 'ZC_PARTNER_MDG>WednesdayAfternoonOpeningTime', type: 'sap/ui/model/odata/type/Time', formatOptions: { style: 'short' }}-{path: 'ZC_PARTNER_MDG>WednesdayAfternoonClosingTime', type: 'sap/ui/model/odata/type/Time', formatOptions: { style: 'short' }}" />
                     </tab:template>
                 </tab:Column>
                 <tab:Column id="IdUPCC07">
                     <Text id="IdUPCT07" text="{i18n>unloadpt.thur}" />
                     <tab:template>
                         <Text id="IdUPCCThur"
-                            text="{path: 'ZC_PARTNER_MDG>ThursdayMorningOpeningTime', type: 'Time', formatOptions: { style: 'short' }}-{path: 'ZC_PARTNER_MDG>ThursdayMorningClosingTime', type: 'Time', formatOptions: { style: 'short' }}
-                            {path: 'ZC_PARTNER_MDG>ThursdayAfternoonOpeningTime', type: 'Time', formatOptions: { style: 'short' }}-{path: 'ZC_PARTNER_MDG>ThursdayAfternoonClosingTime', type: 'Time', formatOptions: { style: 'short' }}" />
+                            text="{path: 'ZC_PARTNER_MDG>ThursdayMorningOpeningTime', type: 'sap/ui/model/odata/type/Time', formatOptions: { style: 'short' }}-{path: 'ZC_PARTNER_MDG>ThursdayMorningClosingTime', type: 'sap/ui/model/odata/type/Time', formatOptions: { style: 'short' }}
+                            {path: 'ZC_PARTNER_MDG>ThursdayAfternoonOpeningTime', type: 'sap/ui/model/odata/type/Time', formatOptions: { style: 'short' }}-{path: 'ZC_PARTNER_MDG>ThursdayAfternoonClosingTime', type: 'sap/ui/model/odata/type/Time', formatOptions: { style: 'short' }}" />
                     </tab:template>
                 </tab:Column>
                 <tab:Column id="IdUPCC08">
                     <Text id="IdUPCT08" text="{i18n>unloadpt.fri}" />
                     <tab:template>
                         <Text id="IdUPCCFri"
-                            text="{path: 'ZC_PARTNER_MDG>FridayMorningOpeningTime', type: 'Time', formatOptions: { style: 'short' }}-{path: 'ZC_PARTNER_MDG>FridayMorningClosingTime', type: 'Time', formatOptions: { style: 'short' }}
-                            {path: 'ZC_PARTNER_MDG>FridayAfternoonOpeningTime', type: 'Time', formatOptions: { style: 'short' }}-{path: 'ZC_PARTNER_MDG>FridayAfternoonClosingTime', type: 'Time', formatOptions: { style: 'short' }}" />
+                            text="{path: 'ZC_PARTNER_MDG>FridayMorningOpeningTime', type: 'sap/ui/model/odata/type/Time', formatOptions: { style: 'short' }}-{path: 'ZC_PARTNER_MDG>FridayMorningClosingTime', type: 'sap/ui/model/odata/type/Time', formatOptions: { style: 'short' }}
+                            {path: 'ZC_PARTNER_MDG>FridayAfternoonOpeningTime', type: 'sap/ui/model/odata/type/Time', formatOptions: { style: 'short' }}-{path: 'ZC_PARTNER_MDG>FridayAfternoonClosingTime', type: 'sap/ui/model/odata/type/Time', formatOptions: { style: 'short' }}" />
                     </tab:template>
                 </tab:Column>
                 <tab:Column id="IdUPCC98">
                     <Text id="IdUPCT09" text="{i18n>unloadpt.sat}" />
                     <tab:template>
                         <Text id="IdUPCCSat"
-                            text="{path: 'ZC_PARTNER_MDG>SaturdayMorningOpeningTime', type: 'Time', formatOptions: { style: 'short' }}-{path: 'ZC_PARTNER_MDG>SaturdayMorningClosingTime', type: 'Time', formatOptions: { style: 'short' }}
-                            {path: 'ZC_PARTNER_MDG>SaturdayAfternoonOpeningTime', type: 'Time', formatOptions: { style: 'short' }}-{path: 'ZC_PARTNER_MDG>SaturdayAfternoonClosingTime', type: 'Time', formatOptions: { style: 'short' }}" />
+                            text="{path: 'ZC_PARTNER_MDG>SaturdayMorningOpeningTime', type: 'sap/ui/model/odata/type/Time', formatOptions: { style: 'short' }}-{path: 'ZC_PARTNER_MDG>SaturdayMorningClosingTime', type: 'sap/ui/model/odata/type/Time', formatOptions: { style: 'short' }}
+                            {path: 'ZC_PARTNER_MDG>SaturdayAfternoonOpeningTime', type: 'sap/ui/model/odata/type/Time', formatOptions: { style: 'short' }}-{path: 'ZC_PARTNER_MDG>SaturdayAfternoonClosingTime', type: 'sap/ui/model/odata/type/Time', formatOptions: { style: 'short' }}" />
                     </tab:template>
                 </tab:Column>
                 <tab:Column id="IdUPCC10">
                     <Text id="IdUPCT10" text="{i18n>unloadpt.sun}" />
                     <tab:template>
                         <Text id="IdUPCSun"
-                            text="{path: 'ZC_PARTNER_MDG>SundayMorningOpeningTime', type: 'Time', formatOptions: { style: 'short' }}-{path: 'ZC_PARTNER_MDG>SundayMorningClosingTime', type: 'Time', formatOptions: { style: 'short' }}
-                            {path: 'ZC_PARTNER_MDG>SundayAfternoonOpeningTime', type: 'Time', formatOptions: { style: 'short' }}-{path: 'ZC_PARTNER_MDG>SundayAfternoonClosingTime', type: 'Time', formatOptions: { style: 'short' }}" />
+                            text="{path: 'ZC_PARTNER_MDG>SundayMorningOpeningTime', type: 'sap/ui/model/odata/type/Time', formatOptions: { style: 'short' }}-{path: 'ZC_PARTNER_MDG>SundayMorningClosingTime', type: 'sap/ui/model/odata/type/Time', formatOptions: { style: 'short' }}
+                            {path: 'ZC_PARTNER_MDG>SundayAfternoonOpeningTime', type: 'sap/ui/model/odata/type/Time', formatOptions: { style: 'short' }}-{path: 'ZC_PARTNER_MDG>SundayAfternoonClosingTime', type: 'sap/ui/model/odata/type/Time', formatOptions: { style: 'short' }}" />
                     </tab:template>
                 </tab:Column>
             </tab:columns>
-        </tab:Table> -->
+        </tab:Table>
     </uxap:ObjectPageSubSection>
 
 </core:FragmentDefinition>

@@ -2,7 +2,7 @@
 <core:FragmentDefinition id="IdOutMailDialogFrag" xmlns:core='sap.ui.core' xmlns='sap.m' xmlns:uxap='sap.uxap'
     xmlns:tab='sap.ui.table'>
     <uxap:ObjectPageSubSection id="OutMailSub" title="{i18n>outm.title}" mode="Expanded" titleUppercase="false">
-        <ScrollContainer id="mdm.mdg.gov.bps1.ext.ScrollContainer2" horizontal="false" vertical="true" height="270px">
+        <!-- <ScrollContainer id="mdm.mdg.gov.bps1.ext.ScrollContainer2" horizontal="false" vertical="true" height="270px">
             <Table id="IdOutMailTab" items="{path: 'ZC_PARTNER_MDG>to_OutputMail'}" mode="SingleSelectLeft"
                 sticky="ColumnHeaders,HeaderToolbar" width="70%">
                 <headerToolbar>
@@ -43,11 +43,11 @@
                     </ColumnListItem>
                 </items>
             </Table>
-        </ScrollContainer>
+        </ScrollContainer> -->
 
-        <!-- <tab:Table id="IdOutMailTab" selectionMode="MultiToggle" rows="{path: 'ZC_PARTNER_MDG>to_OutputMail'}"
+        <tab:Table id="IdOutMailTab" selectionMode="MultiToggle" rows="{path: 'ZC_PARTNER_MDG>to_OutputMail'}"
                 enableColumnFreeze="false" enableCellFilter="false" ariaLabelledBy="title" enableSelectAll="false"
-                width="70%" visibleRowCount="5" selectionBehavior="RowOnly">
+                width="70%" visibleRowCount="4" selectionBehavior="RowOnly">
                 <tab:extension>
                     <OverflowToolbar id="IdOutMToolB">
                         <Title id="IdTitTabOutM" text="{i18n>outm.doc}" level="H2" />
@@ -68,26 +68,25 @@
                         </tab:template>
                     </tab:Column>
                     <tab:Column id="IdOMC01">
-                        <Label id="IdOMT01" text="{i18n>outm.doc}" />
+                        <Label id="IdOMT01" text="{i18n>outm.comp}" />
                         <tab:template>
                             <Text id="IdOMComp"
                                 text="{ZC_PARTNER_MDG>CompanyCode} ({ZC_PARTNER_MDG>CompanyCodeName})" />
                         </tab:template>
                     </tab:Column>
                     <tab:Column id="IdOMC03">
-                        <Label id="IdOMT03" text="{i18n>outm.doc}" />
+                        <Label id="IdOMT03" text="{i18n>outm.mail}" />
                         <tab:template>
                             <Text id="IdOMMail" text="{ZC_PARTNER_MDG>Mail}" />
                         </tab:template>
                     </tab:Column>
                     <tab:Column id="IdOMC04">
-                        <Label id="IdOMT04" text="{i18n>outm.doc}" />
+                        <Label id="IdOMT04" text="{i18n>outm.note}" />
                         <tab:template>
                             <Text id="IdOMNote" text="{ZC_PARTNER_MDG>Notes}" />
                         </tab:template>
                     </tab:Column>
                 </tab:columns>
-            </tab:Table> -->
-
+            </tab:Table>
     </uxap:ObjectPageSubSection>
 </core:FragmentDefinition>

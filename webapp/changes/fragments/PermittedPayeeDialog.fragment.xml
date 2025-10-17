@@ -13,7 +13,7 @@
               <smartForm:SmartForm id="IdPermiPayeeSF" editable="true">
                   <smartForm:Group>
                       <smartForm:GroupElement>
-                          <smartfield:SmartField value="{CompanyCode}" enabled="{=${UpdNotEnabled} ? false:true}" />
+                          <smartfield:SmartField value="{CompanyCode}" enabled="{=${UpdNotEnabled} ? false:true}" mandatory="false"/>
                       </smartForm:GroupElement>
                       <smartForm:GroupElement>
                           <smartfield:SmartField value="{PermittedPayee}"/>

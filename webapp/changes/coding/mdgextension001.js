@@ -355,12 +355,16 @@ sap.ui.define(
             },
 
             onBkTyCUpd: function (oEvent) {
-                let oBankTypeContext = oEvent.getSource().getParent().getParent().getSelectedItem().getBindingContextPath();
+                // let oBankTypeContext = oEvent.getSource().getParent().getParent().getSelectedItem().getBindingContextPath();
+                const iIndex = oEvent.getSource().getParent().getParent().getSelectedIndex();
+                let oBankTypeContext = oEvent.getSource().getParent().getParent().getContextByIndex(iIndex).getPath();
                 this._loadBankTypeDialog(oEvent, "/ZC_BVTYPC_PRC", "", oBankTypeContext);
             },
 
             onBkTyVUpd: function (oEvent) {
-                let oBankTypeContext = oEvent.getSource().getParent().getParent().getSelectedItem().getBindingContextPath();
+                // let oBankTypeContext = oEvent.getSource().getParent().getParent().getSelectedItem().getBindingContextPath();
+                const iIndex = oEvent.getSource().getParent().getParent().getSelectedIndex();
+                let oBankTypeContext = oEvent.getSource().getParent().getParent().getContextByIndex(iIndex).getPath();
                 this._loadBankTypeDialog(oEvent, "/ZC_BVTYPV_PRC", "", oBankTypeContext);
             },
 
@@ -433,7 +437,9 @@ sap.ui.define(
             },
 
             onPPCUpd: function (oEvent) {
-                let oPermitPayeContext = oEvent.getSource().getParent().getParent().getSelectedItem().getBindingContextPath();
+                // let oPermitPayeContext = oEvent.getSource().getParent().getParent().getSelectedItem().getBindingContextPath();
+                const iIndex = oEvent.getSource().getParent().getParent().getSelectedIndex();
+                let oPermitPayeContext = oEvent.getSource().getParent().getParent().getContextByIndex(iIndex).getPath();
                 this._loadPermitPayeeDialog(oEvent, "/ZC_CUSTOMERPERMITPAYEE_PRC", "", oPermitPayeContext);
             },
 
@@ -443,7 +449,9 @@ sap.ui.define(
             },
 
             onPPVUpd: function (oEvent) {
-                let oPermitPayeContext = oEvent.getSource().getParent().getParent().getSelectedItem().getBindingContextPath();
+                // let oPermitPayeContext = oEvent.getSource().getParent().getParent().getSelectedItem().getBindingContextPath();
+                const iIndex = oEvent.getSource().getParent().getParent().getSelectedIndex();
+                let oPermitPayeContext = oEvent.getSource().getParent().getParent().getContextByIndex(iIndex).getPath();
                 this._loadPermitPayeeDialog(oEvent, "/ZC_VENDORPERMITPAYEE_PRC", "", oPermitPayeContext);
             },
 
@@ -514,7 +522,9 @@ sap.ui.define(
             },
 
             onUPCUpd: function (oEvent) {
-                let oUnlPtContext = oEvent.getSource().getParent().getParent().getSelectedItem().getBindingContextPath();
+                // let oUnlPtContext = oEvent.getSource().getParent().getParent().getSelectedItem().getBindingContextPath();
+                const iIndex = oEvent.getSource().getParent().getParent().getSelectedIndex();
+                let oUnlPtContext = oEvent.getSource().getParent().getParent().getContextByIndex(iIndex).getPath();
                 this._loadUnlPtDialog(oEvent, "", oUnlPtContext);
             },
 
@@ -632,7 +642,9 @@ sap.ui.define(
             },
 
             onRSVUpd: function (oEvent) {
-                let oReadSoftContext = oEvent.getSource().getParent().getParent().getSelectedItem().getBindingContextPath();
+                // let oReadSoftContext = oEvent.getSource().getParent().getParent().getSelectedItem().getBindingContextPath();
+                const iIndex = oEvent.getSource().getParent().getParent().getSelectedIndex();
+                let oReadSoftContext = oEvent.getSource().getParent().getParent().getContextByIndex(iIndex).getPath();
                 this._loadReadSoftDialog(oEvent, "", oReadSoftContext);
             },
 
@@ -703,7 +715,9 @@ sap.ui.define(
             },
 
             onOutMUpd: function (oEvent) {
-                let oOutputContext = oEvent.getSource().getParent().getParent().getSelectedItem().getBindingContextPath();
+                // let oOutputContext = oEvent.getSource().getParent().getParent().getSelectedItem().getBindingContextPath();
+                const iIndex = oEvent.getSource().getParent().getParent().getSelectedIndex();
+                let oOutputContext = oEvent.getSource().getParent().getParent().getContextByIndex(iIndex).getPath();
                 // let oOutputContext = oItem.getBindingContextPath();
                 // let oOutputObject = this.getView().getModel('ZC_PARTNER_MDG').getProperty(oOutputContext);
 
@@ -866,8 +880,10 @@ sap.ui.define(
                 this.oMessageManager.removeAllMessages();
                 this.getView().getModel("ZC_PARTNER_MDG").resetChanges(null, true, true);
                 this.getExtModel().resetChanges(null, true, true);
-                let oItem = oEvent.getSource().getParent().getParent().getSelectedItem();
-                let oPath = oItem.getBindingContextPath();
+                // let oItem = oEvent.getSource().getParent().getParent().getSelectedItem();
+                // let oPath = oItem.getBindingContextPath();                
+                const iIndex = oEvent.getSource().getParent().getParent().getSelectedIndex();
+                let oPath = oEvent.getSource().getParent().getParent().getContextByIndex(iIndex).getPath();                
 
                 this.getExtModel().remove(oPath, {
                     success: oData => {
@@ -995,7 +1011,7 @@ sap.ui.define(
                 let SourceId = oContext.getProperty("MDChgProcessSrceObject");
 
                 if (oContextExt !== undefined && oContextExt) {
-                    SourceId = oContextExt.getProperty("MDChgProcessSrceObject");            
+                    SourceId = oContextExt.getProperty("MDChgProcessSrceObject");
                 }
 
                 sap.ushell.Container.getServiceAsync("CrossApplicationNavigation").then(function (oService) {
