@@ -45,7 +45,7 @@
             </Table>
         </ScrollContainer> -->
 
-        <tab:Table id="IdOutMailTab" selectionMode="MultiToggle" rows="{path: 'ZC_PARTNER_MDG>to_OutputMail'}"
+        <tab:Table id="IdOutMailTab" selectionMode="Single" rows="{path: 'ZC_PARTNER_MDG>to_OutputMail'}"
                 enableColumnFreeze="false" enableCellFilter="false" ariaLabelledBy="title" enableSelectAll="false"
                 width="70%" visibleRowCount="4" selectionBehavior="RowOnly">
                 <tab:extension>

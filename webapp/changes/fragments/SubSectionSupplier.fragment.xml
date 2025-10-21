@@ -42,7 +42,7 @@
             </items>
         </Table> -->
 
-        <tab:Table id="IdBkTypVendTab" selectionMode="MultiToggle" rows="{path: 'ZC_PARTNER_MDG>to_VendorBankType'}"
+        <tab:Table id="IdBkTypVendTab" selectionMode="Single" rows="{path: 'ZC_PARTNER_MDG>to_VendorBankType'}"
             enableColumnFreeze="false" enableCellFilter="false" ariaLabelledBy="title" enableSelectAll="false"
             width="70%" visibleRowCount="4" selectionBehavior="RowOnly">
             <tab:extension>
@@ -122,7 +122,7 @@
             </items>
         </Table> -->
 
-        <tab:Table id="IdPermiPayeeVendTab" selectionMode="MultiToggle" rows="{path: 'ZC_PARTNER_MDG>to_VendorPermittedPayee'}"
+        <tab:Table id="IdPermiPayeeVendTab" selectionMode="Single" rows="{path: 'ZC_PARTNER_MDG>to_VendorPermittedPayee'}"
             enableColumnFreeze="false" enableCellFilter="false" ariaLabelledBy="title" enableSelectAll="false"
             width="70%" visibleRowCount="4" selectionBehavior="RowOnly">
             <tab:extension>
@@ -226,7 +226,7 @@
             </items>
         </Table> -->
 
-        <tab:Table id="IdReadSoftVendTab" selectionMode="MultiToggle" rows="{path: 'ZC_PARTNER_MDG>to_VendorReadSoft'}"
+        <tab:Table id="IdReadSoftVendTab" selectionMode="Single" rows="{path: 'ZC_PARTNER_MDG>to_VendorReadSoft'}"
             enableColumnFreeze="false" enableCellFilter="false" ariaLabelledBy="title" enableSelectAll="false"
             width="100%" visibleRowCount="4" selectionBehavior="RowOnly">
             <tab:extension>

@@ -43,7 +43,7 @@
             </items>
         </Table> -->
 
-        <tab:Table id="IdBkTypCustTab" selectionMode="MultiToggle" rows="{path: 'ZC_PARTNER_MDG>to_CustomerBankType'}"
+        <tab:Table id="IdBkTypCustTab" selectionMode="Single" rows="{path: 'ZC_PARTNER_MDG>to_CustomerBankType'}"
             enableColumnFreeze="false" enableCellFilter="false" ariaLabelledBy="title" enableSelectAll="false"
             width="70%" visibleRowCount="4" selectionBehavior="RowOnly">
             <tab:extension>
@@ -123,7 +123,7 @@
             </items>
         </Table> -->
 
-        <tab:Table id="IdPermiPayeeCustTab" selectionMode="MultiToggle"
+        <tab:Table id="IdPermiPayeeCustTab" selectionMode="Single"
             rows="{path: 'ZC_PARTNER_MDG>to_CustomerPermittedPayee'}" enableColumnFreeze="false"
             enableCellFilter="false" ariaLabelledBy="title" enableSelectAll="false" width="70%" visibleRowCount="4"
             selectionBehavior="RowOnly">
@@ -243,7 +243,7 @@
         </Table>  -->
 
 
-        <tab:Table id="IdUnloadPtCusTab" selectionMode="MultiToggle"
+        <tab:Table id="IdUnloadPtCusTab" selectionMode="Single"
             rows="{path: 'ZC_PARTNER_MDG>to_CustomerUnloadPoint'}" enableColumnFreeze="false" enableCellFilter="false"
             ariaLabelledBy="title" enableSelectAll="false" width="100%" visibleRowCount="4" selectionBehavior="RowOnly">
             <tab:extension>
