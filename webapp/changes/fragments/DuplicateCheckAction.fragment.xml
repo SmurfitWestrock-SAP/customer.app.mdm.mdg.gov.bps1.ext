@@ -3,6 +3,6 @@
     <!--  add your xml here -->
     <Button text="{@i18n>DuplicateCheck}"  id="btn-0ae6f918"
      press=".extension.customer.app.mdm.mdg.gov.bps1.ext.mdgextension001.onDuplicateCheck"/>
-    <!-- <Button text="{@i18n>longtext}"  id="btn-longtext"
-     press=".extension.customer.app.mdm.mdg.gov.bps1.ext.mdgextension001.onLongText"/>      -->
+    <Button text="{@i18n>longtext}"  id="btn-longtext"
+     press=".extension.customer.app.mdm.mdg.gov.bps1.ext.mdgextension001.onLongText"/>     
 </core:FragmentDefinition>

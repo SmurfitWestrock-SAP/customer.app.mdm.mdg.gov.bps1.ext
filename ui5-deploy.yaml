@@ -14,9 +14,9 @@ builder:
         target:
           destination: MDD-505-DESTINATION-DEV_ONLY
           url: http://mdddevonly.group.wan:8422/
-          client: '505'
+          client: "505"
         app:
           package: ZMDG_EXT
-          transport: MDDK900774
+          transport: MDDK901042
         exclude:
           - /test/

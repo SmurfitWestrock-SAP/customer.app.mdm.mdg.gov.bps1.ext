@@ -129,7 +129,7 @@
             selectionBehavior="RowOnly">
             <tab:extension>
                 <OverflowToolbar id="IdPPCTVToolB">
-                    <Title id="IdTitTabPPC" text="{i18n>perpay.perpay}" level="H2" />
+                    <Title id="IdTitTabPPC" text="{i18n>perpay.perpar}" level="H2" />
                     <ToolbarSpacer id="IdPPCToolBS" />
                     <Button id="IdPPCAdd" text="{i18n>CREATE_OBJECT}" visible="{uiExt>editable}"
                         press=".extension.customer.app.mdm.mdg.gov.bps1.ext.mdgextension001.onPPCAdd" />
@@ -148,7 +148,7 @@
                     </tab:template>
                 </tab:Column>
                 <tab:Column id="IdPPCC02">
-                    <Text id="IdPPCT02" text="{i18n>perpay.perpay}" />
+                    <Text id="IdPPCT02" text="{i18n>perpay.perpar}" />
                     <tab:template>
                         <Text id="IdPPCPayee"
                             text="{ZC_PARTNER_MDG>PermittedPayee} ({ZC_PARTNER_MDG>PermittedPayeeName})" />

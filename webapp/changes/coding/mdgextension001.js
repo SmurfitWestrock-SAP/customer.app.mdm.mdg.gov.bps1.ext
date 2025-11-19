@@ -605,7 +605,7 @@ sap.ui.define(
                         oUnloadPintContext.getModel().setProperty("SundayAfternoonOpeningTime", oData.Soab2, oUnloadPintContext);
                         oUnloadPintContext.getModel().setProperty("SundayAfternoonClosingTime", oData.Sobi2, oUnloadPintContext);
                     },
-                    error: function (oErr) {
+                    error: (oErr) => {
                         this.getView().setBusy(false);
                     }
                 });

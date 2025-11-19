@@ -20,7 +20,7 @@
                           <smartfield:SmartField value="{IsDfltBPUnloadingPoint}" />
                       </smartForm:GroupElement>
                       <smartForm:GroupElement>
-                          <smartfield:SmartField value="{CustomerFactoryCalenderCode}" />
+                          <smartfield:SmartField value="{CustomerFactoryCalenderCode}" mandatory="true" />
                       </smartForm:GroupElement>
                       <smartForm:GroupElement>
                           <smartfield:SmartField value="{BPGoodsReceivingHoursCode}" change="onGRHoursCodeChg"/>
