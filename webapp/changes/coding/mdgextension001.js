@@ -303,11 +303,14 @@ sap.ui.define(
                     MDChgProcessSrceObject: oContext.getProperty("MDChgProcessSrceObject") || "",
                 }
                 let oGuid = oContext.getProperty("BusinessPartnerUUID");
-
-                oHeaderItem.addHeaderField(new sap.ui.core.Item({
+                
+                const encodedName = encodeURIComponent(oHeaderItem.getFileName());
+                
+                 oHeaderItem.addHeaderField(new sap.ui.core.Item({
                     key: "slug",
-                    text: oGuid + "@" + oData.MasterDataChangeProcess + "@" + oData.MDChgProcessSrceObject + "@" + oTypeKey + "@" + oHeaderItem.getFileName() + "@REQUESTOR"
+                    text: oGuid + "@" + oData.MasterDataChangeProcess + "@" + oData.MDChgProcessSrceObject + "@" + oTypeKey + "@" + encodedName + "@REQUESTOR"
                 }));
+
                 oHeaderItem.addHeaderField(new sap.ui.core.Item({
                     key: "x-csrf-token",
                     text: this.getExtModel().getSecurityToken()
@@ -883,7 +886,7 @@ sap.ui.define(
                 // let oItem = oEvent.getSource().getParent().getParent().getSelectedItem();
                 // let oPath = oItem.getBindingContextPath();                
                 const iIndex = oEvent.getSource().getParent().getParent().getSelectedIndex();
-                let oPath = oEvent.getSource().getParent().getParent().getContextByIndex(iIndex).getPath();                
+                let oPath = oEvent.getSource().getParent().getParent().getContextByIndex(iIndex).getPath();
 
                 this.getExtModel().remove(oPath, {
                     success: oData => {
