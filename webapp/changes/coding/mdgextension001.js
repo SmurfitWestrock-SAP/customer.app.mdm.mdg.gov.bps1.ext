@@ -436,29 +436,34 @@ sap.ui.define(
              *************************************************************************/
             onPPCAdd: function (oEvent) {
                 let oPermitPayeeObj = this.getView().getBindingContext('ZC_PARTNER_MDG').getObject();
-                this._loadPermitPayeeDialog(oEvent, "/ZC_CUSTOMERPERMITPAYEE_PRC", oPermitPayeeObj, "");
+                const sTitle = this.getView().getModel('i18n').getResourceBundle().getText('perpay.perpar');
+                this._loadPermitPayeeDialog(oEvent, "/ZC_CUSTOMERPERMITPAYEE_PRC", oPermitPayeeObj, "", sTitle);
             },
 
             onPPCUpd: function (oEvent) {
                 // let oPermitPayeContext = oEvent.getSource().getParent().getParent().getSelectedItem().getBindingContextPath();
                 const iIndex = oEvent.getSource().getParent().getParent().getSelectedIndex();
                 let oPermitPayeContext = oEvent.getSource().getParent().getParent().getContextByIndex(iIndex).getPath();
-                this._loadPermitPayeeDialog(oEvent, "/ZC_CUSTOMERPERMITPAYEE_PRC", "", oPermitPayeContext);
+                const sTitle = this.getView().getModel('i18n').getResourceBundle().getText('perpay.perpar');
+                this._loadPermitPayeeDialog(oEvent, "/ZC_CUSTOMERPERMITPAYEE_PRC", "", oPermitPayeContext, sTitle);
             },
 
             onPPVAdd: function (oEvent) {
                 let oPermitPayeeObj = this.getView().getBindingContext('ZC_PARTNER_MDG').getObject();
-                this._loadPermitPayeeDialog(oEvent, "/ZC_VENDORPERMITPAYEE_PRC", oPermitPayeeObj, "");
+                const sTitle = this.getView().getModel('i18n').getResourceBundle().getText('perpay.perpay');
+                this._loadPermitPayeeDialog(oEvent, "/ZC_VENDORPERMITPAYEE_PRC", oPermitPayeeObj, "", sTitle);
             },
 
             onPPVUpd: function (oEvent) {
                 // let oPermitPayeContext = oEvent.getSource().getParent().getParent().getSelectedItem().getBindingContextPath();
                 const iIndex = oEvent.getSource().getParent().getParent().getSelectedIndex();
                 let oPermitPayeContext = oEvent.getSource().getParent().getParent().getContextByIndex(iIndex).getPath();
-                this._loadPermitPayeeDialog(oEvent, "/ZC_VENDORPERMITPAYEE_PRC", "", oPermitPayeContext);
+                const sTitle = this.getView().getModel('i18n').getResourceBundle().getText('perpay.perpay');
+                this._loadPermitPayeeDialog(oEvent, "/ZC_VENDORPERMITPAYEE_PRC", "", oPermitPayeContext, sTitle);
             },
 
-            _loadPermitPayeeDialog: function (oEvent, oEntity, oPermitPayeeObj, sPermitPayeeKey) {
+            _loadPermitPayeeDialog: function (oEvent, oEntity, oPermitPayeeObj, sPermitPayeeKey, sTitle) {
+                this.getView().getModel('uiExt').setProperty('/payeDialLab', sTitle);
                 this.oMessageManager.removeAllMessages();
                 this.getView().getModel("ZC_PARTNER_MDG").resetChanges(null, true, true);
                 this.getExtModel().resetChanges(null, true, true);
@@ -1016,6 +1021,7 @@ sap.ui.define(
                 if (oContextExt !== undefined && oContextExt) {
                     SourceId = oContextExt.getProperty("MDChgProcessSrceObject");
                 }
+                let oMdcUiMode = this.getView().getModel("componentParameters").getProperty("/urlParameters/mdc-ui-mode");
 
                 sap.ushell.Container.getServiceAsync("CrossApplicationNavigation").then(function (oService) {
                     oService.hrefForExternalAsync({
@@ -1025,7 +1031,8 @@ sap.ui.define(
                         },
                         params: {
                             "MDChgProcessSrceObject": SourceId,
-                            "MasterDataChangeProcess": oContext.getProperty("MasterDataChangeProcess")
+                            "MasterDataChangeProcess": oContext.getProperty("MasterDataChangeProcess"),
+                            "mdc-ui-mode": oMdcUiMode
                         }
                     }).then(function (sHref) {
                         oService.toExternal({

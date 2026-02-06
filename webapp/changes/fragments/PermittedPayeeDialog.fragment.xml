@@ -4,7 +4,7 @@
       <Dialog id="IdPPDialog" showHeader="false">
           <customHeader>
               <Toolbar>
-                  <Label text="{i18n>perpay.perpay}" design="Bold" />
+                  <Label text="{uiExt>payeDialLab}" design="Bold" />
                   <ToolbarSpacer />
                   <Button id="IdPPCancel" icon="sap-icon://sys-cancel" type="Reject" press="onDialogClose" />
               </Toolbar>

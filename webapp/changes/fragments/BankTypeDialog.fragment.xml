@@ -22,7 +22,7 @@
                           <smartfield:SmartField value="{BusinessArea}" enabled="{=${UpdNotEnabled} ? false:true}" />
                       </smartForm:GroupElement>                      
                       <smartForm:GroupElement>
-                          <smartfield:SmartField value="{Currency}" enabled="{=${UpdNotEnabled} ? false:true}" />
+                          <smartfield:SmartField value="{Currency}" enabled="{=${UpdNotEnabled} ? false:true}"/>
                       </smartForm:GroupElement>
                   </smartForm:Group>
               </smartForm:SmartForm>

@@ -80,7 +80,7 @@
                 <tab:Column id="IdBkVC03">
                     <Text id="IdBkVT03" text="{i18n>bktyp.curr}" />
                     <tab:template>
-                        <Text id="IdBkVWae" text="{ZC_PARTNER_MDG>IsoCurrency}" />
+                        <Text id="IdBkVWae" text="{ZC_PARTNER_MDG>Currency} - {ZC_PARTNER_MDG>CurrencyName}" />
                     </tab:template>
                 </tab:Column>
             </tab:columns>
