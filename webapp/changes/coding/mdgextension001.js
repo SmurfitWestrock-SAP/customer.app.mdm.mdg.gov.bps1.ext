@@ -797,9 +797,87 @@ sap.ui.define(
              * <<<< Output Document Managment
              *************************************************************************/
 
+      /*************************************************************************
+             * >>>> VAT on Cash (Portugal)
+             *************************************************************************/
+            onCVAAdd: function (oEvent) {
+                let oVatCashObj = this.getView().getBindingContext('ZC_PARTNER_MDG').getObject();
+                this._loadVatCashDialog(oEvent, oVatCashObj, "");
+            },
+
+            onCVAUpd: function (oEvent) {
+                const iIndex = oEvent.getSource().getParent().getParent().getSelectedIndex();
+                let oVatCashContext = oEvent.getSource().getParent().getParent().getContextByIndex(iIndex).getPath();
+                this._loadVatCashDialog(oEvent, "", oVatCashContext);
+            },
+
+            _loadVatCashDialog: function (oEvent, oVatCashObj, sVatCashKey) {
+                this.oMessageManager.removeAllMessages();
+                this.getView().getModel("ZC_PARTNER_MDG").resetChanges(null, true, true);
+                this.getExtModel().resetChanges(null, true, true);
+
+                this._loadDialogPopup({
+                    name: "customer.app.mdm.mdg.gov.bps1.ext.changes.fragments.VatCashDialog",
+                    dialog: this._pVatCashDialog
+                }).then(oDialog => {
+                    this._pVatCashDialog = oDialog;
+                    this._pVatCashDialog.IdTab = this.getView().byId(oEvent.getSource().getId());
+                    this._pVatCashDialog.unbindObject();
+                    this._pVatCashDialog.setModel(this.getExtModel());
+
+                    if (oVatCashObj) {
+                        const oVatCashContext = this.getExtModel().createEntry("/ZC_FI_CUST_VAT_ACC_PRC", {
+                            properties: {
+                                MDChgProcessSrceObject: oVatCashObj.MDChgProcessSrceObject,
+                                MasterDataChangeProcess: oVatCashObj.MasterDataChangeProcess || "",
+                            }
+                        });
+                        this._pVatCashDialog.setBindingContext(oVatCashContext);
+                        this._pVatCashDialog.open();
+                    } else {
+                        this.getExtModel().invalidateEntry(sVatCashKey);
+                        this._pVatCashDialog.bindObject({
+                            path: sVatCashKey,
+                            events: {
+                                dataReceived: (oData) => {
+                                    this._pVatCashDialog.open();
+                                }
+                            }
+                        });
+                    }
+                });
+            },
+
+            onCVASave: function (oEvent) {
+                this.oMessageManager.removeAllMessages();
+                this._pVatCashDialog.setBusy(true);
+
+                this.submitChanges({
+                        model: this.getExtModel(),
+                        busyControl: this.getView()
+                    })
+                    .then((oResult) => {
+                        this._pVatCashDialog.unbindObject();
+                        this._pVatCashDialog.IdTab.getModel("customer.mdgextend").refresh();
+                        this._pVatCashDialog.setBusy(false);
+                        this._pVatCashDialog.close();
+                    })
+                    .catch((oError) => {
+                        this._pVatCashDialog.setBusy(false);
+                    });
+            },
+            /*************************************************************************
+             * <<<< VAT on Cash (Portugal)
+             *************************************************************************/
+
             _setuiExt: function () {
                 let ouiData = this.getView().getModel('ui').getData();
                 this.getView().getModel('uiExt').setProperty('/editable', ouiData.editable);
+                // let ouiData = this.Controller._bindEditVisible();
+                // if (ouiData === undefined) {
+                //     ouiData = false;
+                // }
+                // this.getView().getModel('uiExt').setProperty('/editable', ouiData);                
             },
 
             _initializeViewModel: function (sName, oData) {
@@ -1069,6 +1147,7 @@ sap.ui.define(
 
                     oEvent.getSource().getController().extensionAPI.getTransactionController().attachAfterCancel(this._deleteDraft.bind(this));
 
+                    this.Controller = oEvent.getSource().getController();
                     this.extensionAPIExt = oEvent.getSource().getController().extensionAPI;
 
                     // oEvent.getSource().getController().extensionAPI.invokeActions("/SaveDraftAndSubmitProcess", this.getView().getBindingContext()).then(function(r) {
@@ -1165,6 +1244,8 @@ sap.ui.define(
                     if (oLink !== undefined) {
                         oLink.setEnabled(false);
                     }
+
+                    this._setuiExt();
                 },
 
                 /**

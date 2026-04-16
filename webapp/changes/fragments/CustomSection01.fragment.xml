@@ -1,0 +1,48 @@
+<!-- Use stable and unique IDs!-->
+<core:FragmentDefinition  xmlns:core='sap.ui.core' xmlns='sap.m' xmlns:uxap='sap.uxap'
+    core:require="{Date: 'sap/ui/model/odata/type/Date'}" xmlns:tab='sap.ui.table'>
+    <uxap:ObjectPageSection id="op-section-be36493c" title="{i18n>custfivat.tit}" visible="{ZC_PARTNER_MDG>VatPortDisplay}">
+        <uxap:ObjectPageSubSection id="op-subsection-be36493c">
+            <!-- <HBox id="hbox-be36493c"> -->
+                  <tab:Table id="IdFiCustVatAcc" selectionMode="Single" rows="{path: 'ZC_PARTNER_MDG>to_CustomerCatAcc'}"
+                    enableColumnFreeze="false" enableCellFilter="false" ariaLabelledBy="title" enableSelectAll="false"
+                    width="100%" visibleRowCount="4" selectionBehavior="RowOnly">
+                    <tab:extension>
+                        <OverflowToolbar id="IdCVAToolB">
+                            <Title id="IdTitTabCVA" text="{i18n>custfivat.tit}" level="H2" />
+                            <ToolbarSpacer id="IdCVAToolBS" />
+                            <Button id="IdCVAAdd" text="{i18n>CREATE_OBJECT}" visible="{uiExt>/editable}"
+                                press=".extension.customer.app.mdm.mdg.gov.bps1.ext.mdgextension001.onCVAAdd" />
+                            <Button id="IdCVAUpd" text="{i18n>update}" visible="{uiExt>/editable}"
+                                press=".extension.customer.app.mdm.mdg.gov.bps1.ext.mdgextension001.onCVAUpd" />
+                            <Button id="IdCVADel" text="{i18n>DELETE}" visible="{uiExt>/editable}"
+                                press=".extension.customer.app.mdm.mdg.gov.bps1.ext.mdgextension001.onItemDel" />
+                        </OverflowToolbar>
+                    </tab:extension>
+                    <tab:columns>
+                        <tab:Column id="IdCVACFrom">
+                            <Text id="IdCVATFrom" text="{i18n>custfivat.from}" />
+                            <tab:template>
+                                <Text id="IdCVAFrom"
+                                    text="{path: 'ZC_PARTNER_MDG>ValidFrom', type: 'sap/ui/model/odata/type/Date', formatOptions: { style: 'medium' }}" />
+                            </tab:template>
+                        </tab:Column>
+                        <tab:Column id="IdCVACTo">
+                            <Text id="IdCVATTo" text="{i18n>custfivat.to}" />
+                            <tab:template>
+                                <Text id="IdCVATo"
+                                    text="{path: 'ZC_PARTNER_MDG>ValidTo', type: 'sap/ui/model/odata/type/Date', formatOptions: { style: 'medium' }}" />
+                            </tab:template>
+                        </tab:Column>
+                        <tab:Column id="IdCVACAcc">
+                            <Text id="IdCVATAcc" text="{i18n>custfivat.acct}" />
+                            <tab:template>
+                                <CheckBox id="IdCVAAcc" selected="{ZC_PARTNER_MDG>VatCashAccouting}" enabled="false" />
+                            </tab:template>
+                        </tab:Column>
+                    </tab:columns>
+                </tab:Table>
+            <!-- </HBox> -->
+        </uxap:ObjectPageSubSection>
+    </uxap:ObjectPageSection>
+</core:FragmentDefinition>

@@ -1,0 +1,38 @@
+  <!-- enabled="{ModelVue>/enable}" -->
+  <core:FragmentDefinition id="IdCVADialogFrag" xmlns:core='sap.ui.core' xmlns='sap.m' xmlns:form="sap.ui.layout.form"
+      xmlns:smartForm="sap.ui.comp.smartform" xmlns:smartfield="sap.ui.comp.smartfield"
+      core:require="{Date: 'sap/ui/model/odata/type/Date'}">
+      <Dialog id="IdCVADialog" showHeader="false">
+          <customHeader>
+              <Toolbar>
+                  <Label text="{i18n>custfivat.tit}" design="Bold" />
+                  <ToolbarSpacer />
+                  <Button id="IdCVACancel" icon="sap-icon://sys-cancel" type="Reject" press="onDialogClose" />
+              </Toolbar>
+          </customHeader>
+          <content>
+              <smartForm:SmartForm id="IdVatCashSF" editable="true">
+                  <smartForm:Group>
+                      <smartForm:GroupElement>
+                          <smartfield:SmartField value="{ValidFrom}" />
+                      </smartForm:GroupElement>
+                      <smartForm:GroupElement>
+                          <smartfield:SmartField value="{ValidTo}" />
+                      </smartForm:GroupElement>
+                      <smartForm:GroupElement>
+                          <smartfield:SmartField value="{VatCashAccouting}" />
+                      </smartForm:GroupElement>
+                  </smartForm:Group>
+              </smartForm:SmartForm>
+          </content>
+          <footer>
+              <Toolbar id="IdCVABar">
+                  <Button id="IdCVAPopMsg" icon="sap-icon://message-popup" press="handleMessagePopoverPress"
+                      type="{= (${message>/}.length > 0 ? 'Negative':'Default')}" text="{=${message>/}.length}" />
+                  <ToolbarSpacer />
+                  <Button id="IdCVAVal" text="{i18n>bktyp.valid}" icon="sap-icon://accept" type="Accept"
+                      press="onCVASave" />
+              </Toolbar>
+          </footer>
+      </Dialog>
+  </core:FragmentDefinition>

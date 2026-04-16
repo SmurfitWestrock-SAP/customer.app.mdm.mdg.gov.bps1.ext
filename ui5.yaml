@@ -26,7 +26,7 @@ server:
       configuration:
         adp:
           target:
-            destination: MDD-605_BVEYRAC
+            destination: MDD-505-DESTINATION-DEV_ONLY
           ignoreCertErrors: false
     - name: fiori-tools-proxy
       afterMiddleware: fiori-tools-preview

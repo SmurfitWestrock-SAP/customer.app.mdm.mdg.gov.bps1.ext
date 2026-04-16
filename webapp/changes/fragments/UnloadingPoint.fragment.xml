@@ -57,13 +57,13 @@
                       </smartForm:GroupElement>
                       <smartForm:GroupElement>
                           <smartfield:SmartField
-                              value="{path: 'WednesdayAfternoonClosingTime', type: 'Time', formatOptions: { style: 'short' }}" />
-                          <smartfield:SmartField
-                              value="{path: 'WednesdayAfternoonOpeningTime', type: 'Time', formatOptions: { style: 'short' }}" />
+                              value="{path: 'WednesdayMorningOpeningTime', type: 'Time', formatOptions: { style: 'short' }}" />
                           <smartfield:SmartField
                               value="{path: 'WednesdayMorningClosingTime', type: 'Time', formatOptions: { style: 'short' }}" />
                           <smartfield:SmartField
-                              value="{path: 'WednesdayMorningOpeningTime', type: 'Time', formatOptions: { style: 'short' }}" />
+                              value="{path: 'WednesdayAfternoonOpeningTime', type: 'Time', formatOptions: { style: 'short' }}" />
+                          <smartfield:SmartField
+                              value="{path: 'WednesdayAfternoonClosingTime', type: 'Time', formatOptions: { style: 'short' }}" />
                       </smartForm:GroupElement>
                       <smartForm:GroupElement>
                           <smartfield:SmartField
