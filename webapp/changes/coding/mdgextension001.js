@@ -877,8 +877,27 @@ sap.ui.define(
                 // if (ouiData === undefined) {
                 //     ouiData = false;
                 // }
-                // this.getView().getModel('uiExt').setProperty('/editable', ouiData);                
+                // this.getView().getModel('uiExt').setProperty('/editable', ouiData);        
+                
+                // var oPath = "/" + this.getView().getModel().createKey("BusinessPartner", this.getView().getBindingContext().getObject());
+                // let oEdit = this.getView().getModel('ui').getProperty('/editable');
+                // let oEdit_ac = this.getView().getModel().getProperty(oPath + "/Edit_ac");
+                // let oMode = this.getView().getModel('componentParameters').getProperty('/urlParameters/mdc-ui-mode');
+                // let oWFStatus = this.getView().getModel().getProperty(oPath + "/MDChgProcessStepWrkflwSts");
+                // let oWFDecision = this.getView().getModel().getProperty(oPath + "/MDChgProcessStepWrkflwOvrlDcsn");
+                    // return !editable
+                    //  && Edit_ac 
+                    //  && mode !== undefined 
+                    //  && WrkflwSts !== undefined
+                    //   && WrkflwOvrlDcsn !== undefined 
+                    // && (!((mode === that.oConstants.uiMode.embeddedWorkflow)
+                    //  || (WrkflwSts === that.oConstants.wokflowState.running) 
+                    //  || (WrkflwOvrlDcsn === that.oConstants.workflowDecision.rework)) 
+                    //  || (mode === that.oConstants.uiMode.embeddedWorkflow)
+                    //   && (WrkflwSts === that.oConstants.wokflowState.running) 
+                    //  && (WrkflwOvrlDcsn === that.oConstants.workflowDecision.rework)));
             },
+     
 
             _initializeViewModel: function (sName, oData) {
                 this.getView().setModel(new JSONModel(oData), sName);
