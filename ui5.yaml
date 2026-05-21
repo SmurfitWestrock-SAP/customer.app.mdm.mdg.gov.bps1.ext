@@ -36,12 +36,12 @@ server:
           - destination: MDD-605_BVEYRAC
           # url: https://REQUIRED_FOR_VSCODE.example
             path: /sap
-          # - destination: MDD-605_BVEYRAC
+          - destination: MDD-605_BVEYRAC
           #   url: https://REQUIRED_FOR_VSCODE.example
-          #   path: /sap/opu/odata
-          # - destination: MDD-605_BVEYRAC
+            path: /sap/opu/odata
+          - destination: MDD-605_BVEYRAC
           #   url: https://REQUIRED_FOR_VSCODE.example
-          #   path: /sap/bc/ui5_ui5                  
+            path: /sap/bc/ui5_ui5                  
         ui5:
           path:
             - /resources

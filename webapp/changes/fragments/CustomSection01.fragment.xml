@@ -1,15 +1,16 @@
 <!-- Use stable and unique IDs!-->
 <core:FragmentDefinition  xmlns:core='sap.ui.core' xmlns='sap.m' xmlns:uxap='sap.uxap'
     core:require="{Date: 'sap/ui/model/odata/type/Date'}" xmlns:tab='sap.ui.table'>
-    <uxap:ObjectPageSection id="op-section-be36493c" title="{i18n>custfivat.tit}" visible="{ZC_PARTNER_MDG>VatPortDisplay}">
+    <uxap:ObjectPageSection id="op-section-be36493c" title="{i18n>custfivat.tit}" visible="{=${BPCustomGovDispTab} === 'PT' ? true : false}">
         <uxap:ObjectPageSubSection id="op-subsection-be36493c">
             <!-- <HBox id="hbox-be36493c"> -->
-                  <tab:Table id="IdFiCustVatAcc" selectionMode="Single" rows="{path: 'ZC_PARTNER_MDG>to_CustomerCatAcc'}"
+                  <tab:Table id="IdFiCustVatAcc" selectionMode="Single" rows="{path: 'ZC_PARTNER_MDG>to_CustomerCatAcc', 
+                  sorter: { path: 'ValidFrom', descending: true } }"
                     enableColumnFreeze="false" enableCellFilter="false" ariaLabelledBy="title" enableSelectAll="false"
                     width="100%" visibleRowCount="4" selectionBehavior="RowOnly">
                     <tab:extension>
-                        <OverflowToolbar id="IdCVAToolB">
-                            <Title id="IdTitTabCVA" text="{i18n>custfivat.tit}" level="H2" />
+                        <OverflowToolbar id="IdCVAToolB">                            
+                            <Title id="IdTitTabCVA" text="{i18n>custfivat.tit}" level="H2" />                            
                             <ToolbarSpacer id="IdCVAToolBS" />
                             <Button id="IdCVAAdd" text="{i18n>CREATE_OBJECT}" visible="{uiExt>/editable}"
                                 press=".extension.customer.app.mdm.mdg.gov.bps1.ext.mdgextension001.onCVAAdd" />
