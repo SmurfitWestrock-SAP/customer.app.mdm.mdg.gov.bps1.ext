@@ -1,0 +1,59 @@
+  <!-- enabled="{ModelVue>/enable}" -->
+  <core:FragmentDefinition id="IdCredMgtDialogFrag" xmlns:core='sap.ui.core' xmlns='sap.m'
+      xmlns:form="sap.ui.layout.form" xmlns:smartForm="sap.ui.comp.smartform" xmlns:smartfield="sap.ui.comp.smartfield">
+      <Dialog id="IdCredMgtDialog" showHeader="false">
+          <customHeader>
+              <Toolbar>
+                  <Label text="{i18n>credmgt.tit}" design="Bold" />
+                  <ToolbarSpacer />
+                  <Button id="IdCredMgtCancel" icon="sap-icon://sys-cancel" type="Reject" press="onDialogClose" />
+              </Toolbar>
+          </customHeader>
+          <content>
+              <smartForm:SmartForm id="IdCredMgtSF" editable="true">
+                  <smartForm:Group>
+                      <smartForm:GroupElement>
+                          <smartfield:SmartField value="{CreditSegment}" mandatory="true"
+                              enabled="{=${UpdNotEnabled} ? false:true}" showValueHelp="true"/>
+                      </smartForm:GroupElement>
+                      <smartForm:GroupElement>
+                          <smartfield:SmartField value="{CreditManager}" />
+                      </smartForm:GroupElement>
+                      <smartForm:GroupElement>
+                          <smartfield:SmartField value="{CreditLimit}" />
+                      </smartForm:GroupElement>
+                      <smartForm:GroupElement>
+                          <smartfield:SmartField value="{RecoCreditLimitAmt}" />
+                      </smartForm:GroupElement>
+                      <smartForm:GroupElement>
+                          <smartfield:SmartField value="{RecoCreditLimitType}" />
+                      </smartForm:GroupElement>
+                      <smartForm:GroupElement>
+                          <smartfield:SmartField value="{InsuredAmt}" />
+                      </smartForm:GroupElement>
+                      <smartForm:GroupElement>
+                          <smartfield:SmartField value="{InsuredType}" />
+                      </smartForm:GroupElement>
+                      <smartForm:GroupElement>
+                          <smartfield:SmartField value="{SpecAttRequired}" />
+                      </smartForm:GroupElement>
+                      <smartForm:GroupElement>
+                          <smartfield:SmartField value="{Blocked}" />
+                      </smartForm:GroupElement>
+                      <smartForm:GroupElement>
+                          <smartfield:SmartField value="{BlockReason}" />
+                      </smartForm:GroupElement>
+                  </smartForm:Group>
+              </smartForm:SmartForm>
+          </content>
+          <footer>
+              <Toolbar id="IdCredMgtBar">
+                  <Button id="IdCredMgtPopMsg" icon="sap-icon://message-popup" press="handleMessagePopoverPress"
+                      type="{= (${message>/}.length > 0 ? 'Negative':'Default')}" text="{=${message>/}.length}" />
+                  <ToolbarSpacer />
+                  <Button id="IdCredMgtVal" text="{i18n>bktyp.valid}" icon="sap-icon://accept" type="Accept"
+                      press="onCredMgtSave" />
+              </Toolbar>
+          </footer>
+      </Dialog>
+  </core:FragmentDefinition>

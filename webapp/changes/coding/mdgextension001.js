@@ -797,7 +797,7 @@ sap.ui.define(
              * <<<< Output Document Managment
              *************************************************************************/
 
-      /*************************************************************************
+            /*************************************************************************
              * >>>> VAT on Cash (Portugal)
              *************************************************************************/
             onCVAAdd: function (oEvent) {
@@ -868,6 +868,81 @@ sap.ui.define(
             },
             /*************************************************************************
              * <<<< VAT on Cash (Portugal)
+             *************************************************************************/
+
+
+            /*************************************************************************
+             * >>>> Credit Managment
+             *************************************************************************/
+            onCredMgtAdd: function (oEvent) {
+                let oCredMgtObj = this.getView().getBindingContext('ZC_PARTNER_MDG').getObject();
+                this._loadCredMgtDialog(oEvent, "/ZC_CustCreditMgtPrc", oCredMgtObj, "");
+            },
+
+            onCredMgtUpd: function (oEvent) {
+                const iIndex = oEvent.getSource().getParent().getParent().getSelectedIndex();
+                let oCredMgtContext = oEvent.getSource().getParent().getParent().getContextByIndex(iIndex).getPath();
+                this._loadCredMgtDialog(oEvent, "/ZC_CustCreditMgtPrc", "", oCredMgtContext);
+            },
+
+            _loadCredMgtDialog: function (oEvent, oEntity, oCredMgtObj, sCredMgtKey) {
+                this.oMessageManager.removeAllMessages();
+                this.getView().getModel("ZC_PARTNER_MDG").resetChanges(null, true, true);
+                this.getExtModel().resetChanges(null, true, true);
+
+                this._loadDialogPopup({
+                    name: "customer.app.mdm.mdg.gov.bps1.ext.changes.fragments.CredMgtDialog",
+                    dialog: this._pCredMgtDialog
+                }).then(oCredMgtDialog => {
+                    this._pCredMgtDialog = oCredMgtDialog;
+                    this._pCredMgtDialog.IdTab = this.getView().byId(oEvent.getSource().getId());
+                    this._pCredMgtDialog.unbindObject();
+                    this._pCredMgtDialog.setModel(this.getExtModel());
+
+                    if (oCredMgtObj) {
+                        const oCredMgtContext = this.getExtModel().createEntry(oEntity, {
+                            properties: {
+                                MDChgProcessSrceObject: oCredMgtObj.MDChgProcessSrceObject
+                            }
+                        });
+                        this._pCredMgtDialog.setBindingContext(oCredMgtContext);
+                        this._pCredMgtDialog.open();
+                    } else {
+                        this.getExtModel().invalidateEntry(sCredMgtKey);
+                        this._pCredMgtDialog.bindObject({
+                            path: sCredMgtKey,
+                            events: {
+                                dataReceived: (oData) => {
+                                    this._pCredMgtDialog.open();
+                                }
+                            }
+                        });
+                    }
+                });
+            },
+
+            onCredMgtSave: function (oEvent) {
+                this.oMessageManager.removeAllMessages();
+                this._pCredMgtDialog.setBusy(true);
+
+                this.submitChanges({
+                        model: this.getExtModel(),
+                        // idGroup: "ac_grp",
+                        busyControl: this.getView()
+                    })
+                    .then((oResult) => { //Sucess                                                      
+                        this._pCredMgtDialog.unbindObject();
+                        this._pCredMgtDialog.IdTab.getModel("customer.mdgextend").refresh();
+                        this._pCredMgtDialog.setBusy(false);
+                        this._pCredMgtDialog.close();
+                    })
+                    .catch((oError) => {
+                        // this.deleteDuplicateMsg(sModel);
+                        this._pCredMgtDialog.setBusy(false);
+                    });
+            },
+            /*************************************************************************
+             * <<<< Credit Managment
              *************************************************************************/
 
             _setuiExt: function () {

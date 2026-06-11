@@ -1,6 +1,123 @@
 <!-- Use stable and unique IDs!-->
 <core:FragmentDefinition id="IdBTCustFrag" xmlns:core='sap.ui.core' xmlns='sap.m' xmlns:uxap='sap.uxap'
-    core:require="{Time: 'sap/ui/model/odata/type/Time'}" xmlns:tab='sap.ui.table'>
+    core:require="{Time: 'sap/ui/model/odata/type/Time'}" xmlns:tab='sap.ui.table'
+    xmlns:smartForm="sap.ui.comp.smartform" xmlns:smartfield="sap.ui.comp.smartfield">
+    <uxap:ObjectPageSubSection id="IdCreditSubSect" title="{i18n>credmgt.tit}" mode="Expanded" titleUppercase="false"
+        visible="{BPCustCreditMgtTab}">
+        <uxap:blocks>
+            <VBox width="100%" id="IdVBoxCredit" alignItems="Start">
+                <!-- SmartForm -->
+                <smartForm:SmartForm id="IdRiskClassSF" editable="true">
+                    <smartForm:Group id="IdRiskClassGroup">
+                        <smartForm:GroupElement id="IdRiskClassGroupElem">
+                            <smartfield:SmartField id="IdRiskClassField" value="{ZZ1_RISK_CLASS_bus}" />
+                        </smartForm:GroupElement>
+                        <smartForm:GroupElement id="IdCreditGroupElem">
+                            <smartfield:SmartField id="IdCreditGroupField" value="{ZZ1_CREDIT_GROUP_bus}" />
+                        </smartForm:GroupElement>
+                    </smartForm:Group>
+                </smartForm:SmartForm>
+
+                <!-- Table -->
+                <tab:Table id="IdCreditCustTab" selectionMode="Single" rows="{path: 'ZC_PARTNER_MDG>to_CustCreditMgt'}"
+                    enableColumnFreeze="false" enableCellFilter="false" ariaLabelledBy="title" enableSelectAll="false"
+                    width="90%" visibleRowCount="4" selectionBehavior="RowOnly">
+                    <tab:extension>
+                        <OverflowToolbar id="IdCredToolB">
+                            <Title id="IdTitTabCred" text="{i18n>bktyp.bktyp}" level="H2" />
+                            <ToolbarSpacer id="IdCredToolBS" />
+                            <Button id="IdCredAdd" text="{i18n>CREATE_OBJECT}" visible="{uiExt>editable}"
+                                press=".extension.customer.app.mdm.mdg.gov.bps1.ext.mdgextension001.onCredMgtAdd" />
+                            <Button id="IdCredUpd" text="{i18n>update}" visible="{uiExt>editable}"
+                                press=".extension.customer.app.mdm.mdg.gov.bps1.ext.mdgextension001.onCredMgtUpd" />
+                            <Button id="IdCredDel" text="{i18n>DELETE}" visible="{uiExt>editable}"
+                                press=".extension.customer.app.mdm.mdg.gov.bps1.ext.mdgextension001.onItemDel" />
+                        </OverflowToolbar>
+                    </tab:extension>
+                    <tab:columns>
+                        <tab:Column id="IdCredCustC01">
+                            <Text id="IdCredCustT01" text="{i18n>credmgt.segment}" />
+                            <tab:template>
+                                <Text id="IdCredCustF01" text="{ZC_PARTNER_MDG>CreditSegmentName}" />
+                            </tab:template>
+                        </tab:Column>
+                        <tab:Column id="IdCredCustC02">
+                            <Text id="IdCredCustT02" text="{i18n>credmgt.manager}" />
+                            <tab:template>
+                                <Text id="IdCredCustF02"
+                                    text="{ZC_PARTNER_MDG>CreditManager} - {ZC_PARTNER_MDG>CreditManagerName}" />
+                            </tab:template>
+                        </tab:Column>
+                        <tab:Column id="IdCredCustC03">
+                            <Text id="IdCredCustT03" text="{i18n>credmgt.limit}" />
+                            <tab:template>
+                                <ObjectNumber id="IdCredCustF03"
+                                    number="{ parts:[{path:'ZC_PARTNER_MDG>CreditLimit'},{path:'ZC_PARTNER_MDG>CreditSegmentCurrency'}], type: 'sap.ui.model.type.Currency', formatOptions: {showMeasure: false}}"
+                                    unit="{ZC_PARTNER_MDG>CreditSegmentCurrency}" />
+                            </tab:template>
+                        </tab:Column>
+                        <tab:Column id="IdCredCustC04">
+                            <Text id="IdCredCustT04" text="{i18n>credmgt.limit.recommended}" />
+                            <tab:template>
+                                <ObjectNumber id="IdCredCustF04"
+                                    number="{ parts:[{path:'ZC_PARTNER_MDG>RecoCreditLimitAmt'},{path:'ZC_PARTNER_MDG>RecoCreditLimitCurr'}], type: 'sap.ui.model.type.Currency', formatOptions: {showMeasure: false}}"
+                                    unit="{ZC_PARTNER_MDG>RecoCreditLimitCurr}" />
+                            </tab:template>
+                        </tab:Column>
+                        <tab:Column id="IdCredCustC05">
+                            <Text id="IdCredCustT05" text="{i18n>credmgt.limit.institution}" />
+                            <tab:template>
+                                <Text id="IdCredCustF05"
+                                    text="{ZC_PARTNER_MDG>RecoCreditLimitType} - {ZC_PARTNER_MDG>RecoCreditLimitTypeName}" />
+                            </tab:template>
+                        </tab:Column>
+                        <tab:Column id="IdCredCustC06">
+                            <Text id="IdCredCustT06" text="{i18n>credmgt.info.number}" />
+                            <tab:template>
+                                <Text id="IdCredCustF06"
+                                    text="{ZC_PARTNER_MDG>CreditInfNumber} - {ZC_PARTNER_MDG>CreditInfText}" />
+                            </tab:template>
+                        </tab:Column>
+                        <tab:Column id="IdCredCustC07">
+                            <Text id="IdCredCustT07" text="{i18n>credmgt.insured.amount}" />
+                            <tab:template>
+                                <ObjectNumber id="IdCredCustF07"
+                                    number="{ parts:[{path:'ZC_PARTNER_MDG>InsuredAmt'},{path:'ZC_PARTNER_MDG>InsuredCurr'}], type: 'sap.ui.model.type.Currency', formatOptions: {showMeasure: false}}"
+                                    unit="{ZC_PARTNER_MDG>InsuredCurr}" />
+                            </tab:template>
+                        </tab:Column>
+                        <tab:Column id="IdCredCustC08">
+                            <Text id="IdCredCustT08" text="{i18n>credmgt.institution.insured}" />
+                            <tab:template>
+                                <Text id="IdCredCustF08"
+                                    text="{ZC_PARTNER_MDG>InsuredType} - {ZC_PARTNER_MDG>InsuredTypeName}" />
+                            </tab:template>
+                        </tab:Column>
+                        <tab:Column id="IdCredCustC09">
+                            <Text id="IdCredCustT09" text="{i18n>credmgt.special.attention}" />
+                            <tab:template>
+                                <CheckBox id="IdCredCustF09" selected="{ZC_PARTNER_MDG>SpecAttRequired}" />
+                            </tab:template>
+                        </tab:Column>
+                        <tab:Column id="IdCredCustC10">
+                            <Text id="IdCredCustT10" text="{i18n>credmgt.blocked}" />
+                            <tab:template>
+                                <CheckBox id="IdCredCustF10" selected="{ZC_PARTNER_MDG>Blocked}" />
+                            </tab:template>
+                        </tab:Column>
+                        <tab:Column id="IdCredCustC11">
+                            <Text id="IdCredCustT11" text="{i18n>credmgt.blocking.reason}" />
+                            <tab:template>
+                                <Text id="IdCredCustF11"
+                                    text="{ZC_PARTNER_MDG>BlockReason} - {ZC_PARTNER_MDG>BlockReasonDescription}" />
+                            </tab:template>
+                        </tab:Column>
+                    </tab:columns>
+                </tab:Table>
+            </VBox>
+        </uxap:blocks>
+    </uxap:ObjectPageSubSection>
+
     <uxap:ObjectPageSubSection id="BkTypSubSectCust" title="{i18n>bktyp.cust}" mode="Expanded" titleUppercase="false">
         <tab:Table id="IdBkTypCustTab" selectionMode="Single" rows="{path: 'ZC_PARTNER_MDG>to_CustomerBankType'}"
             enableColumnFreeze="false" enableCellFilter="false" ariaLabelledBy="title" enableSelectAll="false"
@@ -48,40 +165,6 @@
     </uxap:ObjectPageSubSection>
 
     <uxap:ObjectPageSubSection id="BkPermiPayeeCust" title="{i18n>perpay.cust}" mode="Expanded" titleUppercase="false">
-        <!-- <Table id="IdPermiPayeeCustTab" items="{path: 'ZC_PARTNER_MDG>to_CustomerPermittedPayee'}"
-            mode="SingleSelectLeft" width="70%">
-            <headerToolbar>
-                <OverflowToolbar id="IdPPCTVToolB">
-                    <Title id="IdTitTabPPC" text="{i18n>perpay.perpay}" level="H2" />
-                    <ToolbarSpacer id="IdPPCToolBS" />
-                    <Button id="IdPPCAdd" text="{i18n>CREATE_OBJECT}" visible="{uiExt>editable}"
-                        press=".extension.customer.app.mdm.mdg.gov.bps1.ext.mdgextension001.onPPCAdd" />
-                    <Button id="IdPPCUpd" text="{i18n>update}" visible="{uiExt>editable}"
-                        press=".extension.customer.app.mdm.mdg.gov.bps1.ext.mdgextension001.onPPCUpd" />
-                    <Button id="IdPPCDel" text="{i18n>DELETE}" visible="{uiExt>editable}"
-                        press=".extension.customer.app.mdm.mdg.gov.bps1.ext.mdgextension001.onItemDel" />
-                </OverflowToolbar>
-            </headerToolbar>
-            <columns>
-                <Column id="IdPPCC01">
-                    <Text id="IdPPCT01" text="{i18n>perpay.com}" />
-                </Column>
-                <Column id="IdPPCC02">
-                    <Text id="IdPPCT02" text="{i18n>perpay.perpay}" />
-                </Column>
-            </columns>
-            <items>
-                <ColumnListItem id="IdPermiPayeeCustItem" vAlign="Middle">
-                    <cells>
-                        <Text id="IdPPCComp" text="{ZC_PARTNER_MDG>CompanyCodeName} ({ZC_PARTNER_MDG>CompanyCode})"
-                        visible="{=${ZC_PARTNER_MDG>CompanyCode} ? true:false}" />
-                        <Text id="IdPPCPayee"
-                            text="{ZC_PARTNER_MDG>PermittedPayee} ({ZC_PARTNER_MDG>PermittedPayeeName})" />
-                    </cells>
-                </ColumnListItem>
-            </items>
-        </Table> -->
-
         <tab:Table id="IdPermiPayeeCustTab" selectionMode="Single"
             rows="{path: 'ZC_PARTNER_MDG>to_CustomerPermittedPayee'}" enableColumnFreeze="false"
             enableCellFilter="false" ariaLabelledBy="title" enableSelectAll="false" width="70%" visibleRowCount="4"
@@ -119,92 +202,9 @@
 
 
     <uxap:ObjectPageSubSection id="BkUnloadPtCust" title="{i18n>unloadpt.cust}" mode="Expanded" titleUppercase="false">
-        <!-- <Table id="IdUnloadPtCusTab" items="{path: 'ZC_PARTNER_MDG>to_CustomerUnloadPoint'}" mode="SingleSelectLeft"
-            width="100%">
-            <headerToolbar>
-                <OverflowToolbar id="IdUPCToolB">
-                    <Title id="IdTitTabUPC" text="{i18n>unloadpt.cust}" level="H2" />
-                    <ToolbarSpacer id="IdUPCToolBS" />
-                    <Button id="IdUPCAdd" text="{i18n>CREATE_OBJECT}" visible="{uiExt>editable}"
-                        press=".extension.customer.app.mdm.mdg.gov.bps1.ext.mdgextension001.onUPCAdd" />
-                    <Button id="IdUPCUpd" text="{i18n>update}" visible="{uiExt>editable}"
-                        press=".extension.customer.app.mdm.mdg.gov.bps1.ext.mdgextension001.onUPCUpd" />
-                    <Button id="IdUPCDel" text="{i18n>DELETE}" visible="{uiExt>editable}"
-                        press=".extension.customer.app.mdm.mdg.gov.bps1.ext.mdgextension001.onItemDel" />
-                </OverflowToolbar>
-            </headerToolbar>
-            <columns>
-                <Column id="IdUPCC01">
-                    <Text id="IdUPCT01" text="{i18n>unloadpt.unlpt}" />
-                </Column>
-                <Column id="IdUPCC02">
-                    <Text id="IdUPCT02" text="{i18n>unloadpt.def}" />
-                </Column>
-                <Column id="IdUPCC03">
-                    <Text id="IdUPCT03" text="{i18n>unloadpt.cal}" />
-                </Column>
-                <Column id="IdUPCC11">
-                    <Text id="IdUPCT11" text="{i18n>unloadpt.hrs}" />
-                </Column>
-                <Column id="IdUPCC04">
-                    <Text id="IdUPCT04" text="{i18n>unloadpt.mon}" />
-                </Column>
-                <Column id="IdUPCC05">
-                    <Text id="IdUPCT05" text="{i18n>unloadpt.tues}" />
-                </Column>
-                <Column id="IdUPCC06">
-                    <Text id="IdUPCT06" text="{i18n>unloadpt.wedn}" />
-                </Column>
-                <Column id="IdUPCC07">
-                    <Text id="IdUPCT07" text="{i18n>unloadpt.thur}" />
-                </Column>
-                <Column id="IdUPCC08">
-                    <Text id="IdUPCT08" text="{i18n>unloadpt.fri}" />
-                </Column>
-                <Column id="IdUPCC98">
-                    <Text id="IdUPCT09" text="{i18n>unloadpt.sat}" />
-                </Column>
-                <Column id="IdUPCC10">
-                    <Text id="IdUPCT10" text="{i18n>unloadpt.sun}" />
-                </Column>
-            </columns>
-            <items>
-                <ColumnListItem id="IdUnloadPtItem" vAlign="Middle">
-                    <cells>
-                        <Text id="IdUPCUnlPt" text="{ZC_PARTNER_MDG>UnloadingPointName}" />
-                        <CheckBox id="IdUPDef" selected="{ZC_PARTNER_MDG>IsDfltBPUnloadingPoint}" enabled="false" />
-                        <Text id="IdUPCCal" text="{ZC_PARTNER_MDG>CustomerFactoryCalenderCode}" />
-                        <Text id="idUPCHour" text="{ZC_PARTNER_MDG>BPGoodsReceivingHoursCode}" />
-                        <Text id="IdUPCMon"
-                            text="{path: 'ZC_PARTNER_MDG>MondayMorningOpeningTime', sap/ui/model/odata/type/Time, formatOptions: { style: 'short' }}-{path: 'ZC_PARTNER_MDG>MondayMorningClosingTime', sap/ui/model/odata/type/Time, formatOptions: { style: 'short' }}
-                            {path: 'ZC_PARTNER_MDG>MondayAfternoonOpeningTime', sap/ui/model/odata/type/Time, formatOptions: { style: 'short' }}-{path: 'ZC_PARTNER_MDG>MondayAfternoonClosingTime', sap/ui/model/odata/type/Time, formatOptions: { style: 'short' }}" />
-                        <Text id="IdUPCTues"
-                            text="{path: 'ZC_PARTNER_MDG>TuesdayMorningOpeningTime', sap/ui/model/odata/type/Time, formatOptions: { style: 'short' }}-{path: 'ZC_PARTNER_MDG>TuesdayMorningClosingTime', sap/ui/model/odata/type/Time, formatOptions: { style: 'short' }}
-                            {path: 'ZC_PARTNER_MDG>TuesdayAfternoonOpeningTime', sap/ui/model/odata/type/Time, formatOptions: { style: 'short' }}-{path: 'ZC_PARTNER_MDG>TuesdayAfternoonClosingTime', sap/ui/model/odata/type/Time, formatOptions: { style: 'short' }}" />
-                        <Text id="IdUPCWedn"
-                            text="{path: 'ZC_PARTNER_MDG>WednesdayMorningOpeningTime', sap/ui/model/odata/type/Time, formatOptions: { style: 'short' }}-{path: 'ZC_PARTNER_MDG>WednesdayMorningClosingTime', sap/ui/model/odata/type/Time, formatOptions: { style: 'short' }}
-                            {path: 'ZC_PARTNER_MDG>WednesdayAfternoonOpeningTime', sap/ui/model/odata/type/Time, formatOptions: { style: 'short' }}-{path: 'ZC_PARTNER_MDG>WednesdayAfternoonClosingTime', sap/ui/model/odata/type/Time, formatOptions: { style: 'short' }}" />
-                        <Text id="IdUPCCThur"
-                            text="{path: 'ZC_PARTNER_MDG>ThursdayMorningOpeningTime', sap/ui/model/odata/type/Time, formatOptions: { style: 'short' }}-{path: 'ZC_PARTNER_MDG>ThursdayMorningClosingTime', sap/ui/model/odata/type/Time, formatOptions: { style: 'short' }}
-                            {path: 'ZC_PARTNER_MDG>ThursdayAfternoonOpeningTime', sap/ui/model/odata/type/Time, formatOptions: { style: 'short' }}-{path: 'ZC_PARTNER_MDG>ThursdayAfternoonClosingTime', sap/ui/model/odata/type/Time, formatOptions: { style: 'short' }}" />
-                        <Text id="IdUPCCFri"
-                            text="{path: 'ZC_PARTNER_MDG>FridayMorningOpeningTime', sap/ui/model/odata/type/Time, formatOptions: { style: 'short' }}-{path: 'ZC_PARTNER_MDG>FridayMorningClosingTime', sap/ui/model/odata/type/Time, formatOptions: { style: 'short' }}
-                            {path: 'ZC_PARTNER_MDG>FridayAfternoonOpeningTime', sap/ui/model/odata/type/Time, formatOptions: { style: 'short' }}-{path: 'ZC_PARTNER_MDG>FridayAfternoonClosingTime', sap/ui/model/odata/type/Time, formatOptions: { style: 'short' }}" />
-                        <Text id="IdUPCCSat"
-                            text="{path: 'ZC_PARTNER_MDG>SaturdayMorningOpeningTime', sap/ui/model/odata/type/Time, formatOptions: { style: 'short' }}-{path: 'ZC_PARTNER_MDG>SaturdayMorningClosingTime', sap/ui/model/odata/type/Time, formatOptions: { style: 'short' }}
-                            {path: 'ZC_PARTNER_MDG>SaturdayAfternoonOpeningTime', sap/ui/model/odata/type/Time, formatOptions: { style: 'short' }}-{path: 'ZC_PARTNER_MDG>SaturdayAfternoonClosingTime', sap/ui/model/odata/type/Time, formatOptions: { style: 'short' }}" />
-                        <Text id="IdUPCSun"
-                            text="{path: 'ZC_PARTNER_MDG>SundayMorningOpeningTime', sap/ui/model/odata/type/Time, formatOptions: { style: 'short' }}-{path: 'ZC_PARTNER_MDG>SundayMorningClosingTime', sap/ui/model/odata/type/Time, formatOptions: { style: 'short' }}
-                            {path: 'ZC_PARTNER_MDG>SundayAfternoonOpeningTime', sap/ui/model/odata/type/Time, formatOptions: { style: 'short' }}-{path: 'ZC_PARTNER_MDG>SundayAfternoonClosingTime', sap/ui/model/odata/type/Time, formatOptions: { style: 'short' }}" />
-                    </cells>
-                </ColumnListItem>
-            </items>
-        </Table>  -->
-
-
-        <tab:Table id="IdUnloadPtCusTab" selectionMode="Single"
-            rows="{path: 'ZC_PARTNER_MDG>to_CustomerUnloadPoint'}" enableColumnFreeze="false" enableCellFilter="false"
-            ariaLabelledBy="title" enableSelectAll="false" width="100%" visibleRowCount="4" selectionBehavior="RowOnly">
+        <tab:Table id="IdUnloadPtCusTab" selectionMode="Single" rows="{path: 'ZC_PARTNER_MDG>to_CustomerUnloadPoint'}"
+            enableColumnFreeze="false" enableCellFilter="false" ariaLabelledBy="title" enableSelectAll="false"
+            width="100%" visibleRowCount="4" selectionBehavior="RowOnly">
             <tab:extension>
                 <OverflowToolbar id="IdUPCToolB">
                     <Title id="IdTitTabUPC" text="{i18n>unloadpt.cust}" level="H2" />
