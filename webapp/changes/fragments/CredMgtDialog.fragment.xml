@@ -20,13 +20,16 @@
                           <smartfield:SmartField value="{CreditManager}" />
                       </smartForm:GroupElement>
                       <smartForm:GroupElement>
-                          <smartfield:SmartField value="{CreditLimit}" />
+                          <smartfield:SmartField value="{CreditLimit}" enabled="{CredLimNotEnabled}" />
                       </smartForm:GroupElement>
                       <smartForm:GroupElement>
                           <smartfield:SmartField value="{RecoCreditLimitAmt}" />
                       </smartForm:GroupElement>
                       <smartForm:GroupElement>
                           <smartfield:SmartField value="{RecoCreditLimitType}" />
+                      </smartForm:GroupElement>
+                      <smartForm:GroupElement>
+                          <smartfield:SmartField value="{CreditInfNumber}" />
                       </smartForm:GroupElement>
                       <smartForm:GroupElement>
                           <smartfield:SmartField value="{InsuredAmt}" />

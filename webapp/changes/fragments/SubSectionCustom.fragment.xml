@@ -2,12 +2,11 @@
 <core:FragmentDefinition id="IdBTCustFrag" xmlns:core='sap.ui.core' xmlns='sap.m' xmlns:uxap='sap.uxap'
     core:require="{Time: 'sap/ui/model/odata/type/Time'}" xmlns:tab='sap.ui.table'
     xmlns:smartForm="sap.ui.comp.smartform" xmlns:smartfield="sap.ui.comp.smartfield">
-    <uxap:ObjectPageSubSection id="IdCreditSubSect" title="{i18n>credmgt.tit}" mode="Expanded" titleUppercase="false"
+    <!-- <uxap:ObjectPageSubSection id="IdCreditSubSect" title="{i18n>credmgt.tit}" mode="Expanded" titleUppercase="false"
         visible="{BPCustCreditMgtTab}">
         <uxap:blocks>
             <VBox width="100%" id="IdVBoxCredit" alignItems="Start">
-                <!-- SmartForm -->
-                <smartForm:SmartForm id="IdRiskClassSF" editable="true">
+                <smartForm:SmartForm id="IdRiskClassSF" editable="{uiExt>editable}">
                     <smartForm:Group id="IdRiskClassGroup">
                         <smartForm:GroupElement id="IdRiskClassGroupElem">
                             <smartfield:SmartField id="IdRiskClassField" value="{ZZ1_RISK_CLASS_bus}" />
@@ -18,7 +17,6 @@
                     </smartForm:Group>
                 </smartForm:SmartForm>
 
-                <!-- Table -->
                 <tab:Table id="IdCreditCustTab" selectionMode="Single" rows="{path: 'ZC_PARTNER_MDG>to_CustCreditMgt'}"
                     enableColumnFreeze="false" enableCellFilter="false" ariaLabelledBy="title" enableSelectAll="false"
                     width="90%" visibleRowCount="4" selectionBehavior="RowOnly">
@@ -75,7 +73,7 @@
                             <Text id="IdCredCustT06" text="{i18n>credmgt.info.number}" />
                             <tab:template>
                                 <Text id="IdCredCustF06"
-                                    text="{ZC_PARTNER_MDG>CreditInfNumber} - {ZC_PARTNER_MDG>CreditInfText}" />
+                                    text="{ZC_PARTNER_MDG>CreditInfNumber}" />
                             </tab:template>
                         </tab:Column>
                         <tab:Column id="IdCredCustC07">
@@ -96,13 +94,14 @@
                         <tab:Column id="IdCredCustC09">
                             <Text id="IdCredCustT09" text="{i18n>credmgt.special.attention}" />
                             <tab:template>
-                                <CheckBox id="IdCredCustF09" selected="{ZC_PARTNER_MDG>SpecAttRequired}" />
+                                <CheckBox id="IdCredCustF09" selected="{ZC_PARTNER_MDG>SpecAttRequired}"
+                                    editable="false" />
                             </tab:template>
                         </tab:Column>
                         <tab:Column id="IdCredCustC10">
                             <Text id="IdCredCustT10" text="{i18n>credmgt.blocked}" />
                             <tab:template>
-                                <CheckBox id="IdCredCustF10" selected="{ZC_PARTNER_MDG>Blocked}" />
+                                <CheckBox id="IdCredCustF10" selected="{ZC_PARTNER_MDG>Blocked}" editable="false" />
                             </tab:template>
                         </tab:Column>
                         <tab:Column id="IdCredCustC11">
@@ -116,7 +115,7 @@
                 </tab:Table>
             </VBox>
         </uxap:blocks>
-    </uxap:ObjectPageSubSection>
+    </uxap:ObjectPageSubSection> -->
 
     <uxap:ObjectPageSubSection id="BkTypSubSectCust" title="{i18n>bktyp.cust}" mode="Expanded" titleUppercase="false">
         <tab:Table id="IdBkTypCustTab" selectionMode="Single" rows="{path: 'ZC_PARTNER_MDG>to_CustomerBankType'}"

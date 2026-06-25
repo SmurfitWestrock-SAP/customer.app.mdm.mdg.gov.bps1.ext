@@ -182,7 +182,7 @@ sap.ui.define(
                             });
 
                             let oKeyAttList = that.getExtModel().createKey("/MdgMdtAttachSet", {
-                                SourceId: oData.convertUUID.Mdchgprocesssrceobject,
+                                SourceId: oContext.getProperty("MDChgProcessSrceObject") || oData.convertUUID.Mdchgprocesssrceobject,
                                 ProcessId: "",
                                 BuGroup: oContext.getProperty("BusinessPartnerGrouping") || ""
                             });
@@ -903,6 +903,9 @@ sap.ui.define(
                         const oCredMgtContext = this.getExtModel().createEntry(oEntity, {
                             properties: {
                                 MDChgProcessSrceObject: oCredMgtObj.MDChgProcessSrceObject
+                                // ,
+                                // CreditSegment: "0000",
+                                // CreditLimit: "0"
                             }
                         });
                         this._pCredMgtDialog.setBindingContext(oCredMgtContext);
